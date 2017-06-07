@@ -25,12 +25,11 @@ namespace Dranen
                 while (Console.KeyAvailable == false)
                 {
                     Thread.Sleep(Game.GameSpeed);
-                    if (events.Count < 1)
+                    if (events.Count <= Game.EventsCount)
                     {
-                        EventPoint ev = new EventPoint(20,20,3000);
-                        events.Add(ev);
+                        GenerateEvent(events);
                     }
-                    
+
                     if (cki.Key == ConsoleKey.UpArrow)
                     {
                         Move(Direction.Up, obj);
@@ -60,24 +59,38 @@ namespace Dranen
 
                     }
                     Drawing.Events(events);
-
-                    for (int i = 0; i < events.Count; i++)
-                    {
-                        if (events[i].Points <= 10)
-                        {
-                            events.RemoveAt(i);
-                        }
-                    }
-
-                    foreach (var ev in events)
-                    {
-                        ev.Deduct();
-                    }
+                    ProcessEvents(events);
                 }
 
                 cki = Console.ReadKey(true);
 
             } while (cki.Key != ConsoleKey.Escape);
+        }
+
+        private static void GenerateEvent(List<EventPoint> events)
+        {
+            var rnd = new Random();
+            var x = rnd.Next(3, Game.WidthConst - 3);
+            var y = rnd.Next(2, Game.HeightConst - 2);
+            var time = rnd.Next(500, 5000);
+            EventPoint ev = new EventPoint(x, y, time);
+            events.Add(ev);
+        }
+
+        private static void ProcessEvents(List<EventPoint> events)
+        {
+            for (int i = 0; i < events.Count; i++)
+            {
+                if (events[i].Points <= 10)
+                {
+                    events.RemoveAt(i);
+                }
+            }
+
+            foreach (var ev in events)
+            {
+                ev.Deduct();
+            }
         }
 
         public static void Move(Direction direction, Protagonist protagonist)
