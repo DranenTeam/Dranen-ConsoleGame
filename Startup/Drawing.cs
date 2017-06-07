@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dranen;
+using Startup;
 
 namespace Dranen
 {
@@ -43,6 +44,14 @@ namespace Dranen
             //}
             //Console.SetCursorPosition(obj.X, obj.Y);
         }
+
+        public static void DrawHostile(Hostile hostile)
+        {
+            Console.BackgroundColor = Game.HostileColor;
+            Console.SetCursorPosition(hostile.X, hostile.Y);
+            Console.Write("[]");
+        }
+
         public static void ClearBackground(Protagonist obj)
         {
             Console.BackgroundColor = Game.BackgroundColor;
@@ -51,9 +60,18 @@ namespace Dranen
             DrawPlayground(obj);
         }
 
+        public static void ClearBackground(Hostile hostile, Protagonist obj)
+        {
+            Console.BackgroundColor = Game.BackgroundColor;
+            Console.Clear();
+            DrawProtagonist(obj);
+            DrawHostile(hostile);
+            DrawPlayground(obj);
+        }
+
         public static void Events(List<EventPoint> events)
         {
-            
+
 
             foreach (var ev in events)
             {
@@ -61,7 +79,8 @@ namespace Dranen
                 if (ev.Points >= 2000)
                 {
                     Console.BackgroundColor = Game.PointEventColorBest;
-                }else if (ev.Points >= 1000)
+                }
+                else if (ev.Points >= 1000)
                 {
                     Console.BackgroundColor = Game.PointEventColorGood;
                 }
@@ -72,7 +91,7 @@ namespace Dranen
                 }
                 Console.SetCursorPosition(ev.X, ev.Y);
                 Console.Write($"{ev.Points.ToString().PadLeft(4)}");
-                }
+            }
 
         }
     }

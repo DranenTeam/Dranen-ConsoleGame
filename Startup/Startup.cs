@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Dranen;
+using Startup;
 
 namespace Dranen
 {
@@ -21,8 +22,9 @@ namespace Dranen
         {
             Protagonist protagonist = new Protagonist();
             List<EventPoint> events = new List<EventPoint>();
+            Hostile hostile = new Hostile(5, 5);
             InitializeGame();
-            Navigation.NavigateProtagonist(protagonist, events);
+            Navigation.NavigateProtagonist(protagonist, events, hostile);
         }
 
         private static void InitializeGame()

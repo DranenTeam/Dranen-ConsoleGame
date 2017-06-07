@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Drawing.cs" />
+    <Compile Include="Hostile.cs" />
     <Compile Include="PointEvent.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Game.cs" />

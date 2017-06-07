@@ -48,6 +48,7 @@ namespace Dranen
         public static ConsoleColor PointEventColorBest = ConsoleColor.DarkGreen;
         public static ConsoleColor PointEventColorGood = ConsoleColor.DarkYellow;
         public static ConsoleColor PointEventColorBad = ConsoleColor.DarkRed;
+        public static ConsoleColor HostileColor = ConsoleColor.Red;
         public const int EventsCount = 5;
     }
 }

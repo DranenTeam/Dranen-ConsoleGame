@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Dranen;
+using Startup;
 
 namespace Dranen
 {
@@ -14,11 +15,12 @@ namespace Dranen
             Left,
             Right
         }
-        public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events)
+        public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events, Hostile hostile)
         {
 
 
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
+            GenerateHostile(hostile);
             do
             {
 
@@ -29,6 +31,8 @@ namespace Dranen
                     {
                         GenerateEvent(events);
                     }
+
+
 
                     if (cki.Key == ConsoleKey.UpArrow)
                     {
@@ -58,13 +62,44 @@ namespace Dranen
                         cki = Console.ReadKey();
 
                     }
+
+                    if (hostile.IsAlive && obj.X <= 15)
+                    {
+                        ChaseLeft(hostile, obj);
+                    }
+
+                    if (hostile.IsAlive && obj.X >= 15)
+                    {
+                        ChaseRight(hostile, obj);
+                    }
+
+                    if (hostile.IsAlive && obj.Y <= 14)
+                    {
+                        ChaseUp(hostile, obj);
+                    }
+
+                    if (hostile.IsAlive && obj.Y >= 14)
+                    {
+                        ChaseDown(hostile, obj);
+                    }
+
                     Drawing.Events(events);
+                    Drawing.DrawHostile(hostile);
                     ProcessEvents(events);
                 }
-
+                
                 cki = Console.ReadKey(true);
 
             } while (cki.Key != ConsoleKey.Escape);
+        }
+
+        private static void GenerateHostile(Hostile hostiles)
+        {
+            var rnd = new Random();
+            var x = rnd.Next(3, Game.WidthConst - 3);
+            var y = rnd.Next(2, Game.HeightConst - 2);
+            //var hostile = new Hostile(x, y);
+            //hostiles.Add(hostile);
         }
 
         private static void GenerateEvent(List<EventPoint> events)
@@ -140,6 +175,34 @@ namespace Dranen
             obj.Move(0, -1);
             Drawing.DrawProtagonist(obj);
             Drawing.ClearBackground(obj);
+        }
+
+        private static void ChaseLeft(Hostile hostile, Protagonist obj)
+        {
+            hostile.Chase(-1, 0);
+            Drawing.DrawHostile(hostile);
+            Drawing.ClearBackground(hostile, obj);
+        }
+
+        private static void ChaseRight(Hostile hostile, Protagonist obj)
+        {
+            hostile.Chase(1, 0);
+            Drawing.DrawHostile(hostile);
+            Drawing.ClearBackground(hostile, obj);
+        }
+
+        private static void ChaseDown(Hostile hostile, Protagonist obj)
+        {
+            hostile.Chase(0, 1);
+            Drawing.DrawHostile(hostile);
+            Drawing.ClearBackground(hostile, obj);
+        }
+
+        private static void ChaseUp(Hostile hostile, Protagonist obj)
+        {
+            hostile.Chase(0, -1);
+            Drawing.DrawHostile(hostile);
+            Drawing.ClearBackground(hostile, obj);
         }
     }
 }
