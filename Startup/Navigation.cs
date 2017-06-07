@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Dranen;
 
 namespace Dranen
 {
-    public class Movement
+    public class Navigation
     {
         public enum Direction
         {
@@ -13,7 +14,7 @@ namespace Dranen
             Left,
             Right
         }
-        public static void NavigateProtagonist(Protagonist obj)
+        public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events)
         {
 
 
@@ -23,7 +24,13 @@ namespace Dranen
 
                 while (Console.KeyAvailable == false)
                 {
-                    Thread.Sleep(GameParameter.GameSpeed);
+                    Thread.Sleep(Game.GameSpeed);
+                    if (events.Count < 1)
+                    {
+                        EventPoint ev = new EventPoint(20,20,3000);
+                        events.Add(ev);
+                    }
+                    
                     if (cki.Key == ConsoleKey.UpArrow)
                     {
                         Move(Direction.Up, obj);
@@ -45,12 +52,26 @@ namespace Dranen
                         Move(Direction.Right, obj);
 
                     }
-                    if (cki.Key == ConsoleKey.Spacebar && !GameParameter.IsPaused)
+                    if (cki.Key == ConsoleKey.Spacebar && !Game.IsPaused)
                     {
                         Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue");
-                        GameParameter.IsPaused = true;
+                        Game.IsPaused = true;
                         cki = Console.ReadKey();
 
+                    }
+                    Drawing.Events(events);
+
+                    for (int i = 0; i < events.Count; i++)
+                    {
+                        if (events[i].Points <= 10)
+                        {
+                            events.RemoveAt(i);
+                        }
+                    }
+
+                    foreach (var ev in events)
+                    {
+                        ev.Deduct();
                     }
                 }
 
@@ -77,7 +98,7 @@ namespace Dranen
             {
                 MoveRight(protagonist);
             }
-            GameParameter.IsPaused = false;
+            Game.IsPaused = false;
         }
 
         public static void MoveLeft(Protagonist obj)

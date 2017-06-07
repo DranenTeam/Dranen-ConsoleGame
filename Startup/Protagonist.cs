@@ -24,12 +24,12 @@ namespace Dranen
         public void Move(int x, int y)
         {
 
-            if (this.X + x * 2 < GameParameter.WidthConst - 2 && this.X + x * 2 >= 1)
+            if (this.X + x * 2 < Game.WidthConst - 2 && this.X + x * 2 >= 1)
             {
                 this.X += x * 2;
             }
 
-            if (this.Y + y < GameParameter.HeightConst - 1 && this.Y + y >= 1)
+            if (this.Y + y < Game.HeightConst - 1 && this.Y + y >= 1)
             {
                 this.Y += y;
             }

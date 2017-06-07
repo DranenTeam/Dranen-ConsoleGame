@@ -11,7 +11,7 @@ namespace Dranen
     {
         public static void DrawProtagonist(Protagonist obj)
         {
-            Console.BackgroundColor = GameParameter.ProtagonistColor;
+            Console.BackgroundColor = Game.ProtagonistColor;
             Console.SetCursorPosition(obj.X, obj.Y);
             if (obj.Y == 0 || obj.X == 0)
             {
@@ -26,30 +26,54 @@ namespace Dranen
 
         public static void DrawPlayground(Protagonist obj)
         {
-            for (int i = 0; i < GameParameter.WidthConst; i += 20)
-            {
-                Console.SetCursorPosition(i, 0);
-                Console.Write("  ");
-                Console.SetCursorPosition(i, GameParameter.HeightConst - 1);
-                Console.Write("  ");
-            }
+            //for (int i = 0; i < Game.WidthConst; i += 20)
+            //{
+            //    Console.SetCursorPosition(i, 0);
+            //    Console.Write("  ");
+            //    Console.SetCursorPosition(i, Game.HeightConst - 1);
+            //    Console.Write("  ");
+            //}
 
-            for (int i = 0; i < GameParameter.HeightConst; i += 10)
-            {
-                Console.SetCursorPosition(0, i);
-                Console.Write("  ");
-                Console.SetCursorPosition(GameParameter.WidthConst - 2, i);
-                Console.Write("  ");
-            }
-            Console.SetCursorPosition(obj.X, obj.Y);
+            //for (int i = 0; i < Game.HeightConst; i += 10)
+            //{
+            //    Console.SetCursorPosition(0, i);
+            //    Console.Write("  ");
+            //    Console.SetCursorPosition(Game.WidthConst - 2, i);
+            //    Console.Write("  ");
+            //}
+            //Console.SetCursorPosition(obj.X, obj.Y);
         }
         public static void ClearBackground(Protagonist obj)
         {
-            Console.BackgroundColor = GameParameter.BackgroundColor;
+            Console.BackgroundColor = Game.BackgroundColor;
             Console.Clear();
             DrawProtagonist(obj);
             DrawPlayground(obj);
         }
 
+        public static void Events(List<EventPoint> events)
+        {
+            
+
+            foreach (var ev in events)
+            {
+
+                if (ev.Points >= 2000)
+                {
+                    Console.BackgroundColor = Game.PointEventColorBest;
+                }else if (ev.Points >= 1000)
+                {
+                    Console.BackgroundColor = Game.PointEventColorGood;
+                }
+                else
+                {
+                    Console.BackgroundColor = Game.PointEventColorBad;
+
+                }
+                Console.SetCursorPosition(ev.X, ev.Y);
+                Console.Write($"{ev.Points.ToString().PadLeft(4)}");
+                }
+
+        }
     }
 }

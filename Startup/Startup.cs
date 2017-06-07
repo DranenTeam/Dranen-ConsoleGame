@@ -20,19 +20,20 @@ namespace Dranen
         private static void Game()
         {
             Protagonist protagonist = new Protagonist();
+            List<EventPoint> events = new List<EventPoint>();
             InitializeGame();
-            Movement.NavigateProtagonist(protagonist);
+            Navigation.NavigateProtagonist(protagonist, events);
         }
 
         private static void InitializeGame()
         {
             Console.CursorVisible = false;
-            Console.BufferHeight = GameParameter.HeightConst;
-            Console.BufferWidth = GameParameter.WidthConst;
-            Console.SetWindowSize(GameParameter.WidthConst, GameParameter.HeightConst);
-            Console.BackgroundColor = GameParameter.BackgroundColor;
+            Console.BufferHeight = Dranen.Game.HeightConst;
+            Console.BufferWidth = Dranen.Game.WidthConst;
+            Console.SetWindowSize(Dranen.Game.WidthConst, Dranen.Game.HeightConst);
+            Console.BackgroundColor = Dranen.Game.BackgroundColor;
             Console.Clear();
-            Console.BackgroundColor = GameParameter.ProtagonistColor;
+            Console.BackgroundColor = Dranen.Game.ProtagonistColor;
             Console.SetCursorPosition(0, 0);
             Console.Write("  ");
 
