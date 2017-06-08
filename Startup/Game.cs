@@ -8,7 +8,7 @@ namespace Dranen
 {
     public static class Game
     {
-        private static int gameSpeed = 10;
+        private static int gameSpeed = 20;
         private static bool isPaused = false;
         private static int score = 0;
 
@@ -41,14 +41,21 @@ namespace Dranen
             }
         }
 
-        public const int WidthConst = 80; // This should not be less than the visible area of your console
-        public const int HeightConst = 30;
+        public static int PointEventGoodScore = 40;
+        public static int PointEventBestScore = 70;
+
+
+        public const int WidthConst = 40; // This should not be less than the visible area of your console
+        public const int HeightConst = 20;
         public static ConsoleColor BackgroundColor = ConsoleColor.DarkGray;
         public static ConsoleColor ProtagonistColor = ConsoleColor.Black;
         public static ConsoleColor PointEventColorBest = ConsoleColor.DarkGreen;
         public static ConsoleColor PointEventColorGood = ConsoleColor.DarkYellow;
         public static ConsoleColor PointEventColorBad = ConsoleColor.DarkRed;
         public static ConsoleColor HostileColor = ConsoleColor.Red;
-        public const int EventsCount = 5;
+        public static ConsoleColor ScoreBoardColor = ConsoleColor.Magenta;
+        public static int PointDeductor = 1;
+        public const int EventsCount = 10;
+        public static int PointDeathThreshold = 5;
     }
 }

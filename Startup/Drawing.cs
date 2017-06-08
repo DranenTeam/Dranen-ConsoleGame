@@ -25,6 +25,14 @@ namespace Dranen
 
         }
 
+        public static void ScoreBoard()
+        {
+            Console.Title = Game.Score.ToString();
+            //Console.SetCursorPosition(Game.WidthConst/2, 0);
+            //Console.BackgroundColor = Game.ScoreBoardColor;
+            //Console.Write($"{Game.Score.ToString().PadLeft(6)}");
+        }
+
         public static void DrawPlayground(Protagonist obj)
         {
             //for (int i = 0; i < Game.WidthConst; i += 20)
@@ -49,7 +57,7 @@ namespace Dranen
         {
             Console.BackgroundColor = Game.HostileColor;
             Console.SetCursorPosition(hostile.X, hostile.Y);
-            Console.Write("[]");
+            Console.Write("  ");
         }
 
         public static void ClearBackground(Protagonist obj)
@@ -76,11 +84,11 @@ namespace Dranen
             foreach (var ev in events)
             {
 
-                if (ev.Points >= 2000)
+                if (ev.Points >= Game.PointEventBestScore)
                 {
                     Console.BackgroundColor = Game.PointEventColorBest;
                 }
-                else if (ev.Points >= 1000)
+                else if (ev.Points >= Game.PointEventGoodScore)
                 {
                     Console.BackgroundColor = Game.PointEventColorGood;
                 }
@@ -90,9 +98,11 @@ namespace Dranen
 
                 }
                 Console.SetCursorPosition(ev.X, ev.Y);
-                Console.Write($"{ev.Points.ToString().PadLeft(4)}");
+                Console.Write($"{ev.Points.ToString().PadLeft(2)}");
             }
 
         }
+
+
     }
 }

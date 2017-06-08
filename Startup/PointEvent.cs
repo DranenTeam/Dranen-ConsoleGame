@@ -30,10 +30,10 @@ namespace Dranen
             }
         }
 
-        public EventPoint(int x, int y, int points, int deduction = 5) : base(x, y)
+        public EventPoint(int x, int y, int points, int deduction = 1) : base(x, y)
         {
             this.Points = points;
-            this.PointDeductor = deduction;
+            this.PointDeductor = Game.PointDeductor;
         }
 
         public int Points

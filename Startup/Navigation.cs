@@ -85,9 +85,10 @@ namespace Dranen
 
                     Drawing.Events(events);
                     Drawing.DrawHostile(hostile);
-                    ProcessEvents(events);
+                    Drawing.ScoreBoard();
+                    ProcessEvents(events, obj, hostile);
                 }
-                
+
                 cki = Console.ReadKey(true);
 
             } while (cki.Key != ConsoleKey.Escape);
@@ -105,21 +106,32 @@ namespace Dranen
         private static void GenerateEvent(List<EventPoint> events)
         {
             var rnd = new Random();
-            var x = rnd.Next(3, Game.WidthConst - 3);
-            var y = rnd.Next(2, Game.HeightConst - 2);
-            var time = rnd.Next(500, 5000);
-            EventPoint ev = new EventPoint(x, y, time);
+            var x = rnd.Next(1, Game.WidthConst / 2 - 3);
+            var y = rnd.Next(1, Game.HeightConst / 2 - 2);
+            var time = rnd.Next(15, 95);
+            EventPoint ev = new EventPoint(x * 2, y * 2, time);
             events.Add(ev);
         }
 
-        private static void ProcessEvents(List<EventPoint> events)
+        private static void ProcessEvents(List<EventPoint> events, Protagonist obj, Hostile hostile)
         {
             for (int i = 0; i < events.Count; i++)
             {
-                if (events[i].Points <= 10)
+                if (events[i].Y == obj.Y && events[i].X == obj.X)
+                {
+                    Game.Score += events[i].Points;
+                    events[i].Points = 0;
+                }
+
+                if (events[i].Points <= Game.PointDeathThreshold)
                 {
                     events.RemoveAt(i);
                 }
+            }
+
+            if (obj.Y == hostile.Y && obj.X == hostile.X)
+            {
+                Game.Score = 0;
             }
 
             foreach (var ev in events)
