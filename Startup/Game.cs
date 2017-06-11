@@ -8,7 +8,7 @@ namespace Dranen
 {
     public static class Game
     {
-        private static int gameSpeed = 20;
+        private static int gameSpeed = 30;
         private static bool isPaused = false;
         private static int score = 0;
 
@@ -43,6 +43,7 @@ namespace Dranen
 
         public static int PointEventGoodScore = 40;
         public static int PointEventBestScore = 70;
+        public static int HostileAddingScore = 500;
 
 
         public const int WidthConst = 40; // This should not be less than the visible area of your console

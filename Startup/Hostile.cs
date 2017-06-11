@@ -1,4 +1,5 @@
 ﻿using Dranen;
+using System;
 
 namespace Startup
 {
@@ -28,6 +29,15 @@ namespace Startup
             {
                 this.Y += y;
             }
+        }
+
+        public void RandomReset()
+        {
+            var rnd = new Random();
+            var x = rnd.Next(2, (Game.WidthConst / 2) - 3) * 2;
+            var y = rnd.Next(2, Game.HeightConst - 2);
+            this.X = x;
+            this.Y = y;
         }
     }
 }

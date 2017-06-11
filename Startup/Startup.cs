@@ -22,9 +22,11 @@ namespace Dranen
         {
             Protagonist protagonist = new Protagonist();
             List<EventPoint> events = new List<EventPoint>();
-            Hostile hostile = new Hostile(4, 4);
+            List<Hostile> hostiles = new List<Hostile>();
+            hostiles.Add(new Hostile(4, 4));
+
             InitializeGame();
-            Navigation.NavigateProtagonist(protagonist, events, hostile);
+            Navigation.NavigateProtagonist(protagonist, events, hostiles);
         }
 
         private static void InitializeGame()

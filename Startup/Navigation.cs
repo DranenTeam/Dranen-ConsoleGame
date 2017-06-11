@@ -15,15 +15,13 @@ namespace Dranen
             Left,
             Right
         }
-        public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events, Hostile hostile)
+        public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles)
         {
 
 
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
-            GenerateHostile(hostile);
             do
             {
-
                 while (Console.KeyAvailable == false)
                 {
                     Thread.Sleep(Game.GameSpeed);
@@ -32,61 +30,66 @@ namespace Dranen
                         GenerateEvent(events);
                     }
 
-
-
                     if (cki.Key == ConsoleKey.UpArrow)
                     {
                         Move(Direction.Up, obj);
-
                     }
                     if (cki.Key == ConsoleKey.DownArrow)
                     {
                         Move(Direction.Down, obj);
-
                     }
                     if (cki.Key == ConsoleKey.LeftArrow)
                     {
                         Move(Direction.Left, obj);
-
                     }
-
                     if (cki.Key == ConsoleKey.RightArrow)
                     {
                         Move(Direction.Right, obj);
-
                     }
                     if (cki.Key == ConsoleKey.Spacebar && !Game.IsPaused)
                     {
                         Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue");
                         Game.IsPaused = true;
                         cki = Console.ReadKey();
-
                     }
 
-                    if (hostile.IsAlive && obj.X <= 15)
+                    Drawing.ClearBackground();
+
+                    foreach (var hostile in hostiles)
                     {
-                        ChaseLeft(hostile, obj);
+                        if (hostile.IsAlive && obj.X <= 15)
+                        {
+                            ChaseLeft(hostile, obj);
+                        }
+                        if (hostile.IsAlive && obj.X >= 15)
+                        {
+                            ChaseRight(hostile, obj);
+                        }
+                        if (hostile.IsAlive && obj.Y <= 14)
+                        {
+                            ChaseUp(hostile, obj);
+                        }
+                        if (hostile.IsAlive && obj.Y >= 14)
+                        {
+                            ChaseDown(hostile, obj);
+                        }
+
+                        Drawing.Events(events);
+                        Drawing.DrawHostile(hostile);
+                        Drawing.ScoreBoard();
+                        ProcessEvents(events, obj, hostile);
                     }
 
-                    if (hostile.IsAlive && obj.X >= 15)
+                    if (currentScore >= Game.HostileAddingScore)
                     {
-                        ChaseRight(hostile, obj);
+                        currentScore = 0;
+                        GenerateHostile(hostiles);
                     }
-
-                    if (hostile.IsAlive && obj.Y <= 14)
+                    if (Game.Score == 0 && hostiles.Count > 1)
                     {
-                        ChaseUp(hostile, obj);
+                        hostiles.Clear();
+                        GenerateHostile(hostiles);
                     }
-
-                    if (hostile.IsAlive && obj.Y >= 14)
-                    {
-                        ChaseDown(hostile, obj);
-                    }
-
-                    Drawing.Events(events);
-                    Drawing.DrawHostile(hostile);
-                    Drawing.ScoreBoard();
-                    ProcessEvents(events, obj, hostile);
                 }
 
                 cki = Console.ReadKey(true);
@@ -94,13 +97,20 @@ namespace Dranen
             } while (cki.Key != ConsoleKey.Escape);
         }
 
-        private static void GenerateHostile(Hostile hostiles)
+        private static void GenerateHostile(List<Hostile> hostiles)
         {
             var rnd = new Random();
-            var x = rnd.Next(3, Game.WidthConst - 3);
+            var x = rnd.Next(2, (Game.WidthConst / 2) - 2) * 2;
             var y = rnd.Next(2, Game.HeightConst - 2);
+            hostiles.Add(new Hostile(x, y));
+
             //var hostile = new Hostile(x, y);
             //hostiles.Add(hostile);
+        }
+
+        private static void ResetHostile(Hostile hostile)
+        {
+            hostile.RandomReset();
         }
 
         private static void GenerateEvent(List<EventPoint> events)
@@ -113,6 +123,8 @@ namespace Dranen
             events.Add(ev);
         }
 
+        private static int currentScore = 0;
+
         private static void ProcessEvents(List<EventPoint> events, Protagonist obj, Hostile hostile)
         {
             for (int i = 0; i < events.Count; i++)
@@ -120,6 +132,7 @@ namespace Dranen
                 if (events[i].Y == obj.Y && events[i].X == obj.X)
                 {
                     Game.Score += events[i].Points;
+                    currentScore += events[i].Points;
                     events[i].Points = 0;
                 }
 
@@ -127,16 +140,17 @@ namespace Dranen
                 {
                     events.RemoveAt(i);
                 }
+                else
+                {
+                    events[i].Deduct();
+                }
             }
 
             if (obj.Y == hostile.Y && obj.X == hostile.X)
             {
                 Game.Score = 0;
-            }
-
-            foreach (var ev in events)
-            {
-                ev.Deduct();
+                currentScore = 0;
+                ResetHostile(hostile);
             }
         }
 
@@ -193,28 +207,28 @@ namespace Dranen
         {
             hostile.Chase(-1, 0);
             Drawing.DrawHostile(hostile);
-            Drawing.ClearBackground(hostile, obj);
+            Drawing.Draw(hostile, obj);
         }
 
         private static void ChaseRight(Hostile hostile, Protagonist obj)
         {
             hostile.Chase(1, 0);
             Drawing.DrawHostile(hostile);
-            Drawing.ClearBackground(hostile, obj);
+            Drawing.Draw(hostile, obj);
         }
 
         private static void ChaseDown(Hostile hostile, Protagonist obj)
         {
             hostile.Chase(0, 1);
             Drawing.DrawHostile(hostile);
-            Drawing.ClearBackground(hostile, obj);
+            Drawing.Draw(hostile, obj);
         }
 
         private static void ChaseUp(Hostile hostile, Protagonist obj)
         {
             hostile.Chase(0, -1);
             Drawing.DrawHostile(hostile);
-            Drawing.ClearBackground(hostile, obj);
+            Drawing.Draw(hostile, obj);
         }
     }
 }

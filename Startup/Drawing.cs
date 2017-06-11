@@ -22,7 +22,6 @@ namespace Dranen
             {
                 Console.Write("  ");
             }
-
         }
 
         public static void ScoreBoard()
@@ -67,11 +66,14 @@ namespace Dranen
             DrawProtagonist(obj);
             DrawPlayground(obj);
         }
-
-        public static void ClearBackground(Hostile hostile, Protagonist obj)
+        public static void ClearBackground()
         {
             Console.BackgroundColor = Game.BackgroundColor;
             Console.Clear();
+        }
+
+        public static void Draw(Hostile hostile, Protagonist obj)
+        {
             DrawProtagonist(obj);
             DrawHostile(hostile);
             DrawPlayground(obj);
@@ -79,8 +81,6 @@ namespace Dranen
 
         public static void Events(List<EventPoint> events)
         {
-
-
             foreach (var ev in events)
             {
 
@@ -100,9 +100,6 @@ namespace Dranen
                 Console.SetCursorPosition(ev.X, ev.Y);
                 Console.Write($"{ev.Points.ToString().PadLeft(2)}");
             }
-
         }
-
-
     }
 }
