@@ -15,11 +15,11 @@ namespace Dranen
             Left,
             Right
         }
+
         public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles)
         {
-
-
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
+
             do
             {
                 while (Console.KeyAvailable == false)
@@ -54,22 +54,21 @@ namespace Dranen
                     }
 
                     Drawing.ClearBackground();
-
                     foreach (var hostile in hostiles)
                     {
-                        if (hostile.IsAlive && obj.X <= 15)
+                        if (hostile.IsAlive && obj.X < hostile.X)
                         {
                             ChaseLeft(hostile, obj);
                         }
-                        if (hostile.IsAlive && obj.X >= 15)
+                        if (hostile.IsAlive && obj.X > hostile.X)
                         {
                             ChaseRight(hostile, obj);
                         }
-                        if (hostile.IsAlive && obj.Y <= 14)
+                        if (hostile.IsAlive && obj.Y < hostile.Y)
                         {
                             ChaseUp(hostile, obj);
                         }
-                        if (hostile.IsAlive && obj.Y >= 14)
+                        if (hostile.IsAlive && obj.Y > hostile.Y)
                         {
                             ChaseDown(hostile, obj);
                         }
@@ -83,7 +82,7 @@ namespace Dranen
                     if (currentScore >= Game.HostileAddingScore)
                     {
                         currentScore = 0;
-                        GenerateHostile(hostiles);
+                        GenerateHostile(hostiles);                        
                     }
                     if (Game.Score == 0 && hostiles.Count > 1)
                     {
@@ -112,6 +111,7 @@ namespace Dranen
         {
             hostile.RandomReset();
         }
+
 
         private static void GenerateEvent(List<EventPoint> events)
         {

@@ -95,7 +95,6 @@ namespace Dranen
                 else
                 {
                     Console.BackgroundColor = Game.PointEventColorBad;
-
                 }
                 Console.SetCursorPosition(ev.X, ev.Y);
                 Console.Write($"{ev.Points.ToString().PadLeft(2)}");
