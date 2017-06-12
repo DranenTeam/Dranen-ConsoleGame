@@ -10,15 +10,18 @@ using Startup;
 namespace Dranen
 {
 
-    internal class Program
+    public class Program
     {
 
         static void Main()
         {
-            Game();
+            Menu.Initialize();
+            //Game();
         }
 
-        private static void Game()
+        
+
+        public static void Game()
         {
             Protagonist protagonist = new Protagonist();
             List<EventPoint> events = new List<EventPoint>();

@@ -8,7 +8,7 @@ namespace Dranen
 {
     public static class Game
     {
-        private static int gameSpeed = 30;
+        public static int gameSpeed = 30;
         private static bool isPaused = false;
         private static int score = 0;
 

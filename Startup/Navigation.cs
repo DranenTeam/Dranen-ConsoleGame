@@ -82,7 +82,7 @@ namespace Dranen
                     if (currentScore >= Game.HostileAddingScore)
                     {
                         currentScore = 0;
-                        GenerateHostile(hostiles);                        
+                        GenerateHostile(hostiles);
                     }
                     if (Game.Score == 0 && hostiles.Count > 1)
                     {
@@ -103,8 +103,6 @@ namespace Dranen
             var y = rnd.Next(2, Game.HeightConst - 2);
             hostiles.Add(new Hostile(x, y));
 
-            //var hostile = new Hostile(x, y);
-            //hostiles.Add(hostile);
         }
 
         private static void ResetHostile(Hostile hostile)
