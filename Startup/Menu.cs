@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using Dranen;
 
@@ -20,56 +21,85 @@ namespace Startup
                 "Play", "Options", "How to play", "Credits", "Exit"
             };
             var cursor = 11;
+            var position = 11;
 
             while (true)
             {
                 Console.Clear();
                 Logo();
-
-                var position = 11;
-                foreach (var item in menuList)
+                Position(11, position);
+                Console.CursorVisible = true;
+                Console.CursorSize = 100;
+                Console.WriteLine("What is your name?");
+                Position(15, 13);
+                string playersName = Console.ReadLine();
+                
+                while (true)
                 {
-                    if (position == cursor)
+                    Console.Clear();
+                    Console.CursorVisible = false;
+                    Logo();
+                    Position(16, 7);
+                    Console.WriteLine($"Hello {playersName}!");
+                    Position(10, 8);
+                    Console.WriteLine($"Good luck in your quest!");
+                    
+                    foreach (var item in menuList)
                     {
-                        Console.BackgroundColor = ConsoleColor.Yellow;
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                    }
-                    Position(16, position);
-                    Console.WriteLine(item);
-                    position++;
-
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                var key = Console.ReadKey();
-                switch (key.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        cursor--; break;
-                    case ConsoleKey.DownArrow:
-                        cursor++; break;
-                    case ConsoleKey.Enter:
-                        switch (cursor)
+                        if (position == cursor)
                         {
-                            case 11: Program.Game(); break;
-                            case 12: Options(); break;
-                            case 13: HowToPlay(); break;
-                            case 14: Credits(); break;
-                            case 15: Exit(); break;
+                            Console.BackgroundColor = ConsoleColor.Yellow;
+                            Console.ForegroundColor = ConsoleColor.Blue;
                         }
-                        break;
+                        Position(16, position);
+                        Console.WriteLine(item);
+                        position++;
+
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    var key = Console.ReadKey();
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            cursor--;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            cursor++;
+                            break;
+                        case ConsoleKey.Enter:
+                            switch (cursor)
+                            {
+                                case 11:
+                                    Program.Game();
+                                    break;
+                                case 12:
+                                    Options();
+                                    break;
+                                case 13:
+                                    HowToPlay();
+                                    break;
+                                case 14:
+                                    Credits();
+                                    break;
+                                case 15:
+                                    Exit();
+                                    break;
+                            }
+                            break;
                         //case ConsoleKey.Escape: return;
+                    }
+                    if (cursor < 11)
+                    {
+                        cursor++;
+                    }
+                    if (cursor > 15)
+                    {
+                        cursor--;
+                    }
                 }
-                if (cursor < 11)
-                {
-                    cursor++;
-                }
-                if (cursor > 15)
-                {
-                    cursor--;
-                }
-            }
         }
+    }
 
         private static void Position(int x, int y)
         {
