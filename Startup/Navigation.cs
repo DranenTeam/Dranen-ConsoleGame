@@ -76,6 +76,7 @@ namespace Dranen
                         Drawing.Events(events);
                         Drawing.DrawHostile(hostile);
                         Drawing.ScoreBoard();
+                        Drawing.LivesBoard();
                         ProcessEvents(events, obj, hostile);
                     }
 
@@ -146,9 +147,18 @@ namespace Dranen
 
             if (obj.Y == hostile.Y && obj.X == hostile.X)
             {
-                Game.Score = 0;
-                currentScore = 0;
-                ResetHostile(hostile);
+                if (Game.Lives > 0)
+                {
+                    Game.Lives--;
+                    Game.Score = 0;
+                    currentScore = 0;
+                    ResetHostile(hostile);
+                }
+                else
+                {
+                    Game.IsEnd = true;
+                }
+                
             }
         }
 

@@ -32,6 +32,12 @@ namespace Dranen
             //Console.Write($"{Game.Score.ToString().PadLeft(6)}");
         }
 
+        public static void LivesBoard()
+        {
+            Console.SetCursorPosition(15,0);
+            Console.WriteLine($"Lives: {Game.Lives}");
+        }
+
         public static void DrawPlayground(Protagonist obj)
         {
             //for (int i = 0; i < Game.WidthConst; i += 20)

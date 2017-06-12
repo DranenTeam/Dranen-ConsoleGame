@@ -10,6 +10,8 @@ namespace Dranen
     {
         public static int gameSpeed = 30;
         private static bool isPaused = false;
+        private static bool isEnd = false;
+        private static int lives = 3;
         private static int score = 0;
 
         public static int Score
@@ -23,6 +25,17 @@ namespace Dranen
         {
             get { return isPaused; }
             set { isPaused = value; }
+        }
+        public static bool IsEnd
+        {
+            get { return isEnd; }
+            set { isEnd = value; }
+        }
+
+        public static int Lives
+        {
+            get { return lives; }
+            set { lives = value; }
         }
 
         public static int GameSpeed
