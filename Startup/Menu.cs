@@ -125,12 +125,13 @@ namespace Startup
         private static void Credits()
         {
             Console.Clear();
-            const string text = @"Drenen 2017"; // dev names or something about the game.
+            const string text = "Drenen 2017\nTheo Dor\nNikoleta Valchinova\nVladimir Gadjov\nKostadin Valchev\nDimitar Nikolov"; // dev names or something about the game.
+           
             var cursor = 1;
             while (true)
             {
                 Console.Clear();
-                Position(2, cursor);
+                Position(15, cursor);
                 Console.WriteLine(text);
                 Thread.Sleep(250);
                 cursor++;
@@ -141,7 +142,6 @@ namespace Startup
             }
             Console.ReadKey(); //TODO: Break the while and go back in the menu
         }
-
         private static void HowToPlay()
         {
             Console.Clear();
