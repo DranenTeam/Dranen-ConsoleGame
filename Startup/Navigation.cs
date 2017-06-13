@@ -112,12 +112,12 @@ namespace Dranen
                 ProcessEvents(events, obj, hostile);
             }
 
-            if (Game.Score >= Game.HostileAddingScore)
+            if (currentScore >= Game.HostileAddingScore)
             {
-                Game.Score = 0;
+                currentScore = 0;
                 GenerateHostile(hostiles);
             }
-            if (Game.Score == 0 && hostiles.Count > 1)
+            if (Game.Score <= 0 && hostiles.Count > 1)
             {
                 hostiles.Clear();
                 GenerateHostile(hostiles);
@@ -143,7 +143,6 @@ namespace Dranen
             Console.WriteLine($"Time: {stopwatch.Elapsed.TotalSeconds.ToString("0")}");
             Console.SetCursorPosition(10, 13);
             Console.WriteLine($"Score: {Game.Score}");
-            //Console.WriteLine($"Score: {currentScore}");
             Console.SetCursorPosition(9, 15);
             Console.WriteLine($"Prss any key to start over.");
             if (true)
@@ -178,7 +177,7 @@ namespace Dranen
             events.Add(ev);
         }
 
-        //private static int currentScore = 0;
+        private static int currentScore = 0;
 
         private static void ProcessEvents(List<EventPoint> events, Protagonist obj, Hostile hostile)
         {
@@ -187,7 +186,7 @@ namespace Dranen
                 if (events[i].Y == obj.Y && events[i].X == obj.X)
                 {
                     Game.Score += events[i].Points;
-                    //currentScore += events[i].Points;
+                    currentScore += events[i].Points;
                     events[i].Points = 0;
                 }
 
@@ -207,7 +206,7 @@ namespace Dranen
                 {
                     Game.Lives--;
                     Game.Score -= 100;
-                    //currentScore = 0;
+                    currentScore -= 100;
                     ResetHostile(hostile);
                 }
                 else
