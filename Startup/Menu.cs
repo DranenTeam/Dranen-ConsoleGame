@@ -21,13 +21,12 @@ namespace Startup
                 "Play", "Options", "How to play", "Credits", "Exit"
             };
             var cursor = 11;
-            var position = 11;
 
             while (true)
             {
                 Console.Clear();
                 Logo();
-                Position(11, position);
+                Position(11, 11);
                 Console.CursorVisible = true;
                 Console.CursorSize = 100;
                 Console.WriteLine("What is your name?");
@@ -37,14 +36,14 @@ namespace Startup
                 
                 while (true)
                 {
-                    Console.Clear();
-                    Console.CursorVisible = false;
-                    Logo();
-                    Position(16, 7);
-                    Console.WriteLine($"Hello {playersName}!");
-                    Position(10, 8);
-                    Console.WriteLine($"Good luck in your quest!");
-                    
+                        Console.Clear();
+                        Console.CursorVisible = false;
+                        Logo();
+                        Position(16, 7);
+                        Console.WriteLine($"Hello {playersName}!");
+                        Position(10, 8);
+                        Console.WriteLine($"Good luck in your quest!");
+                    var position = 11;
                     foreach (var item in menuList)
                     {
                         if (position == cursor)
