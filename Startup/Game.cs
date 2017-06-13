@@ -13,6 +13,7 @@ namespace Dranen
         private static bool isEnd = false;
         private static int lives = 3;
         private static int score = 0;
+        private static StringBuilder playersName = new StringBuilder();
 
     public static int Score
         {
@@ -48,6 +49,12 @@ namespace Dranen
                     throw new ArgumentException("Game speed cannot be lower than 0");
                 }
             }
+        }
+
+        public static StringBuilder PlayersName
+        {
+            get { return playersName; }
+            set { playersName = value; }
         }
 
         public static int PointEventGoodScore = 40;

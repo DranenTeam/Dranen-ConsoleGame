@@ -33,7 +33,7 @@ namespace Startup
                 Console.WriteLine("What is your name?");
                 Position(15, 13);
                 StringBuilder playersName = new StringBuilder(Console.ReadLine());
-                PlayersName(playersName);
+                Game.PlayersName = playersName;
                 
                 while (true)
                 {
@@ -102,10 +102,10 @@ namespace Startup
         }
     }
 
-        public static void PlayersName(StringBuilder playersName)
-        {
-            playersName = new StringBuilder(2, 10);
-        }
+        //public static void PlayersName(StringBuilder playersName)
+        //{
+        //    playersName = new StringBuilder(2, 10);
+        //}
 
         private static void Position(int x, int y)
         {

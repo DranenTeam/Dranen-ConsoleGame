@@ -61,8 +61,12 @@ namespace Dranen
                         Console.Clear();
                         Menu.Logo();
                         stopwatch.Stop();
-                        Console.SetCursorPosition(5,10);
-                        Console.WriteLine($"You died! Time: {stopwatch.Elapsed}");
+                        Console.SetCursorPosition(9,10);
+                        Console.WriteLine($"Sorry {Game.PlayersName}, You died! :(");
+                        Console.SetCursorPosition(10, 12);
+                        Console.WriteLine($"Time: {stopwatch.Elapsed}");
+                        Console.SetCursorPosition(10, 13);
+                        Console.WriteLine($"Score: {currentScore}");
                         cki = Console.ReadKey();
                     }
 
