@@ -226,16 +226,19 @@ namespace Startup
             if (speed == 30)
             {
                 Game.gameSpeed = 40;
+                Game.HostileAddingScore = 200;
                 optValue = "Game Speed Slow";
             }
             else if (speed == 40)
             {
                 Game.GameSpeed = 10;
+                Game.HostileAddingScore = 1000;
                 optValue = "Game Speed Fast";
             }
             else if (speed == 10)
             {
                 Game.GameSpeed = 30;
+                Game.HostileAddingScore = 500;
                 optValue = "Game Speed Normal";
             }
 

@@ -117,11 +117,11 @@ namespace Dranen
                 currentScore = 0;
                 GenerateHostile(hostiles);
             }
-            if (Game.Score <= 0 && hostiles.Count > 1)
-            {
-                hostiles.Clear();
-                GenerateHostile(hostiles);
-            }
+            //if (Game.Score == 0 && hostiles.Count > 1)
+            //{
+            //    hostiles.Clear();
+            //    GenerateHostile(hostiles);
+            //}
         }
 
         private static void EventsProcessor(List<EventPoint> events)
