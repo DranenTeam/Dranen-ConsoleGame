@@ -14,13 +14,11 @@ namespace Dranen
         private static int lives = 3;
         private static int score = 0;
 
-        public static int Score
+    public static int Score
         {
             get { return score; }
             set { score = value; }
         }
-
-
         public static bool IsPaused
         {
             get { return isPaused; }
@@ -31,13 +29,11 @@ namespace Dranen
             get { return isEnd; }
             set { isEnd = value; }
         }
-
         public static int Lives
         {
             get { return lives; }
             set { lives = value; }
         }
-
         public static int GameSpeed
         {
             get { return gameSpeed; }
@@ -57,7 +53,6 @@ namespace Dranen
         public static int PointEventGoodScore = 40;
         public static int PointEventBestScore = 70;
         public static int HostileAddingScore = 500;
-
 
         public const int WidthConst = 40; // This should not be less than the visible area of your console
         public const int HeightConst = 20;

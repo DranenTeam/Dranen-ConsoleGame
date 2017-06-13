@@ -112,7 +112,7 @@ namespace Startup
             Console.SetCursorPosition(x, y);
         }
 
-        private static void Logo()
+        public static void Logo()
         {
             Console.WriteLine(@" 
                                   

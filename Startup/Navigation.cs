@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Mime;
 using System.Threading;
 using Dranen;
 using Startup;
@@ -19,11 +21,13 @@ namespace Dranen
         public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles)
         {
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
+            Stopwatch stopwatch = new Stopwatch();
 
             do
             {
                 while (Console.KeyAvailable == false)
                 {
+                    stopwatch.Start();
                     Thread.Sleep(Game.GameSpeed);
                     if (events.Count <= Game.EventsCount)
                     {
@@ -48,12 +52,22 @@ namespace Dranen
                     }
                     if (cki.Key == ConsoleKey.Spacebar && !Game.IsPaused)
                     {
-                        Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue");
+                        Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue.");
                         Game.IsPaused = true;
+                        cki = Console.ReadKey();
+                    }
+                    if (Game.IsEnd)
+                    {
+                        Console.Clear();
+                        Menu.Logo();
+                        stopwatch.Stop();
+                        Console.SetCursorPosition(5,10);
+                        Console.WriteLine($"You died! Time: {stopwatch.Elapsed}");
                         cki = Console.ReadKey();
                     }
 
                     Drawing.ClearBackground();
+                    Drawing.LivesBoard();
                     foreach (var hostile in hostiles)
                     {
                         if (hostile.IsAlive && obj.X < hostile.X)
@@ -76,7 +90,7 @@ namespace Dranen
                         Drawing.Events(events);
                         Drawing.DrawHostile(hostile);
                         Drawing.ScoreBoard();
-                        Drawing.LivesBoard();
+
                         ProcessEvents(events, obj, hostile);
                     }
 
@@ -94,7 +108,9 @@ namespace Dranen
 
                 cki = Console.ReadKey(true);
 
-            } while (cki.Key != ConsoleKey.Escape);
+            }
+            while (cki.Key != ConsoleKey.Escape);
+           
         }
 
         private static void GenerateHostile(List<Hostile> hostiles)
@@ -149,7 +165,7 @@ namespace Dranen
             {
                 if (Game.Lives > 0)
                 {
-                    Game.Lives--;
+                    Game.Lives --;
                     Game.Score = 0;
                     currentScore = 0;
                     ResetHostile(hostile);
@@ -158,7 +174,6 @@ namespace Dranen
                 {
                     Game.IsEnd = true;
                 }
-                
             }
         }
 
