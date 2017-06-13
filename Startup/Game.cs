@@ -60,7 +60,6 @@ namespace Dranen
         public static int PointEventGoodScore = 40;
         public static int PointEventBestScore = 70;
         public static int HostileAddingScore = 500;
-
         public const int WidthConst = 40; // This should not be less than the visible area of your console
         public const int HeightConst = 20;
         public static ConsoleColor BackgroundColor = ConsoleColor.DarkGray;
@@ -69,7 +68,6 @@ namespace Dranen
         public static ConsoleColor PointEventColorGood = ConsoleColor.DarkYellow;
         public static ConsoleColor PointEventColorBad = ConsoleColor.DarkRed;
         public static ConsoleColor HostileColor = ConsoleColor.Red;
-        public static ConsoleColor ScoreBoardColor = ConsoleColor.Magenta;
         public static int PointDeductor = 1;
         public const int EventsCount = 10;
         public static int PointDeathThreshold = 5;

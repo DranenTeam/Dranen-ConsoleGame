@@ -29,92 +29,128 @@ namespace Dranen
                 {
                     stopwatch.Start();
                     Thread.Sleep(Game.GameSpeed);
-                    if (events.Count <= Game.EventsCount)
-                    {
-                        GenerateEvent(events);
-                    }
-
-                    if (cki.Key == ConsoleKey.UpArrow)
-                    {
-                        Move(Direction.Up, obj);
-                    }
-                    if (cki.Key == ConsoleKey.DownArrow)
-                    {
-                        Move(Direction.Down, obj);
-                    }
-                    if (cki.Key == ConsoleKey.LeftArrow)
-                    {
-                        Move(Direction.Left, obj);
-                    }
-                    if (cki.Key == ConsoleKey.RightArrow)
-                    {
-                        Move(Direction.Right, obj);
-                    }
-                    if (cki.Key == ConsoleKey.Spacebar && !Game.IsPaused)
-                    {
-                        Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue.");
-                        Game.IsPaused = true;
-                        cki = Console.ReadKey();
-                    }
+                    EventsProcessor(events);
+                    cki = MovementProcessor(obj, cki);
                     if (Game.IsEnd)
                     {
-                        Console.Clear();
-                        Menu.Logo();
-                        stopwatch.Stop();
-                        Console.SetCursorPosition(9,10);
-                        Console.WriteLine($"Sorry {Game.PlayersName}, You died! :(");
-                        Console.SetCursorPosition(10, 12);
-                        Console.WriteLine($"Time: {stopwatch.Elapsed}");
-                        Console.SetCursorPosition(10, 13);
-                        Console.WriteLine($"Score: {currentScore}");
-                        cki = Console.ReadKey();
+                        ShowEndScreen(stopwatch);
+                        Game.IsEnd = false;
+                        Game.Lives = 3;
+                        return;
                     }
-
-                    Drawing.ClearBackground();
-                    Drawing.LivesBoard();
-                    foreach (var hostile in hostiles)
-                    {
-                        if (hostile.IsAlive && obj.X < hostile.X)
-                        {
-                            ChaseLeft(hostile, obj);
-                        }
-                        if (hostile.IsAlive && obj.X > hostile.X)
-                        {
-                            ChaseRight(hostile, obj);
-                        }
-                        if (hostile.IsAlive && obj.Y < hostile.Y)
-                        {
-                            ChaseUp(hostile, obj);
-                        }
-                        if (hostile.IsAlive && obj.Y > hostile.Y)
-                        {
-                            ChaseDown(hostile, obj);
-                        }
-
-                        Drawing.Events(events);
-                        Drawing.DrawHostile(hostile);
-                        Drawing.ScoreBoard();
-
-                        ProcessEvents(events, obj, hostile);
-                    }
-
-                    if (currentScore >= Game.HostileAddingScore)
-                    {
-                        currentScore = 0;
-                        GenerateHostile(hostiles);
-                    }
-                    if (Game.Score == 0 && hostiles.Count > 1)
-                    {
-                        hostiles.Clear();
-                        GenerateHostile(hostiles);
-                    }
+                    LiveBoardProcessor();
+                    HostilesProcessor(obj, events, hostiles);
                 }
 
                 cki = Console.ReadKey(true);
 
             }
             while (cki.Key != ConsoleKey.Escape);
-           
+
+        }
+
+        private static ConsoleKeyInfo MovementProcessor(Protagonist obj, ConsoleKeyInfo cki)
+        {
+            if (cki.Key == ConsoleKey.UpArrow)
+            {
+                Move(Direction.Up, obj);
+            }
+            if (cki.Key == ConsoleKey.DownArrow)
+            {
+                Move(Direction.Down, obj);
+            }
+            if (cki.Key == ConsoleKey.LeftArrow)
+            {
+                Move(Direction.Left, obj);
+            }
+            if (cki.Key == ConsoleKey.RightArrow)
+            {
+                Move(Direction.Right, obj);
+            }
+            if (cki.Key == ConsoleKey.Spacebar && !Game.IsPaused )
+            {
+                //&& !Game.IsEnd
+                Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue.");
+                Game.IsPaused = true;
+                cki = Console.ReadKey();
+            }
+
+            return cki;
+        }
+
+        private static void LiveBoardProcessor()
+        {
+            Drawing.ClearBackground();
+            Drawing.LivesBoard();
+        }
+
+        private static void HostilesProcessor(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles)
+        {
+            foreach (var hostile in hostiles)
+            {
+                if (hostile.IsAlive && obj.X < hostile.X)
+                {
+                    ChaseLeft(hostile, obj);
+                }
+                if (hostile.IsAlive && obj.X > hostile.X)
+                {
+                    ChaseRight(hostile, obj);
+                }
+                if (hostile.IsAlive && obj.Y < hostile.Y)
+                {
+                    ChaseUp(hostile, obj);
+                }
+                if (hostile.IsAlive && obj.Y > hostile.Y)
+                {
+                    ChaseDown(hostile, obj);
+                }
+
+                Drawing.Events(events);
+                Drawing.DrawHostile(hostile);
+                Drawing.ScoreBoard();
+
+                ProcessEvents(events, obj, hostile);
+            }
+
+            if (Game.Score >= Game.HostileAddingScore)
+            {
+                Game.Score = 0;
+                GenerateHostile(hostiles);
+            }
+            if (Game.Score == 0 && hostiles.Count > 1)
+            {
+                hostiles.Clear();
+                GenerateHostile(hostiles);
+            }
+        }
+
+        private static void EventsProcessor(List<EventPoint> events)
+        {
+            if (events.Count <= Game.EventsCount)
+            {
+                GenerateEvent(events);
+            }
+        }
+
+        private static void ShowEndScreen(Stopwatch stopwatch)
+        {
+            Console.Clear();
+            Menu.Logo();
+            stopwatch.Stop();
+            Console.SetCursorPosition(9, 10);
+            Console.WriteLine($"Sorry {Game.PlayersName}, You died! :(");
+            Console.SetCursorPosition(10, 12);
+            Console.WriteLine($"Time: {stopwatch.Elapsed.TotalSeconds.ToString("0")}");
+            Console.SetCursorPosition(10, 13);
+            Console.WriteLine($"Score: {Game.Score}");
+            //Console.WriteLine($"Score: {currentScore}");
+            Console.SetCursorPosition(9, 15);
+            Console.WriteLine($"Prss any key to start over.");
+            if (true)
+            {
+                Thread.Sleep(2000);
+                Console.ReadKey();
+            }
         }
 
         private static void GenerateHostile(List<Hostile> hostiles)
@@ -142,7 +178,7 @@ namespace Dranen
             events.Add(ev);
         }
 
-        private static int currentScore = 0;
+        //private static int currentScore = 0;
 
         private static void ProcessEvents(List<EventPoint> events, Protagonist obj, Hostile hostile)
         {
@@ -151,7 +187,7 @@ namespace Dranen
                 if (events[i].Y == obj.Y && events[i].X == obj.X)
                 {
                     Game.Score += events[i].Points;
-                    currentScore += events[i].Points;
+                    //currentScore += events[i].Points;
                     events[i].Points = 0;
                 }
 
@@ -169,9 +205,9 @@ namespace Dranen
             {
                 if (Game.Lives > 0)
                 {
-                    Game.Lives --;
-                    Game.Score = 0;
-                    currentScore = 0;
+                    Game.Lives--;
+                    Game.Score -= 100;
+                    //currentScore = 0;
                     ResetHostile(hostile);
                 }
                 else

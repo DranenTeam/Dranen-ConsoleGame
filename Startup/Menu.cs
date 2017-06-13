@@ -33,16 +33,16 @@ namespace Startup
                 Position(15, 13);
                 StringBuilder playersName = new StringBuilder(Console.ReadLine());
                 Game.PlayersName = playersName;
-                
+
                 while (true)
                 {
-                        Console.Clear();
-                        Console.CursorVisible = false;
-                        Logo();
-                        Position(16, 7);
-                        Console.WriteLine($"Hello {playersName}!");
-                        Position(10, 8);
-                        Console.WriteLine($"Good luck in your quest!");
+                    Console.Clear();
+                    Console.CursorVisible = false;
+                    Logo();
+                    Position(16, 7);
+                    Console.WriteLine($"Hello {playersName}!");
+                    Position(10, 8);
+                    Console.WriteLine($"Good luck in your quest!");
                     var position = 11;
                     foreach (var item in menuList)
                     {
@@ -87,7 +87,7 @@ namespace Startup
                                     break;
                             }
                             break;
-                        //case ConsoleKey.Escape: return;
+                            //case ConsoleKey.Escape: return;
                     }
                     if (cursor < 11)
                     {
@@ -98,8 +98,8 @@ namespace Startup
                         cursor--;
                     }
                 }
+            }
         }
-    }
 
         //public static void PlayersName(StringBuilder playersName)
         //{
@@ -126,9 +126,10 @@ namespace Startup
         {
             Console.Clear();
             const string text = "Drenen 2017\nTheo Dor\nNikoleta Valchinova\nVladimir Gadjov\nKostadin Valchev\nDimitar Nikolov"; // dev names or something about the game.
-           
+
             var cursor = 1;
-            while (true)
+
+            for (int i = 0; i < 15; i++)
             {
                 Console.Clear();
                 Position(15, cursor);
@@ -140,6 +141,7 @@ namespace Startup
                     cursor = 1;
                 }
             }
+
             Console.ReadKey(); //TODO: Break the while and go back in the menu
         }
         private static void HowToPlay()
@@ -147,8 +149,10 @@ namespace Startup
             Console.Clear();
             while (true)
             {
-                Console.WriteLine(@"//TODO: Describe movements and rules
-Use Esc for back");
+                Console.WriteLine(@"
+1. Chase the points
+2. Dodge the red hostiles
+3. Repeat");
                 var key = Console.ReadKey();
                 if (key.Key == ConsoleKey.Escape)
                 {
@@ -161,7 +165,7 @@ Use Esc for back");
         {
             var optionsList = new[]
             {
-                "Game Speed Normal", "option2", "option3", "option4", "option5"
+                "Game Speed Normal"//, "option2", "option3", "option4", "option5"
             };
             var cursor = 11;
 

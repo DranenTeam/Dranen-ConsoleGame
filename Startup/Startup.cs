@@ -16,24 +16,27 @@ namespace Dranen
         static void Main()
         {
             Menu.Initialize();
-            //Game();
         }
 
         
 
         public static void Game()
         {
-            Protagonist protagonist = new Protagonist();
-            List<EventPoint> events = new List<EventPoint>();
-            List<Hostile> hostiles = new List<Hostile>();
-            hostiles.Add(new Hostile(4, 4));            
-
-            InitializeGame();
-            Navigation.NavigateProtagonist(protagonist, events, hostiles);
+            while (true)
+            {
+                InitializeGame();
+                Dranen.Game.Score = 0;
+                Protagonist protagonist = new Protagonist();
+                List<EventPoint> events = new List<EventPoint>();
+                List<Hostile> hostiles = new List<Hostile>();
+                hostiles.Add(new Hostile(4, 4));
+                Navigation.NavigateProtagonist(protagonist, events, hostiles);
+                }
         }
 
         private static void InitializeGame()
         {
+
             Console.CursorVisible = false;
             Console.BufferHeight = Dranen.Game.HeightConst;
             Console.BufferWidth = Dranen.Game.WidthConst;
