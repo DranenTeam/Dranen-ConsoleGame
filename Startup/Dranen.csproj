@@ -50,12 +50,20 @@
     <Compile Include="Event.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Navigation.cs" />
+    <Compile Include="Sound.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protagonist.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sounds\Event.wav" />
+    <Content Include="Sounds\Game over.wav" />
+    <Content Include="Sounds\GameStartSound.wav" />
+    <Content Include="Sounds\Hostile.wav" />
+    <Content Include="Sounds\MenuEffect.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

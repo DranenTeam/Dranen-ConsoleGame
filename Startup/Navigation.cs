@@ -73,6 +73,7 @@ namespace Dranen
                 Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue.");
                 Game.IsPaused = true;
                 cki = Console.ReadKey();
+
             }
 
             return cki;
@@ -133,7 +134,7 @@ namespace Dranen
         }
 
         private static void ShowEndScreen(Stopwatch stopwatch)
-        {
+        {   
             Console.Clear();
             Menu.Logo();
             stopwatch.Stop();
@@ -145,6 +146,8 @@ namespace Dranen
             Console.WriteLine($"Score: {Game.Score}");
             Console.SetCursorPosition(9, 15);
             Console.WriteLine($"Prss any key to start over.");
+            Sound.GameOver();
+
             if (true)
             {
                 Thread.Sleep(2000);
@@ -188,6 +191,7 @@ namespace Dranen
                     Game.Score += events[i].Points;
                     currentScore += events[i].Points;
                     events[i].Points = 0;
+                    Sound.Event();
                 }
 
                 if (events[i].Points <= Game.PointDeathThreshold)

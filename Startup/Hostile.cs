@@ -18,6 +18,7 @@ namespace Startup
             this.Y = y;
             this.IsAlive = true; // Some Buffs can kill it
             var rdm = new Random();
+            Sound.Hostile();
             this.Slowliness = rdm.Next(5, 15);
             this.dx = Slowliness;
             this.dy = Slowliness;

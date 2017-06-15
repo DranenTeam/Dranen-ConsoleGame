@@ -50,6 +50,9 @@ namespace Dranen
                 }
             }
         }
+      
+       
+
 
         public static StringBuilder PlayersName
         {
@@ -57,7 +60,7 @@ namespace Dranen
             set { playersName = value; }
         }
 
-        public static int PointEventGoodScore = 40;
+        public static int PointEventGoodScore = 120;
         public static int PointEventBestScore = 70;
         public static int HostileAddingScore = 500;
         public const int WidthConst = 40; // This should not be less than the visible area of your console

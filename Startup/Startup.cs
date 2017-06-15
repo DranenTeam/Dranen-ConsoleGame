@@ -27,6 +27,8 @@ namespace Dranen
                 InitializeGame();
                 Dranen.Game.Score = 0;
                 Protagonist protagonist = new Protagonist();
+
+
                 List<EventPoint> events = new List<EventPoint>();
                 List<Hostile> hostiles = new List<Hostile>();
                 hostiles.Add(new Hostile(4, 4));

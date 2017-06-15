@@ -9,13 +9,13 @@ namespace Startup
     {
         public static void Initialize()
         {
+            Sound.GameStartSound();
             Console.WindowHeight =
                 20;
             Console.WindowWidth = 40;
             Console.BufferHeight = 20;
             Console.BufferWidth = 40;
             Console.CursorVisible = false;
-
             var menuList = new string[]
             {
                 "Play", "Options", "How to play", "Credits", "Exit"
@@ -33,7 +33,7 @@ namespace Startup
                 Position(15, 13);
                 StringBuilder playersName = new StringBuilder(Console.ReadLine());
                 Game.PlayersName = playersName;
-
+                Sound.MenuEffect();
                 while (true)
                 {
                     Console.Clear();
@@ -59,6 +59,7 @@ namespace Startup
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     var key = Console.ReadKey();
+                    Sound.MenuEffect();
                     switch (key.Key)
                     {
                         case ConsoleKey.UpArrow:
@@ -125,6 +126,7 @@ namespace Startup
         private static void Credits()
         {
             Console.Clear();
+            Sound.CreditsSound();
             const string text = "Drenen 2017\nTheo Dor\nNikoleta Valchinova\nVladimir Gadjov\nKostadin Valchev\nDimitar Nikolov"; // dev names or something about the game.
 
             var cursor = 1;
@@ -184,6 +186,7 @@ namespace Startup
                     }
                     Position(11, position);
                     Console.WriteLine(item);
+                    Sound.MenuEffect();
                     position++;
 
                     Console.BackgroundColor = ConsoleColor.Black;
