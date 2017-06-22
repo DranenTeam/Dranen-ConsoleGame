@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Startup
 {
-  public  static class Sound
+    public static class Sound
     {
         public static void GameOver()
         {
@@ -37,6 +37,11 @@ namespace Startup
         {
             System.Media.SoundPlayer creditsSound = new System.Media.SoundPlayer("..//..//Sounds//GameStartSound.wav");
             creditsSound.Play();
+        }
+        public static void LostLife()
+        {
+            System.Media.SoundPlayer gameOver = new System.Media.SoundPlayer("..//..//Sounds//LostLife.wav");
+            gameOver.Play();
         }
     }
 }

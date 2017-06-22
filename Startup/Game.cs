@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Startup;
 
 namespace Dranen
 {
@@ -15,7 +16,7 @@ namespace Dranen
         private static int score = 0;
         private static StringBuilder playersName = new StringBuilder();
 
-    public static int Score
+        public static int Score
         {
             get { return score; }
             set { score = value; }
@@ -33,7 +34,21 @@ namespace Dranen
         public static int Lives
         {
             get { return lives; }
-            set { lives = value; }
+            set
+            {
+                if (value < 3)
+                {
+                    Sound.LostLife();
+                    lives = value;
+                }
+                else
+                {
+                    lives = value;
+
+                }
+
+                lives = value;
+            }
         }
         public static int GameSpeed
         {
@@ -50,8 +65,8 @@ namespace Dranen
                 }
             }
         }
-      
-       
+
+
 
 
         public static StringBuilder PlayersName

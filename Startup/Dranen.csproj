@@ -63,6 +63,7 @@
     <Content Include="Sounds\Game over.wav" />
     <Content Include="Sounds\GameStartSound.wav" />
     <Content Include="Sounds\Hostile.wav" />
+    <Content Include="Sounds\LostLife.wav" />
     <Content Include="Sounds\MenuEffect.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
