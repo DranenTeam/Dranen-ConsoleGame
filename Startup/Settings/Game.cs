@@ -28,7 +28,7 @@ namespace Settings
 
         public const int EventsCount = 10; // Count of Point boxes on the map [5 - 50]
         public static int PointDeathThreshold = 5; // Below what amount of points a point box disappears [5 - 50]
-        public static int PointDeductor = 1; // How much points a poit box losses every game tick [ 5-99]
+        public static int PointDeductor = 1; // How much points a point box losses every game tick [ 5-99]
         public static int PointEventGoodScore = 50; // Above that points a box is colored as good [ 5-99]
         public static int PointEventBestScore = 70;// Above that points a box is colored as best [ 5-99]
         public static int HostileAddingScore = 500; // after how mutch points generated a new hostile is added

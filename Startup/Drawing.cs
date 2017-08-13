@@ -38,26 +38,6 @@ namespace Dranen
             Console.WriteLine($"Lives: {game.Lives}");
         }
 
-        public static void DrawPlayground(Protagonist obj)
-        {
-            //for (int i = 0; i < Game.WidthConst; i += 20)
-            //{
-            //    Console.SetCursorPosition(i, 0);
-            //    Console.Write("  ");
-            //    Console.SetCursorPosition(i, Game.HeightConst - 1);
-            //    Console.Write("  ");
-            //}
-
-            //for (int i = 0; i < Game.HeightConst; i += 10)
-            //{
-            //    Console.SetCursorPosition(0, i);
-            //    Console.Write("  ");
-            //    Console.SetCursorPosition(Game.WidthConst - 2, i);
-            //    Console.Write("  ");
-            //}
-            //Console.SetCursorPosition(obj.X, obj.Y);
-        }
-
         public static void DrawHostile(Hostile hostile)
         {
             Console.BackgroundColor = Settings.Color.Hostile;
@@ -70,7 +50,6 @@ namespace Dranen
             Console.BackgroundColor = Settings.Color.Background;
             Console.Clear();
             DrawProtagonist(obj);
-            DrawPlayground(obj);
         }
 
         public static void ClearBackground()
@@ -83,7 +62,6 @@ namespace Dranen
         {
             DrawProtagonist(obj);
             DrawHostile(hostile);
-            DrawPlayground(obj);
         }
 
         public static void Events(List<EventPoint> events)

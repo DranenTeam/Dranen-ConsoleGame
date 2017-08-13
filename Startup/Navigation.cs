@@ -13,6 +13,8 @@ namespace Dranen
 {
     public class Navigation
     {
+        private static int currentScore = 0;
+
         public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles, Game game)
         {
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
@@ -79,19 +81,19 @@ namespace Dranen
         {
             foreach (var hostile in hostiles)
             {
-                if (hostile.IsAlive && obj.X < hostile.X)
+                if (obj.X < hostile.X)
                 {
                     ChaseLeft(hostile, obj);
                 }
-                if (hostile.IsAlive && obj.X > hostile.X)
+                if (obj.X > hostile.X)
                 {
                     ChaseRight(hostile, obj);
                 }
-                if (hostile.IsAlive && obj.Y < hostile.Y)
+                if (obj.Y < hostile.Y)
                 {
                     ChaseUp(hostile, obj);
                 }
-                if (hostile.IsAlive && obj.Y > hostile.Y)
+                if (obj.Y > hostile.Y)
                 {
                     ChaseDown(hostile, obj);
                 }
@@ -169,7 +171,7 @@ namespace Dranen
             events.Add(ev);
         }
 
-        private static int currentScore = 0;
+        
 
         private static void ProcessEvents(List<EventPoint> events, Protagonist obj, Hostile hostile, Game game)
         {
@@ -233,56 +235,48 @@ namespace Dranen
         public static void MoveLeft(Protagonist obj)
         {
             obj.Move(-1, 0);
-            Drawing.DrawProtagonist(obj);
             Drawing.ClearBackground(obj);
         }
 
         private static void MoveDown(Protagonist obj)
         {
             obj.Move(0, 1);
-            Drawing.DrawProtagonist(obj);
             Drawing.ClearBackground(obj);
         }
 
         private static void MoveRight(Protagonist obj)
         {
             obj.Move(1, 0);
-            Drawing.DrawProtagonist(obj);
             Drawing.ClearBackground(obj);
         }
 
         private static void MoveUp(Protagonist obj)
         {
             obj.Move(0, -1);
-            Drawing.DrawProtagonist(obj);
             Drawing.ClearBackground(obj);
         }
 
         private static void ChaseLeft(Hostile hostile, Protagonist obj)
         {
-            hostile.Chase(-1, 0);
-            Drawing.DrawHostile(hostile);
+            hostile.Move(-1, 0);
             Drawing.Draw(hostile, obj);
         }
 
         private static void ChaseRight(Hostile hostile, Protagonist obj)
         {
-            hostile.Chase(1, 0);
-            Drawing.DrawHostile(hostile);
+            hostile.Move(1, 0);
             Drawing.Draw(hostile, obj);
         }
 
         private static void ChaseDown(Hostile hostile, Protagonist obj)
         {
-            hostile.Chase(0, 1);
-            Drawing.DrawHostile(hostile);
+            hostile.Move(0, 1);
             Drawing.Draw(hostile, obj);
         }
 
         private static void ChaseUp(Hostile hostile, Protagonist obj)
         {
-            hostile.Chase(0, -1);
-            Drawing.DrawHostile(hostile);
+            hostile.Move(0, -1);
             Drawing.Draw(hostile, obj);
         }
     }

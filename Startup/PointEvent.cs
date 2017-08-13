@@ -26,7 +26,8 @@ namespace Dranen
             }
         }
 
-        public EventPoint(int x, int y, int points, int gameWidth, int gameHeight, int deduction = 1) : base(x, y, gameWidth, gameHeight)
+        public EventPoint(int x, int y, int points, int gameWidth, int gameHeight, int deduction = 1) 
+            : base(x, y, gameWidth, gameHeight)
         {
             this.Points = points;
             this.PointDeductor = Settings.Game.PointDeductor;
