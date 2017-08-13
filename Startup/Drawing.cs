@@ -24,18 +24,18 @@ namespace Dranen
             }
         }
 
-        public static void ScoreBoard()
+        public static void ScoreBoard(Game game)
         {
-            Console.Title = Game.Score.ToString();
+            Console.Title = game.Score.ToString();
             //Console.SetCursorPosition(Game.WidthConst/2, 0);
             //Console.Background = Game.ScoreBoardColor;
             //Console.Write($"{Game.Score.ToString().PadLeft(6)}");
         }
 
-        public static void LivesBoard()
+        public static void LivesBoard(Game game)
         {
             Console.SetCursorPosition(15, 0);
-            Console.WriteLine($"Lives: {Game.Lives}");
+            Console.WriteLine($"Lives: {game.Lives}");
         }
 
         public static void DrawPlayground(Protagonist obj)

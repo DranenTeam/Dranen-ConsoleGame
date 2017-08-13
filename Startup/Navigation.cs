@@ -13,7 +13,7 @@ namespace Dranen
 {
     public class Navigation
     {
-        public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles)
+        public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles, Game game)
         {
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
             Stopwatch stopwatch = new Stopwatch();
@@ -25,16 +25,14 @@ namespace Dranen
                     stopwatch.Start();
                     Thread.Sleep(Settings.Game.GameSpeed);
                     EventsProcessor(events);
-                    cki = MovementProcessor(obj, cki);
-                    if (Game.IsEnd)
+                    cki = MovementProcessor(obj, cki, game);
+                    if (game.IsEnd)
                     {
-                        ShowEndScreen(stopwatch);
-                        Game.IsEnd = false;
-                        Game.Lives = 3;
+                        ShowEndScreen(stopwatch, game);
                         return;
                     }
-                    LiveBoardProcessor();
-                    HostilesProcessor(obj, events, hostiles);
+                    LiveBoardProcessor(game);
+                    HostilesProcessor(obj, events, hostiles, game);
                 }
 
                 cki = Console.ReadKey(true);
@@ -42,42 +40,42 @@ namespace Dranen
             while (cki.Key != ConsoleKey.Escape);
         }
 
-        private static ConsoleKeyInfo MovementProcessor(Protagonist obj, ConsoleKeyInfo cki)
+        private static ConsoleKeyInfo MovementProcessor(Protagonist obj, ConsoleKeyInfo cki, Game game)
         {
             if (cki.Key == ConsoleKey.UpArrow)
             {
-                Move(Direction.Up, obj);
+                Move(Direction.Up, obj, game);
             }
             if (cki.Key == ConsoleKey.DownArrow)
             {
-                Move(Direction.Down, obj);
+                Move(Direction.Down, obj, game);
             }
             if (cki.Key == ConsoleKey.LeftArrow)
             {
-                Move(Direction.Left, obj);
+                Move(Direction.Left, obj, game);
             }
             if (cki.Key == ConsoleKey.RightArrow)
             {
-                Move(Direction.Right, obj);
+                Move(Direction.Right, obj, game);
             }
-            if (cki.Key == ConsoleKey.Spacebar && !Game.IsPaused)
+            if (cki.Key == ConsoleKey.Spacebar && !game.IsPaused)
             {
                 //&& !Game.IsEnd
                 Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue.");
-                Game.IsPaused = true;
+                game.Pause();
                 cki = Console.ReadKey();
             }
 
             return cki;
         }
 
-        private static void LiveBoardProcessor()
+        private static void LiveBoardProcessor(Game game)
         {
             Drawing.ClearBackground();
-            Drawing.LivesBoard();
+            Drawing.LivesBoard(game);
         }
 
-        private static void HostilesProcessor(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles)
+        private static void HostilesProcessor(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles, Game game)
         {
             foreach (var hostile in hostiles)
             {
@@ -100,9 +98,9 @@ namespace Dranen
 
                 Drawing.Events(events);
                 Drawing.DrawHostile(hostile);
-                Drawing.ScoreBoard();
+                Drawing.ScoreBoard(game);
 
-                ProcessEvents(events, obj, hostile);
+                ProcessEvents(events, obj, hostile, game);
             }
 
             if (currentScore >= Settings.Game.HostileAddingScore)
@@ -125,17 +123,17 @@ namespace Dranen
             }
         }
 
-        private static void ShowEndScreen(Stopwatch stopwatch)
+        private static void ShowEndScreen(Stopwatch stopwatch, Game game)
         {
             Console.Clear();
             Menu.Logo();
             stopwatch.Stop();
             Console.SetCursorPosition(9, 10);
-            Console.WriteLine($"Sorry {Game.PlayersName}, You died! :(");
+            Console.WriteLine($"Sorry {game.PlayersName}, You died! :(");
             Console.SetCursorPosition(10, 12);
             Console.WriteLine($"Time: {stopwatch.Elapsed.TotalSeconds.ToString("0")}");
             Console.SetCursorPosition(10, 13);
-            Console.WriteLine($"Score: {Game.Score}");
+            Console.WriteLine($"Score: {game.Score}");
             Console.SetCursorPosition(9, 15);
             Console.WriteLine($"Prss any key to start over.");
             Sound.GameOver();
@@ -173,13 +171,13 @@ namespace Dranen
 
         private static int currentScore = 0;
 
-        private static void ProcessEvents(List<EventPoint> events, Protagonist obj, Hostile hostile)
+        private static void ProcessEvents(List<EventPoint> events, Protagonist obj, Hostile hostile, Game game)
         {
             for (int i = 0; i < events.Count; i++)
             {
                 if (events[i].Y == obj.Y && events[i].X == obj.X)
                 {
-                    Game.Score += events[i].Points;
+                    game.AddScore(events[i].Points);
                     currentScore += events[i].Points;
                     events[i].Points = 0;
                     Sound.Event();
@@ -197,21 +195,21 @@ namespace Dranen
 
             if (obj.Y == hostile.Y && obj.X == hostile.X)
             {
-                if (Game.Lives > 0)
+                if (game.Lives > 0)
                 {
-                    Game.Lives--;
-                    Game.Score -= 100;
-                    currentScore -= 100;
+                    game.DecreaseLive();
+                    game.AddScore(Settings.Game.LoseLifePenalty);
+                    currentScore -= Settings.Game.LoseLifePenalty;
                     ResetHostile(hostile);
                 }
                 else
                 {
-                    Game.IsEnd = true;
+                    game.End();
                 }
             }
         }
 
-        public static void Move(Direction direction, Protagonist protagonist)
+        public static void Move(Direction direction, Protagonist protagonist, Game game)
         {
             if (direction == Direction.Up)
             {
@@ -229,7 +227,7 @@ namespace Dranen
             {
                 MoveRight(protagonist);
             }
-            Game.IsPaused = false;
+            game.UnPause();
         }
 
         public static void MoveLeft(Protagonist obj)

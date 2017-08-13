@@ -32,5 +32,6 @@ namespace Settings
         public static int PointEventGoodScore = 50; // Above that points a box is colored as good [ 5-99]
         public static int PointEventBestScore = 70;// Above that points a box is colored as best [ 5-99]
         public static int HostileAddingScore = 500; // after how mutch points generated a new hostile is added
+        public static int LoseLifePenalty = 100;
     }
 }

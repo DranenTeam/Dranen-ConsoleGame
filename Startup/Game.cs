@@ -7,55 +7,84 @@ using Startup;
 
 namespace Dranen
 {
-    public static class Game
+    public class Game
     {
-        private static bool isPaused = false;
-        private static bool isEnd = false;
-        private static int lives = 3;
-        private static int score = 0;
-        private static StringBuilder playersName = new StringBuilder();
+        private bool isPaused;
+        private bool isEnd;
+        private int lives;
+        private int score;
+        private string playersName;
 
-        public static int Score
+        public Game(int lives)
         {
-            get { return score; }
-            set { score = value; }
+            this.isPaused = false;
+            this.isEnd = false;
+            this.lives = lives;
+            this.score = 0;
+            this.playersName = "Player";
         }
 
-        public static bool IsPaused
+        public int Score
         {
-            get { return isPaused; }
-            set { isPaused = value; }
+            get { return this.score; }
+            private set { this.score = value; }
         }
 
-        public static bool IsEnd
+        public bool IsPaused
         {
-            get { return isEnd; }
-            set { isEnd = value; }
+            get { return this.isPaused; }
+            private set { this.isPaused = value; }
         }
 
-        public static int Lives
+        public bool IsEnd
         {
-            get { return lives; }
-            set
+            get { return this.isEnd; }
+            private set { this.isEnd = value; }
+        }
+
+        public int Lives
+        {
+            get { return this.lives; }
+            private set
             {
-                if (value < 3)
+                if (value < 1)
                 {
-                    Sound.LostLife();
-                    lives = value;
-                }
-                else
-                {
-                    lives = value;
+                    throw new ApplicationException("Game cannot be started  with less than 1 live");
                 }
 
-                lives = value;
+                this.lives = value;
             }
         }
 
-        public static StringBuilder PlayersName
+        public string PlayersName
         {
-            get { return playersName; }
-            set { playersName = value; }
+            get { return this.playersName; }
+            set { this.playersName = value; }
+        }
+
+        public void AddScore(int score)
+        {
+            this.score += score;
+        }
+
+        public void Pause()
+        {
+            this.isPaused = true;
+        }
+
+        public void UnPause()
+        {
+            this.isPaused = false;
+        }
+
+        public void End()
+        {
+            this.IsEnd = true;
+        }
+
+        public void DecreaseLive()
+        {
+            this.lives--;
         }
     }
 }

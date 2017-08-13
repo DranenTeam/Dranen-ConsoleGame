@@ -16,10 +16,10 @@ namespace Dranen
         private int x;
         private int y;
 
-        public Protagonist(int gameWidth, int gameHeight)
+        public Protagonist()
         {
-            this.GameWidth = gameWidth;
-            this.GameHeight = gameHeight;
+            this.GameWidth = Settings.Environment.WidthConst;
+            this.GameHeight = Settings.Environment.HeightConst;
             this.X = 0;
             this.Y = 0;
             this.IsAlive = true;
