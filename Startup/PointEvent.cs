@@ -10,7 +10,6 @@ namespace Dranen
     // describes a block on the map with special properties
     public class EventPoint : Event
     {
-
         private int points;
         private int pointDeductor;
 
@@ -19,21 +18,18 @@ namespace Dranen
             get { return this.pointDeductor; }
             set
             {
-                if (value >= 0)
+                if (value < 0)
                 {
-                    pointDeductor = value;
+                    throw new ArgumentException("PointDeductor must be positive");
                 }
-                else
-                {
-                       throw new ArgumentException("PointDeductor must be positive");
-                }
+                this.pointDeductor = value;
             }
         }
 
-        public EventPoint(int x, int y, int points, int deduction = 1) : base(x, y)
+        public EventPoint(int x, int y, int points, int gameWidth, int gameHeight, int deduction = 1) : base(x, y, gameWidth, gameHeight)
         {
             this.Points = points;
-            this.PointDeductor = Game.PointDeductor;
+            this.PointDeductor = Settings.Game.PointDeductor;
         }
 
         public int Points
@@ -46,9 +42,8 @@ namespace Dranen
         {
             if (this.points - this.pointDeductor > 0)
             {
-                this.points -=pointDeductor;
+                this.points -= pointDeductor;
             }
         }
-
     }
 }

@@ -44,12 +44,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Drawing.cs" />
+    <Compile Include="Enums\Direction.cs" />
     <Compile Include="Hostile.cs" />
+    <Compile Include="Interfaces\ILivable.cs" />
+    <Compile Include="Interfaces\IMovable.cs" />
+    <Compile Include="Interfaces\IPosition.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="PointEvent.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Navigation.cs" />
+    <Compile Include="Settings\Color.cs" />
+    <Compile Include="Settings\Environment.cs" />
+    <Compile Include="Settings\Game.cs" />
     <Compile Include="Sound.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,5 +73,6 @@
     <Content Include="Sounds\LostLife.wav" />
     <Content Include="Sounds\MenuEffect.wav" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

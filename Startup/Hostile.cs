@@ -28,7 +28,7 @@ namespace Startup
 
         public void Chase(int x, int y)
         {
-            if (this.X + x * 2 < Game.WidthConst - 2 && this.X + x * 2 >= 1)
+            if (this.X + x * 2 < Settings.Environment.WidthConst - 2 && this.X + x * 2 >= 1)
             {
                 dx -= 1;
                 if (dx == 0)
@@ -38,7 +38,7 @@ namespace Startup
                 }
             }
 
-            if (this.Y + y < Game.HeightConst - 1 && this.Y + y >= 1)
+            if (this.Y + y < Settings.Environment.HeightConst - 1 && this.Y + y >= 1)
             {
                 dy -= 1;
                 if (dy == 0)
@@ -52,8 +52,8 @@ namespace Startup
         public void RandomReset()
         {
             var rnd = new Random();
-            var x = rnd.Next(2, (Game.WidthConst / 2) - 2) * 2;
-            var y = rnd.Next(2, Game.HeightConst - 2);
+            var x = rnd.Next(2, (Settings.Environment.WidthConst / 2) - 2) * 2;
+            var y = rnd.Next(2, Settings.Environment.HeightConst - 2);
             this.X = x;
             this.Y = y;
         }

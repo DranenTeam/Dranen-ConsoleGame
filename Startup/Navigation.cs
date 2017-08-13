@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Net.Mime;
 using System.Threading;
 using Dranen;
+using Startup.Enums;
 using Startup;
+using Settings;
 
 namespace Dranen
 {
     public class Navigation
     {
-        public enum Direction
-        {
-            Up,
-            Down,
-            Left,
-            Right
-        }
-
         public static void NavigateProtagonist(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles)
         {
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
@@ -28,7 +23,7 @@ namespace Dranen
                 while (Console.KeyAvailable == false)
                 {
                     stopwatch.Start();
-                    Thread.Sleep(Game.GameSpeed);
+                    Thread.Sleep(Settings.Game.GameSpeed);
                     EventsProcessor(events);
                     cki = MovementProcessor(obj, cki);
                     if (Game.IsEnd)
@@ -43,10 +38,8 @@ namespace Dranen
                 }
 
                 cki = Console.ReadKey(true);
-
             }
             while (cki.Key != ConsoleKey.Escape);
-
         }
 
         private static ConsoleKeyInfo MovementProcessor(Protagonist obj, ConsoleKeyInfo cki)
@@ -67,13 +60,12 @@ namespace Dranen
             {
                 Move(Direction.Right, obj);
             }
-            if (cki.Key == ConsoleKey.Spacebar && !Game.IsPaused )
+            if (cki.Key == ConsoleKey.Spacebar && !Game.IsPaused)
             {
                 //&& !Game.IsEnd
                 Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue.");
                 Game.IsPaused = true;
                 cki = Console.ReadKey();
-
             }
 
             return cki;
@@ -113,7 +105,7 @@ namespace Dranen
                 ProcessEvents(events, obj, hostile);
             }
 
-            if (currentScore >= Game.HostileAddingScore)
+            if (currentScore >= Settings.Game.HostileAddingScore)
             {
                 currentScore = 0;
                 GenerateHostile(hostiles);
@@ -127,14 +119,14 @@ namespace Dranen
 
         private static void EventsProcessor(List<EventPoint> events)
         {
-            if (events.Count <= Game.EventsCount)
+            if (events.Count <= Settings.Game.EventsCount)
             {
                 GenerateEvent(events);
             }
         }
 
         private static void ShowEndScreen(Stopwatch stopwatch)
-        {   
+        {
             Console.Clear();
             Menu.Logo();
             stopwatch.Stop();
@@ -158,10 +150,9 @@ namespace Dranen
         private static void GenerateHostile(List<Hostile> hostiles)
         {
             var rnd = new Random();
-            var x = rnd.Next(2, (Game.WidthConst / 2) - 2) * 2;
-            var y = rnd.Next(2, Game.HeightConst - 2);
+            var x = rnd.Next(2, (Settings.Environment.WidthConst / 2) - 2) * 2;
+            var y = rnd.Next(2, Settings.Environment.HeightConst - 2);
             hostiles.Add(new Hostile(x, y));
-
         }
 
         private static void ResetHostile(Hostile hostile)
@@ -169,14 +160,14 @@ namespace Dranen
             hostile.RandomReset();
         }
 
-
         private static void GenerateEvent(List<EventPoint> events)
         {
             var rnd = new Random();
-            var x = rnd.Next(1, Game.WidthConst / 2 - 3);
-            var y = rnd.Next(1, Game.HeightConst / 2 - 2);
+            var x = rnd.Next(1, (Settings.Environment.WidthConst / 2) - 3);
+            var y = rnd.Next(1, (Settings.Environment.HeightConst / 2) - 2);
             var time = rnd.Next(15, 95);
-            EventPoint ev = new EventPoint(x * 2, y * 2, time);
+            EventPoint ev = new EventPoint(x * 2, y * 2, Settings.Environment.WidthConst, Settings.Environment.HeightConst, time);
+
             events.Add(ev);
         }
 
@@ -194,7 +185,7 @@ namespace Dranen
                     Sound.Event();
                 }
 
-                if (events[i].Points <= Game.PointDeathThreshold)
+                if (events[i].Points <= Settings.Game.PointDeathThreshold)
                 {
                     events.RemoveAt(i);
                 }

@@ -65,24 +65,30 @@ namespace Startup
                         case ConsoleKey.UpArrow:
                             cursor--;
                             break;
+
                         case ConsoleKey.DownArrow:
                             cursor++;
                             break;
+
                         case ConsoleKey.Enter:
                             switch (cursor)
                             {
                                 case 11:
                                     Program.Game();
                                     break;
+
                                 case 12:
                                     Options();
                                     break;
+
                                 case 13:
                                     HowToPlay();
                                     break;
+
                                 case 14:
                                     Credits();
                                     break;
+
                                 case 15:
                                     Exit();
                                     break;
@@ -114,10 +120,10 @@ namespace Startup
 
         public static void Logo()
         {
-            Console.WriteLine(@" 
-                                  
-    ____                           
-   |    \  ___  ___  ___  ___  ___ 
+            Console.WriteLine(@"
+
+    ____
+   |    \  ___  ___  ___  ___  ___
    |  |  ||  _|| -_||   || -_||   |
    |____/ |_|  |___||_|_||___||_|_|
    ");
@@ -146,6 +152,7 @@ namespace Startup
 
             Console.ReadKey(); //TODO: Break the while and go back in the menu
         }
+
         private static void HowToPlay()
         {
             Console.Clear();
@@ -203,13 +210,14 @@ namespace Startup
                         switch (cursor)
                         {
                             case 11:
-                                optionsList[0] = GameSpeed(Game.gameSpeed); break;
+                                optionsList[0] = GameSpeed(Settings.Game.GameSpeed); break;
                                 //case 12: Option2(); break;
                                 //case 13: Option3(); break;
                                 //case 14: Option4(); break;
                                 //case 14: Option5(); break;
                         }
                         break;
+
                     case ConsoleKey.Escape: return;
                 }
                 if (cursor < 11)
@@ -228,20 +236,20 @@ namespace Startup
             var optValue = string.Empty;
             if (speed == 30)
             {
-                Game.gameSpeed = 40;
-                Game.HostileAddingScore = 200;
+                Settings.Game.GameSpeed = 40;
+                Settings.Game.HostileAddingScore = 200;
                 optValue = "Game Speed Slow";
             }
             else if (speed == 40)
             {
-                Game.GameSpeed = 10;
-                Game.HostileAddingScore = 1000;
+                Settings.Game.GameSpeed = 10;
+                Settings.Game.HostileAddingScore = 1000;
                 optValue = "Game Speed Fast";
             }
             else if (speed == 10)
             {
-                Game.GameSpeed = 30;
-                Game.HostileAddingScore = 500;
+                Settings.Game.GameSpeed = 30;
+                Settings.Game.HostileAddingScore = 500;
                 optValue = "Game Speed Normal";
             }
 

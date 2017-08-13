@@ -12,7 +12,7 @@ namespace Dranen
     {
         public static void DrawProtagonist(Protagonist obj)
         {
-            Console.BackgroundColor = Game.ProtagonistColor;
+            Console.BackgroundColor = Settings.Color.Protagonist;
             Console.SetCursorPosition(obj.X, obj.Y);
             if (obj.Y == 0 || obj.X == 0)
             {
@@ -28,13 +28,13 @@ namespace Dranen
         {
             Console.Title = Game.Score.ToString();
             //Console.SetCursorPosition(Game.WidthConst/2, 0);
-            //Console.BackgroundColor = Game.ScoreBoardColor;
+            //Console.Background = Game.ScoreBoardColor;
             //Console.Write($"{Game.Score.ToString().PadLeft(6)}");
         }
 
         public static void LivesBoard()
         {
-            Console.SetCursorPosition(15,0);
+            Console.SetCursorPosition(15, 0);
             Console.WriteLine($"Lives: {Game.Lives}");
         }
 
@@ -60,21 +60,22 @@ namespace Dranen
 
         public static void DrawHostile(Hostile hostile)
         {
-            Console.BackgroundColor = Game.HostileColor;
+            Console.BackgroundColor = Settings.Color.Hostile;
             Console.SetCursorPosition(hostile.X, hostile.Y);
             Console.Write("  ");
         }
 
         public static void ClearBackground(Protagonist obj)
         {
-            Console.BackgroundColor = Game.BackgroundColor;
+            Console.BackgroundColor = Settings.Color.Background;
             Console.Clear();
             DrawProtagonist(obj);
             DrawPlayground(obj);
         }
+
         public static void ClearBackground()
         {
-            Console.BackgroundColor = Game.BackgroundColor;
+            Console.BackgroundColor = Settings.Color.Background;
             Console.Clear();
         }
 
@@ -89,18 +90,17 @@ namespace Dranen
         {
             foreach (var ev in events)
             {
-
-                if (ev.Points >= Game.PointEventBestScore)
+                if (ev.Points >= Settings.Game.PointEventBestScore)
                 {
-                    Console.BackgroundColor = Game.PointEventColorBest;
+                    Console.BackgroundColor = Settings.Color.PointEventBest;
                 }
-                else if (ev.Points >= Game.PointEventGoodScore)
+                else if (ev.Points >= Settings.Game.PointEventGoodScore)
                 {
-                    Console.BackgroundColor = Game.PointEventColorGood;
+                    Console.BackgroundColor = Settings.Color.PointEventGood;
                 }
                 else
                 {
-                    Console.BackgroundColor = Game.PointEventColorBad;
+                    Console.BackgroundColor = Settings.Color.PointEventBad;
                 }
                 Console.SetCursorPosition(ev.X, ev.Y);
                 Console.Write($"{ev.Points.ToString().PadLeft(2)}");
