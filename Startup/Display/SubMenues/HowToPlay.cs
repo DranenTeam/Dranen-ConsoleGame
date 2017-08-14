@@ -13,10 +13,7 @@ namespace Startup.Display.SubMenues
             Console.Clear();
             while (true)
             {
-                Console.WriteLine(@"
-1. Chase the points
-2. Dodge the red hostiles
-3. Repeat");
+                Console.WriteLine(StaticMessages.HowToPlayInstructions);
                 var key = Console.ReadKey();
                 if (key.Key == ConsoleKey.Escape)
                 {

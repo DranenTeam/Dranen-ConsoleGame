@@ -16,14 +16,20 @@ namespace Startup.Core
         private List<Event> events;
         private List<Hostile> hostiles;
         private Game game;
+        private MovementProcessor movementProcessor;
+        private EventsProcessor eventsProcessor;
+        private Random randomGenerator;
 
-        public Engine(Protagonist protagonist, List<Event> events, List<Hostile> hostiles, Game game)
+        public Engine(Protagonist protagonist, List<Event> events, List<Hostile> hostiles, Game game, MovementProcessor movementProcessor, EventsProcessor eventsProcessor)
         {
             this.currentScore = 0;
             this.protagonist = protagonist;
             this.events = events;
             this.hostiles = hostiles;
             this.game = game;
+            this.movementProcessor = movementProcessor;
+            this.eventsProcessor = eventsProcessor;
+            this.randomGenerator = new Random();
         }
 
         public void NavigateProtagonist(ConsoleKeyInfo cki, Stopwatch stopwatch)
@@ -40,10 +46,10 @@ namespace Startup.Core
                     Thread.Sleep(Settings.Game.GameSpeed);
 
                     // creates new events if needed
-                    EventsProcessor.Run(this.events);
+                    this.eventsProcessor.Run(this.randomGenerator);
 
                     // execute last movement command
-                    MovementProcessor.Run(this.protagonist, cki, this.game);
+                    this.movementProcessor.Run(this.protagonist, cki, this.game);
                     if (this.game.IsEnd)
                     {
                         // TODO: Refacotr this via event or somethig

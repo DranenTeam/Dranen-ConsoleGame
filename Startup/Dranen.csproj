@@ -43,16 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Commands\GenerateEvent.cs" />
     <Compile Include="Core\Commands\GenerateHostile.cs" />
     <Compile Include="Core\Commands\ResetHostile.cs" />
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Core\EventsProcessor.cs" />
     <Compile Include="Core\MovementProcessor.cs" />
-    <Compile Include="Core\ShowEndScreen.cs" />
     <Compile Include="Display\Information.cs" />
     <Compile Include="Display\Board.cs" />
     <Compile Include="Display\Menu.cs" />
+    <Compile Include="Display\StaticMessages.cs" />
     <Compile Include="Display\SubMenues\Credits.cs" />
     <Compile Include="Display\SubMenues\EndScreen.cs" />
     <Compile Include="Display\SubMenues\EnterName.cs" />
@@ -84,7 +83,6 @@
     <Compile Include="Models\PointBox.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Core\Navigation.cs" />
     <Compile Include="Settings\Color.cs" />
     <Compile Include="Settings\Environment.cs" />
     <Compile Include="Settings\Game.cs" />

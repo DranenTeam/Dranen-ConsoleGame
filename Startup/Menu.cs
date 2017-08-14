@@ -64,7 +64,7 @@ namespace Startup
                             switch (cursor)
                             {
                                 case 11:
-                                    Display.Menu.StartGame(Display.Menu.Result.ToString());
+                                    Display.Menu.StartGame(Display.Menu.Result);
                                     break;
 
                                 case 12:

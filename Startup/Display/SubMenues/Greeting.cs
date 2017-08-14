@@ -16,7 +16,7 @@ namespace Startup.Display.SubMenues
             Startup.Menu.Position(16, 7);
             Console.WriteLine($"Hello {Display.Menu.Result}!");
             Startup.Menu.Position(10, 8);
-            Console.WriteLine($"Good luck in your quest!");
+            Console.WriteLine(StaticMessages.GoodLuck);
         }
     }
 }

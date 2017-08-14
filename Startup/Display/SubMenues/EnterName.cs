@@ -16,7 +16,7 @@ namespace Startup.Display.SubMenues
                 Startup.Menu.Position(11, 11);
                 Console.CursorVisible = true;
                 Console.CursorSize = 100;
-                Console.WriteLine("What is your name?");
+                Console.WriteLine(StaticMessages.EnterNameQuestion);
                 Startup.Menu.Position(15, 13);
                 this.PlayersName = Console.ReadLine();
             }

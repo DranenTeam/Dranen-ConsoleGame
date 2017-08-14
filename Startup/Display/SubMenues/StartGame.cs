@@ -23,8 +23,10 @@ namespace Startup.Display.SubMenues
                 Protagonist protagonist = new Protagonist();
                 List<Event> events = new List<Event>();
                 List<Hostile> hostiles = new List<Hostile>();
+                MovementProcessor movementProcessor = new MovementProcessor();
+                EventsProcessor eventsProcessor = new EventsProcessor(events);
                 hostiles.Add(new Hostile(4, 4));
-                Engine engine = new Engine(protagonist, events, hostiles, game);
+                Engine engine = new Engine(protagonist, events, hostiles, game, movementProcessor, eventsProcessor);
                 ConsoleKeyInfo cki = new ConsoleKeyInfo();
                 Stopwatch stopwatch = new Stopwatch();
                 engine.NavigateProtagonist(cki, stopwatch);

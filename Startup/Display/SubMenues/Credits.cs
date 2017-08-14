@@ -13,7 +13,6 @@ namespace Startup.Display.SubMenues
         {
             Console.Clear();
             Sound.CreditsSound();
-            const string text = "Drenen 2017\nTheo Dor\nNikoleta Valchinova\nVladimir Gadjov\nKostadin Valchev\nDimitar Nikolov"; // dev names or something about the game.
 
             var cursor = 1;
 
@@ -21,7 +20,7 @@ namespace Startup.Display.SubMenues
             {
                 Console.Clear();
                 Startup.Menu.Position(15, cursor);
-                Console.WriteLine(text);
+                Console.WriteLine(StaticMessages.AuthorsList);
                 Thread.Sleep(rollSpeed);
                 cursor++;
                 if (cursor == Console.WindowHeight)

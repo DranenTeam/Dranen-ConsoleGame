@@ -1,35 +1,65 @@
 ﻿using Startup.Enums;
 using System;
+using Startup.Display;
 using Startup.Interfaces;
 
 namespace Startup.Core
 {
     public class MovementProcessor
     {
-        public static void Run(IDynamic obj, ConsoleKeyInfo cki, Game game)
+        public void Run(IDynamic obj, ConsoleKeyInfo cki, Game game)
         {
-            if (cki.Key == ConsoleKey.UpArrow)
+            switch (cki.Key)
             {
-                Navigation.Move(Direction.Up, obj, game);
+                case ConsoleKey.UpArrow:
+                    Move(Direction.Up, obj, game);
+                    break;
+
+                case ConsoleKey.DownArrow:
+                    Move(Direction.Down, obj, game);
+                    break;
+
+                case ConsoleKey.LeftArrow:
+                    Move(Direction.Left, obj, game);
+                    break;
+
+                case ConsoleKey.RightArrow:
+                    Move(Direction.Right, obj, game);
+                    break;
+
+                case ConsoleKey.Spacebar:
+                    if (!game.IsPaused)
+                    {
+                        Console.WriteLine(StaticMessages.GamePause);
+                        game.Pause();
+                        cki = Console.ReadKey();
+                    }
+                    break;
             }
-            if (cki.Key == ConsoleKey.DownArrow)
+        }
+
+        private void Move(Direction direction, IDynamic agent, Game game)
+        {
+            switch (direction)
             {
-                Navigation.Move(Direction.Down, obj, game);
+                case Direction.Up:
+                    agent.Move(0, -1);
+                    break;
+
+                case Direction.Down:
+                    agent.Move(0, 1);
+                    break;
+
+                case Direction.Left:
+                    agent.Move(-1, 0);
+                    break;
+
+                case Direction.Right:
+                    agent.Move(1, 0);
+                    break;
             }
-            if (cki.Key == ConsoleKey.LeftArrow)
-            {
-                Navigation.Move(Direction.Left, obj, game);
-            }
-            if (cki.Key == ConsoleKey.RightArrow)
-            {
-                Navigation.Move(Direction.Right, obj, game);
-            }
-            if (cki.Key == ConsoleKey.Spacebar && !game.IsPaused)
-            {
-                Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue.");
-                game.Pause();
-                cki = Console.ReadKey();
-            }
+            game.UnPause();
+            Board.ClearBackground(agent);
         }
     }
 }
