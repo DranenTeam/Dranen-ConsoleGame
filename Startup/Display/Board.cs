@@ -24,7 +24,7 @@ namespace Startup.Display
 
         // Draws all agents ( protagonist or hostile) on the console
 
-        public static void All(IDynamic hostile, IDynamic obj)
+        public static void AllAgents(IDynamic hostile, IDynamic obj)
         {
             Agent(obj, Settings.Color.Protagonist);
             Agent(hostile, Settings.Color.Hostile);

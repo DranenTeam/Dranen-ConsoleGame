@@ -5,6 +5,7 @@ using Startup.Models;
 namespace Startup.Core.Commands
 {
     public class GenerateHostile
+
     {
         public static void Execute(List<Hostile> hostiles)
         {

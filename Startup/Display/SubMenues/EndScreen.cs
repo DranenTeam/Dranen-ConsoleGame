@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace Startup.Core
+namespace Startup.Display.SubMenues
 {
-    public class ShowEndScreen
+    public class EndScreen
     {
-        public static void Run(Stopwatch stopwatch, Game game)
+        public EndScreen(Stopwatch stopwatch, Game game)
         {
             Console.Clear();
             Display.Menu.Logo();

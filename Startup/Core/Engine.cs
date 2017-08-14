@@ -47,12 +47,14 @@ namespace Startup.Core
                     if (this.game.IsEnd)
                     {
                         // TODO: Refacotr this via event or somethig
-                        ShowEndScreen.Run(stopwatch, this.game); // draws
+                        Display.Menu.EndScreen(stopwatch, this.game);
                         return;
                     }
 
                     // Draws the screen
-                    LiveBoardProcessor.Run(this.game); // draws
+                    Display.Board.ClearBackground();
+                    Display.Information.LivesBoard(this.game);
+
                     HostilesProcessor(); // draws
                 }
 
@@ -82,7 +84,7 @@ namespace Startup.Core
                 {
                     hostile.Move(0, 1);
                 }
-                Board.All(hostile, this.protagonist);
+
                 if (this.protagonist.Y == hostile.Y && this.protagonist.X == hostile.X)
                 {
                     if (this.game.Lives > 0)
@@ -99,12 +101,13 @@ namespace Startup.Core
                     }
                 }
 
-                Display.Board.Events(this.events);
                 Display.Board.Agent(hostile, Settings.Color.Hostile);
-                Display.Information.ScoreBoard(this.game);
-
                 this.ProcessEvents();
             }
+            Display.Board.Agent(this.protagonist, Settings.Color.Protagonist);
+
+            Display.Board.Events(this.events);
+            Display.Information.ScoreBoard(this.game);
 
             if (this.currentScore >= Settings.Game.HostileAddingScore)
             {
