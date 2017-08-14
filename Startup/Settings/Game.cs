@@ -10,6 +10,7 @@ namespace Startup.Settings
         private static int pointEventGoodScore = 50; // Above that points a box is colored as good [ 5-99]
         private static int pointEventBestScore = 70;// Above that points a box is colored as best [ 5-99]
         private static int hostileAddingScore = 500; // after how mutch points generated a new hostile is added
+        private static int loseLifePenalty = -100;
 
         public static int GameSpeed
         {
@@ -94,6 +95,20 @@ namespace Startup.Settings
             }
         }
 
-        public static int LoseLifePenalty = -100;
+        public static int LoseLifePenalty
+        {
+            get { return loseLifePenalty; }
+            set
+            {
+                if (value < 0)
+                {
+                    loseLifePenalty = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Penalty should be a negative number.");
+                }
+            }
+        }
     }
 }
