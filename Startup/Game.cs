@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Startup;
+using Startup.Exceptions;
 
 namespace Dranen
 {
@@ -49,7 +50,7 @@ namespace Dranen
             {
                 if (value < 1)
                 {
-                    throw new ApplicationException("Game cannot be started  with less than 1 live");
+                    throw new InvalidLivesCountException();
                 }
 
                 this.lives = value;

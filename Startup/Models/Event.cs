@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Startup.Exceptions;
 using Startup.Interfaces;
 
 namespace Dranen
@@ -30,7 +31,7 @@ namespace Dranen
             {
                 if (value <= 2)
                 {
-                    throw new ApplicationException("Invalid game size, game window height must be higher than 2");
+                    throw new InvalidGameHeightException();
                 }
                 this.gameHeight = value;
             }
@@ -43,7 +44,7 @@ namespace Dranen
             {
                 if (value <= 2)
                 {
-                    throw new ApplicationException("Invalid game size, game window width must be higher than 2");
+                    throw new InvalidGameWIdthException();
                 }
                 this.gameWidth = value;
             }
@@ -56,7 +57,7 @@ namespace Dranen
             {
                 if (value < 1 && value > this.gameHeight - 1)
                 {
-                    throw new ArgumentException($"Y position should be in range [1-{this.gameHeight - 1}]");
+                    throw new InvalidCoordinatesException($"Y position should be in range [1-{this.gameHeight - 1}]");
                 }
                 this.y = value;
             }
@@ -69,7 +70,7 @@ namespace Dranen
             {
                 if (value < 2 && value > this.gameWidth - 2)
                 {
-                    throw new ArgumentException($"X position should be in range [2-{this.gameWidth - 2}]");
+                    throw new InvalidCoordinatesException($"X position should be in range [2-{this.gameWidth - 2}]");
                 }
 
                 this.x = value;

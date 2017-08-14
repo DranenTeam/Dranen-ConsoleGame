@@ -53,6 +53,11 @@
     <Compile Include="Core\ShowEndScreen.cs" />
     <Compile Include="Drawing.cs" />
     <Compile Include="Enums\Direction.cs" />
+    <Compile Include="Exceptions\InvalidCoordinatesException.cs" />
+    <Compile Include="Exceptions\InvalidGameHeightException.cs" />
+    <Compile Include="Exceptions\InvalidGameWIdthException.cs" />
+    <Compile Include="Exceptions\InvalidLivesCountException.cs" />
+    <Compile Include="Exceptions\InvalidPointDeductorValueException.cs" />
     <Compile Include="Interfaces\IEvent.cs" />
     <Compile Include="Models\Hostile.cs" />
     <Compile Include="Interfaces\ILivable.cs" />

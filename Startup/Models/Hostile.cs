@@ -1,6 +1,7 @@
 ﻿using Dranen;
 using Startup.Interfaces;
 using System;
+using Startup.Exceptions;
 
 namespace Startup
 {
@@ -47,7 +48,7 @@ namespace Startup
             {
                 if (value <= 2)
                 {
-                    throw new ApplicationException("Invalid game size, game window width must be higher than 2");
+                    throw new InvalidGameWIdthException();
                 }
                 this.gameWidth = value;
             }
@@ -60,7 +61,7 @@ namespace Startup
             {
                 if (value <= 2)
                 {
-                    throw new ApplicationException("Invalid game size, game window height must be higher than 2");
+                    throw new InvalidGameHeightException();
                 }
                 this.gameHeight = value;
             }

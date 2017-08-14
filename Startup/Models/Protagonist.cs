@@ -1,4 +1,5 @@
 ﻿using System;
+using Startup.Exceptions;
 using Startup.Interfaces;
 
 namespace Dranen
@@ -26,7 +27,7 @@ namespace Dranen
             {
                 if (value <= 2)
                 {
-                    throw new ApplicationException("Invalid game size, game window height must be higher than 2");
+                    throw new InvalidGameHeightException();
                 }
                 this.gameHeight = value;
             }
@@ -39,7 +40,7 @@ namespace Dranen
             {
                 if (value <= 2)
                 {
-                    throw new ApplicationException("Invalid game size, game window width must be higher than 2");
+                    throw new InvalidGameWIdthException();
                 }
                 this.gameWidth = value;
             }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Startup.Exceptions;
 
 namespace Dranen
 {
@@ -20,7 +21,7 @@ namespace Dranen
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("PointDeductor must be positive");
+                    throw new InvalidPointDeductorValueException("PointDeductor must be positive");
                 }
                 this.pointDeductor = value;
             }
