@@ -6,7 +6,7 @@ namespace Startup.Commands
 {
     public class GenerateEvent
     {
-        public static void Execute(List<PointBox> events)
+        public static void Execute(List<Event> events)
         {
             var rnd = new Random();
             var x = rnd.Next(1, (Settings.Environment.Width / 2) - 3);

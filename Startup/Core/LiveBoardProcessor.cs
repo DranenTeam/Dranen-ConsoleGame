@@ -6,8 +6,8 @@ namespace Startup.Core
     {
         public static void Run(Game game)
         {
-            Drawing.ClearBackground();
-            Drawing.LivesBoard(game);
+            Draw.ClearBackground();
+            Draw.LivesBoard(game);
         }
     }
 }

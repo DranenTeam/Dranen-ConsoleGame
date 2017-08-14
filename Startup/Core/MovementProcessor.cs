@@ -7,7 +7,7 @@ namespace Startup.Core
 {
     public class MovementProcessor
     {
-        public static ConsoleKeyInfo Run(IDynamic obj, ConsoleKeyInfo cki, Game game)
+        public static void Run(IDynamic obj, ConsoleKeyInfo cki, Game game)
         {
             if (cki.Key == ConsoleKey.UpArrow)
             {
@@ -31,8 +31,6 @@ namespace Startup.Core
                 game.Pause();
                 cki = Console.ReadKey();
             }
-
-            return cki;
         }
     }
 }

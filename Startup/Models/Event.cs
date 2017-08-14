@@ -9,7 +9,7 @@ using Startup.Interfaces;
 namespace Dranen
 {
     // describes a block on the map with special properties
-    public abstract class Event : IEvent
+    public abstract class Event : IEvent, IColor, ISymbol
     {
         private int x;
         private int y;
@@ -22,6 +22,38 @@ namespace Dranen
             this.GameHeight = Settings.Environment.Height;
             this.X = x;
             this.Y = y;
+        }
+
+        public virtual ConsoleColor Color
+        {
+            get;
+        }
+
+        public int X
+        {
+            get { return this.x; }
+            private set
+            {
+                if (value < 2 && value > this.gameWidth - 2)
+                {
+                    throw new InvalidCoordinatesException($"X position should be in range [2-{this.gameWidth - 2}]");
+                }
+
+                this.x = value;
+            }
+        }
+
+        public int Y
+        {
+            get { return this.y; }
+            private set
+            {
+                if (value < 1 && value > this.gameHeight - 1)
+                {
+                    throw new InvalidCoordinatesException($"Y position should be in range [1-{this.gameHeight - 1}]");
+                }
+                this.y = value;
+            }
         }
 
         public int GameHeight
@@ -50,31 +82,11 @@ namespace Dranen
             }
         }
 
-        public int Y
-        {
-            get { return this.y; }
-            private set
-            {
-                if (value < 1 && value > this.gameHeight - 1)
-                {
-                    throw new InvalidCoordinatesException($"Y position should be in range [1-{this.gameHeight - 1}]");
-                }
-                this.y = value;
-            }
-        }
+        public virtual string Symbol { get; }
+        public virtual bool IsActive { get; }
 
-        public int X
-        {
-            get { return this.x; }
-            private set
-            {
-                if (value < 2 && value > this.gameWidth - 2)
-                {
-                    throw new InvalidCoordinatesException($"X position should be in range [2-{this.gameWidth - 2}]");
-                }
+        public abstract void TimeTrigger();
 
-                this.x = value;
-            }
-        }
+        public abstract int Activate();
     }
 }

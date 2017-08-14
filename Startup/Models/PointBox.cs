@@ -13,6 +13,7 @@ namespace Dranen
     {
         private int points;
         private int pointDeductor;
+        private bool isActive;
 
         public int PointDeductor
         {
@@ -30,22 +31,55 @@ namespace Dranen
         public PointBox(int x, int y, int points, int deduction = 1)
             : base(x, y)
         {
-            this.Points = points;
+            this.points = points;
             this.PointDeductor = Settings.Game.PointDeductor;
+            this.isActive = true;
         }
 
-        public int Points
+        public override ConsoleColor Color
         {
-            get { return this.points; }
-            set { points = value; }
+            get
+            {
+                if (this.points >= Settings.Game.PointEventBestScore)
+                {
+                    return Settings.Color.PointEventBest;
+                }
+
+                if (this.points >= Settings.Game.PointEventGoodScore)
+                {
+                    return Console.BackgroundColor = Settings.Color.PointEventGood;
+                }
+
+                return Console.BackgroundColor = Settings.Color.PointEventBad;
+            }
         }
 
-        public void Deduct()
+        public override string Symbol
+        {
+            get { return this.points.ToString(); }
+        }
+
+        public override bool IsActive
+        {
+            get { return this.isActive; }
+        }
+
+        public override void TimeTrigger()
         {
             if (this.points - this.pointDeductor > 0)
             {
-                this.points -= pointDeductor;
+                this.points -= this.pointDeductor;
             }
+            else
+            {
+                this.isActive = false;
+            }
+        }
+
+        public override int Activate()
+        {
+            this.isActive = false;
+            return this.points;
         }
     }
 }

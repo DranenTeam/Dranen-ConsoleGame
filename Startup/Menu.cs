@@ -276,7 +276,7 @@ namespace Startup
                 game.PlayersName = playerName;
 
                 Protagonist protagonist = new Protagonist();
-                List<PointBox> events = new List<PointBox>();
+                List<Event> events = new List<Event>();
                 List<Hostile> hostiles = new List<Hostile>();
                 hostiles.Add(new Hostile(4, 4));
                 //Navigation navigation = new Navigation(protagonist, events, hostiles, game);

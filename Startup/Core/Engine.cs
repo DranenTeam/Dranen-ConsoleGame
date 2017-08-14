@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using Startup.Commands;
+using Startup.Interfaces;
 
 namespace Startup.Core
 {
@@ -11,11 +12,11 @@ namespace Startup.Core
     {
         private int currentScore = 0;
         private Protagonist protagonist;
-        private List<PointBox> events;
+        private List<Event> events;
         private List<Hostile> hostiles;
         private Game game;
 
-        public Engine(Protagonist protagonist, List<PointBox> events, List<Hostile> hostiles, Game game)
+        public Engine(Protagonist protagonist, List<Event> events, List<Hostile> hostiles, Game game)
         {
             this.currentScore = 0;
             this.protagonist = protagonist;
@@ -28,21 +29,33 @@ namespace Startup.Core
         {
             do
             {
+                // if no key is pressed (or hold) execute the last key pressed command every [Settings.Game.GameSpeed] seconds
                 while (Console.KeyAvailable == false)
                 {
+                    // starts game time counter
                     stopwatch.Start();
+
+                    // pause the environment for some time( THIS REPRESENTS ONE GAME LOOP !!! )
                     Thread.Sleep(Settings.Game.GameSpeed);
+
+                    // creates new events if needed
                     EventsProcessor.Run(events);
-                    cki = MovementProcessor.Run(protagonist, cki, game);
+
+                    // execute last movement command
+                    MovementProcessor.Run(this.protagonist, cki, this.game);
                     if (game.IsEnd)
                     {
+                        // TODO: Refacotr this via event or somethig
                         ShowEndScreen.Run(stopwatch, game);
                         return;
                     }
+
+                    // Draws the screen
                     LiveBoardProcessor.Run(game);
                     HostilesProcessor();
                 }
 
+                // Reads another key
                 cki = Console.ReadKey(true);
             }
             while (cki.Key != ConsoleKey.Escape);
@@ -84,9 +97,9 @@ namespace Startup.Core
                     }
                 }
 
-                Drawing.Events(this.events);
-                Drawing.DrawHostile(hostile);
-                Drawing.ScoreBoard(game);
+                Draw.Events(this.events);
+                Draw.Agent(hostile, Settings.Color.Hostile);
+                Draw.ScoreBoard(game);
 
                 ProcessEvents();
             }
@@ -102,47 +115,44 @@ namespace Startup.Core
         {
             for (int i = 0; i < events.Count; i++)
             {
-                if (events[i].Y == this.protagonist.Y && events[i].X == this.protagonist.X)
+                var currentEvent = this.events[i];
+                if (currentEvent.Y == this.protagonist.Y && currentEvent.X == this.protagonist.X)
                 {
-                    game.AddScore(events[i].Points);
-                    currentScore += events[i].Points;
-                    events[i].Points = 0;
+                    var points = currentEvent.Activate();
+                    this.game.AddScore(points);
+                    this.currentScore += points;
                     Sound.Event();
                 }
-
-                if (events[i].Points <= Settings.Game.PointDeathThreshold)
+                currentEvent.TimeTrigger();
+                if (!currentEvent.IsActive)
                 {
-                    events.RemoveAt(i);
-                }
-                else
-                {
-                    events[i].Deduct();
+                    this.events.RemoveAt(i);
                 }
             }
         }
 
-        private void ChaseLeft(Hostile hostile, Protagonist obj)
+        private void ChaseLeft(IDynamic hostile, IDynamic obj)
         {
             hostile.Move(-1, 0);
-            Drawing.Draw(hostile, obj);
+            Draw.All(hostile, obj);
         }
 
-        private void ChaseRight(Hostile hostile, Protagonist obj)
+        private void ChaseRight(IDynamic hostile, IDynamic obj)
         {
             hostile.Move(1, 0);
-            Drawing.Draw(hostile, obj);
+            Draw.All(hostile, obj);
         }
 
-        private void ChaseDown(Hostile hostile, Protagonist obj)
+        private void ChaseDown(IDynamic hostile, IDynamic obj)
         {
             hostile.Move(0, 1);
-            Drawing.Draw(hostile, obj);
+            Draw.All(hostile, obj);
         }
 
-        private void ChaseUp(Hostile hostile, Protagonist obj)
+        private void ChaseUp(IDynamic hostile, IDynamic obj)
         {
             hostile.Move(0, -1);
-            Drawing.Draw(hostile, obj);
+            Draw.All(hostile, obj);
         }
     }
 }

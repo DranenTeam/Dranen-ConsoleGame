@@ -35,25 +35,25 @@ namespace Dranen
         private static void MoveLeft(IDynamic obj)
         {
             obj.Move(-1, 0);
-            Drawing.ClearBackground(obj);
+            Draw.ClearBackground(obj);
         }
 
         private static void MoveDown(IDynamic obj)
         {
             obj.Move(0, 1);
-            Drawing.ClearBackground(obj);
+            Draw.ClearBackground(obj);
         }
 
         private static void MoveRight(IDynamic obj)
         {
             obj.Move(1, 0);
-            Drawing.ClearBackground(obj);
+            Draw.ClearBackground(obj);
         }
 
         private static void MoveUp(IDynamic obj)
         {
             obj.Move(0, -1);
-            Drawing.ClearBackground(obj);
+            Draw.ClearBackground(obj);
         }
     }
 }
