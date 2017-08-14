@@ -9,6 +9,7 @@ namespace Startup.Settings
         private static int pointDeductor = 1; // How much points a point box losses every game tick [ 5-99]
         private static int pointEventGoodScore = 50; // Above that points a box is colored as good [ 5-99]
         private static int pointEventBestScore = 70;// Above that points a box is colored as best [ 5-99]
+        private static int hostileAddingScore = 500; // after how mutch points generated a new hostile is added
 
         public static int GameSpeed
         {
@@ -73,8 +74,26 @@ namespace Startup.Settings
                 }
             }
         }
-        
-        public static int HostileAddingScore = 500; // after how mutch points generated a new hostile is added
+
+        public static int HostileAddingScore
+        {
+            get
+            {
+                return hostileAddingScore;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    hostileAddingScore = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Score must be more then 0 for new hostile to be added.");
+                }
+            }
+        }
+
         public static int LoseLifePenalty = -100;
     }
 }
