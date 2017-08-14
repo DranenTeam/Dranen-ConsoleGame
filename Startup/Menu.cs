@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using Dranen;
+using Startup.Core;
 
 namespace Startup
 {
@@ -273,7 +274,8 @@ namespace Startup
                 List<EventPoint> events = new List<EventPoint>();
                 List<Hostile> hostiles = new List<Hostile>();
                 hostiles.Add(new Hostile(4, 4));
-                Navigation.NavigateProtagonist(protagonist, events, hostiles, game);
+                Engine.NavigateProtagonist(protagonist, events, hostiles, game);
+                //Navigation.NavigateProtagonist(protagonist, events, hostiles, game);
             }
         }
 

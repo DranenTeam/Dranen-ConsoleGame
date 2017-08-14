@@ -1,0 +1,17 @@
+﻿using Startup.Interfaces;
+using System;
+using System.Collections.Generic;
+
+namespace Startup.Commands
+{
+    public class GenerateHostile
+    {
+        public static void Execute(List<Hostile> hostiles)
+        {
+            var rnd = new Random();
+            var x = rnd.Next(2, (Settings.Environment.WidthConst / 2) - 2) * 2;
+            var y = rnd.Next(2, Settings.Environment.HeightConst - 2);
+            hostiles.Add(new Hostile(x, y));
+        }
+    }
+}
