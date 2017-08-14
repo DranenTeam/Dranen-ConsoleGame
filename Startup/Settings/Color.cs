@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Settings
+namespace Startup.Settings
 {
     internal class Color
     {

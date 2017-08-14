@@ -1,29 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dranen;
-using Startup;
 using Startup.Interfaces;
+using Startup.Models;
 
-namespace Dranen
+namespace Startup.Display
 {
-    public class Draw
+    public class Board
     {
-        // Draws the score board on the console title
-        public static void ScoreBoard(Game game)
-        {
-            Console.Title = game.Score.ToString();
-        }
-
-        // Draws the remaning lives board on the console
-        public static void LivesBoard(Game game)
-        {
-            Console.SetCursorPosition(15, 0);
-            Console.WriteLine($"Lives: {game.Lives}");
-        }
-
         // Draws an agent( protagonist or hostile) on the console
         public static void Agent(IDynamic agent, ConsoleColor color)
         {
@@ -47,7 +30,7 @@ namespace Dranen
             Agent(hostile, Settings.Color.Hostile);
         }
 
-        // Draws the clears the background and draws the objects
+        // Clears the background and draws the objects
         public static void ClearBackground(IDynamic obj)
         {
             Console.BackgroundColor = Settings.Color.Background;
@@ -68,7 +51,6 @@ namespace Dranen
             foreach (var ev in events)
             {
                 Console.BackgroundColor = ev.Color;
-
                 Console.SetCursorPosition(ev.X, ev.Y);
                 Console.Write($"{ev.Symbol.PadLeft(2)}");
             }

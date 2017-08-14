@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Startup.Exceptions;
 using Startup.Interfaces;
 
-namespace Dranen
+namespace Startup.Models
 {
     // describes a block on the map with special properties
     public abstract class Event : IEvent, IColor, ISymbol

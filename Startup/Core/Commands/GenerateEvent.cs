@@ -1,8 +1,8 @@
-﻿using Dranen;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Startup.Models;
 
-namespace Startup.Commands
+namespace Startup.Core.Commands
 {
     public class GenerateEvent
     {

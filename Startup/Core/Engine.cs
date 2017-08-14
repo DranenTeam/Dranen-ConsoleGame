@@ -1,10 +1,11 @@
-﻿using Dranen;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-using Startup.Commands;
+using Startup.Core.Commands;
+using Startup.Display;
 using Startup.Interfaces;
+using Startup.Models;
 
 namespace Startup.Core
 {
@@ -39,20 +40,20 @@ namespace Startup.Core
                     Thread.Sleep(Settings.Game.GameSpeed);
 
                     // creates new events if needed
-                    EventsProcessor.Run(events);
+                    EventsProcessor.Run(this.events);
 
                     // execute last movement command
                     MovementProcessor.Run(this.protagonist, cki, this.game);
-                    if (game.IsEnd)
+                    if (this.game.IsEnd)
                     {
                         // TODO: Refacotr this via event or somethig
-                        ShowEndScreen.Run(stopwatch, game);
+                        ShowEndScreen.Run(stopwatch, this.game); // draws
                         return;
                     }
 
                     // Draws the screen
-                    LiveBoardProcessor.Run(game);
-                    HostilesProcessor();
+                    LiveBoardProcessor.Run(this.game); // draws
+                    HostilesProcessor(); // draws
                 }
 
                 // Reads another key
@@ -63,32 +64,33 @@ namespace Startup.Core
 
         public void HostilesProcessor()
         {
-            foreach (var hostile in hostiles)
+            foreach (var hostile in this.hostiles)
             {
-                if (protagonist.X < hostile.X)
+                if (this.protagonist.X < hostile.X)
                 {
-                    ChaseLeft(hostile, protagonist);
+                    hostile.Move(-1, 0);
                 }
-                if (protagonist.X > hostile.X)
+                if (this.protagonist.X > hostile.X)
                 {
-                    ChaseRight(hostile, protagonist);
+                    hostile.Move(1, 0);
                 }
-                if (protagonist.Y < hostile.Y)
+                if (this.protagonist.Y < hostile.Y)
                 {
-                    ChaseUp(hostile, protagonist);
+                    hostile.Move(0, -1);
                 }
-                if (protagonist.Y > hostile.Y)
+                if (this.protagonist.Y > hostile.Y)
                 {
-                    ChaseDown(hostile, protagonist);
+                    hostile.Move(0, 1);
                 }
-                if (protagonist.Y == hostile.Y && protagonist.X == hostile.X)
+                Board.All(hostile, this.protagonist);
+                if (this.protagonist.Y == hostile.Y && this.protagonist.X == hostile.X)
                 {
-                    if (game.Lives > 0)
+                    if (this.game.Lives > 0)
                     {
-                        game.DecreaseLive();
+                        this.game.DecreaseLive();
 
-                        game.AddScore(Settings.Game.LoseLifePenalty);
-                        currentScore -= Settings.Game.LoseLifePenalty;
+                        this.game.AddScore(Settings.Game.LoseLifePenalty);
+                        this.currentScore -= Settings.Game.LoseLifePenalty;
                         ResetHostile.Execute(hostile);
                     }
                     else
@@ -97,17 +99,17 @@ namespace Startup.Core
                     }
                 }
 
-                Draw.Events(this.events);
-                Draw.Agent(hostile, Settings.Color.Hostile);
-                Draw.ScoreBoard(game);
+                Display.Board.Events(this.events);
+                Display.Board.Agent(hostile, Settings.Color.Hostile);
+                Display.Information.ScoreBoard(this.game);
 
-                ProcessEvents();
+                this.ProcessEvents();
             }
 
-            if (currentScore >= Settings.Game.HostileAddingScore)
+            if (this.currentScore >= Settings.Game.HostileAddingScore)
             {
-                currentScore = 0;
-                GenerateHostile.Execute(hostiles);
+                this.currentScore = 0;
+                GenerateHostile.Execute(this.hostiles);
             }
         }
 
@@ -129,30 +131,6 @@ namespace Startup.Core
                     this.events.RemoveAt(i);
                 }
             }
-        }
-
-        private void ChaseLeft(IDynamic hostile, IDynamic obj)
-        {
-            hostile.Move(-1, 0);
-            Draw.All(hostile, obj);
-        }
-
-        private void ChaseRight(IDynamic hostile, IDynamic obj)
-        {
-            hostile.Move(1, 0);
-            Draw.All(hostile, obj);
-        }
-
-        private void ChaseDown(IDynamic hostile, IDynamic obj)
-        {
-            hostile.Move(0, 1);
-            Draw.All(hostile, obj);
-        }
-
-        private void ChaseUp(IDynamic hostile, IDynamic obj)
-        {
-            hostile.Move(0, -1);
-            Draw.All(hostile, obj);
         }
     }
 }

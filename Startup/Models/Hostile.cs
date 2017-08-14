@@ -1,9 +1,8 @@
-﻿using Dranen;
-using Startup.Interfaces;
-using System;
+﻿using System;
 using Startup.Exceptions;
+using Startup.Interfaces;
 
-namespace Startup
+namespace Startup.Models
 {
     public class Hostile : IDynamic
     {
@@ -22,8 +21,8 @@ namespace Startup
             this.GameHeight = Settings.Environment.Height;
             var rdm = new Random();
             this.Slowliness = rdm.Next(5, 12);
-            this.dx = Slowliness;
-            this.dy = Slowliness;
+            this.dx = this.Slowliness;
+            this.dy = this.Slowliness;
             Sound.Hostile();
         }
 
@@ -80,20 +79,20 @@ namespace Startup
         {
             if (this.X + x * 2 < Settings.Environment.Width - 2 && this.X + x * 2 >= 1)
             {
-                dx -= 1;
-                if (dx == 0)
+                this.dx -= 1;
+                if (this.dx == 0)
                 {
-                    dx = Slowliness;
+                    this.dx = this.Slowliness;
                     this.X += x * 2;
                 }
             }
 
             if (this.Y + y < Settings.Environment.Height - 1 && this.Y + y >= 1)
             {
-                dy -= 1;
-                if (dy == 0)
+                this.dy -= 1;
+                if (this.dy == 0)
                 {
-                    dy = Slowliness;
+                    this.dy = this.Slowliness;
                     this.Y += y;
                 }
             }

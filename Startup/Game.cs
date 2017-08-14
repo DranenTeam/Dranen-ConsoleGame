@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Startup;
-using Startup.Exceptions;
+﻿using Startup.Exceptions;
 
-namespace Dranen
+namespace Startup
 {
     public class Game
     {

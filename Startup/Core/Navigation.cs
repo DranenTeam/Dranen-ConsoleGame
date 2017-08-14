@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading;
+﻿using Startup.Display;
 using Startup.Enums;
-using Startup;
-using Startup.Commands;
 using Startup.Interfaces;
 
-namespace Dranen
+namespace Startup.Core
 {
     public class Navigation
     {
@@ -35,25 +30,25 @@ namespace Dranen
         private static void MoveLeft(IDynamic obj)
         {
             obj.Move(-1, 0);
-            Draw.ClearBackground(obj);
+            Board.ClearBackground(obj);
         }
 
         private static void MoveDown(IDynamic obj)
         {
             obj.Move(0, 1);
-            Draw.ClearBackground(obj);
+            Board.ClearBackground(obj);
         }
 
         private static void MoveRight(IDynamic obj)
         {
             obj.Move(1, 0);
-            Draw.ClearBackground(obj);
+            Board.ClearBackground(obj);
         }
 
         private static void MoveUp(IDynamic obj)
         {
             obj.Move(0, -1);
-            Draw.ClearBackground(obj);
+            Board.ClearBackground(obj);
         }
     }
 }

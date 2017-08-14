@@ -1,4 +1,6 @@
-﻿namespace Startup.Commands
+﻿using Startup.Models;
+
+namespace Startup.Core.Commands
 {
     public class ResetHostile
     {

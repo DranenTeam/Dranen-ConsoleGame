@@ -1,8 +1,7 @@
-﻿using System;
-using Startup.Exceptions;
+﻿using Startup.Exceptions;
 using Startup.Interfaces;
 
-namespace Dranen
+namespace Startup.Models
 {
     public class Protagonist : IDynamic, ILivable
     {

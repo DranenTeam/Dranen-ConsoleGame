@@ -1,4 +1,4 @@
-﻿using Dranen;
+﻿using Startup.Display;
 
 namespace Startup.Core
 {
@@ -6,8 +6,8 @@ namespace Startup.Core
     {
         public static void Run(Game game)
         {
-            Draw.ClearBackground();
-            Draw.LivesBoard(game);
+            Board.ClearBackground();
+            Display.Information.LivesBoard(game);
         }
     }
 }
