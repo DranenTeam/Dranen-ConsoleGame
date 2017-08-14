@@ -6,21 +6,21 @@
     public class Game
     {
         public const int EventsCount = 10; // Count of Point boxes on the map [5 - 50]
-        private int gameSpeed = 30;
-        private int pointDeductor = 1; // How much points a point box losses every game tick [ 5-99]
-        private int pointEventGoodScore = 50; // Above that points a box is colored as good [ 5-99]
-        private int pointEventBestScore = 70;// Above that points a box is colored as best [ 5-99]
-        private int hostileAddingScore = 500; // after how mutch points generated a new hostile is added
-        private int loseLifePenalty = -100;
+        private static int gameSpeed = 30;
+        private static int pointDeductor = 1; // How much points a point box losses every game tick [ 5-99]
+        private static int pointEventGoodScore = 50; // Above that points a box is colored as good [ 5-99]
+        private static int pointEventBestScore = 70;// Above that points a box is colored as best [ 5-99]
+        private static int hostileAddingScore = 500; // after how mutch points generated a new hostile is added
+        private static int loseLifePenalty = -100;
 
-        public int GameSpeed
+        public static int GameSpeed
         {
-            get { return this.gameSpeed; }
+            get { return gameSpeed; }
             set
             {
                 if (value > 0)
                 {
-                    this.gameSpeed = value;
+                    gameSpeed = value;
                 }
                 else
                 {
@@ -29,16 +29,16 @@
             }
         }
 
-        public int PointDeductor
+        public static int PointDeductor
         {
             get
             {
-                return this.pointDeductor; }
+                return pointDeductor; }
             set
             {
                 if (value > 0)
                 {
-                    this.pointDeductor = value;
+                    pointDeductor = value;
                 }
                 else
                 {
@@ -47,14 +47,14 @@
             }
         }
 
-        public int PointEventGoodScore
+        public static int PointEventGoodScore
         {
-            get { return this.pointEventGoodScore; }
+            get { return pointEventGoodScore; }
             set
             {
                 if (value > 0)
                 {
-                    this.pointEventGoodScore = value;
+                    pointEventGoodScore = value;
                 }
                 else
                 {
@@ -63,16 +63,16 @@
             }
         }
 
-        public int PointEventBestScore
+        public static int PointEventBestScore
         {
             get
             {
-                return this.pointEventBestScore; }
+                return pointEventBestScore; }
             set
             {
                 if (value > 0)
                 {
-                    this.pointEventBestScore = value;
+                    pointEventBestScore = value;
                 }
                 else
                 {
@@ -81,17 +81,17 @@
             }
         }
 
-        public int HostileAddingScore
+        public static int HostileAddingScore
         {
             get
             {
-                return this.hostileAddingScore;
+                return hostileAddingScore;
             }
             set
             {
                 if (value > 0)
                 {
-                    this.hostileAddingScore = value;
+                    hostileAddingScore = value;
                 }
                 else
                 {
@@ -100,14 +100,14 @@
             }
         }
 
-        public int LoseLifePenalty
+        public static int LoseLifePenalty
         {
-            get { return this.loseLifePenalty; }
+            get { return loseLifePenalty; }
             set
             {
                 if (value < 0)
                 {
-                    this.loseLifePenalty = value;
+                    loseLifePenalty = value;
                 }
                 else
                 {
