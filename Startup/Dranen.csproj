@@ -55,6 +55,9 @@
     <Compile Include="Display\Menu.cs" />
     <Compile Include="Display\SubMenues\Credits.cs" />
     <Compile Include="Display\SubMenues\EndScreen.cs" />
+    <Compile Include="Display\SubMenues\EnterName.cs" />
+    <Compile Include="Display\SubMenues\Exit.cs" />
+    <Compile Include="Display\SubMenues\Greeting.cs" />
     <Compile Include="Display\SubMenues\HowToPlay.cs" />
     <Compile Include="Display\SubMenues\Logo.cs" />
     <Compile Include="Display\SubMenues\Options.cs" />
