@@ -1,27 +1,26 @@
-﻿using System;
-
-namespace Startup.Settings
+﻿namespace Startup.Settings
 {
+    using System;
     using Startup.Exceptions;
 
-    public static class Game
+    public class Game
     {
         public const int EventsCount = 10; // Count of Point boxes on the map [5 - 50]
-        private static int gameSpeed = 30;
-        private static int pointDeductor = 1; // How much points a point box losses every game tick [ 5-99]
-        private static int pointEventGoodScore = 50; // Above that points a box is colored as good [ 5-99]
-        private static int pointEventBestScore = 70;// Above that points a box is colored as best [ 5-99]
-        private static int hostileAddingScore = 500; // after how mutch points generated a new hostile is added
-        private static int loseLifePenalty = -100;
+        private int gameSpeed = 30;
+        private int pointDeductor = 1; // How much points a point box losses every game tick [ 5-99]
+        private int pointEventGoodScore = 50; // Above that points a box is colored as good [ 5-99]
+        private int pointEventBestScore = 70;// Above that points a box is colored as best [ 5-99]
+        private int hostileAddingScore = 500; // after how mutch points generated a new hostile is added
+        private int loseLifePenalty = -100;
 
-        public static int GameSpeed
+        public int GameSpeed
         {
-            get { return gameSpeed; }
+            get { return this.gameSpeed; }
             set
             {
                 if (value > 0)
                 {
-                    gameSpeed = value;
+                    this.gameSpeed = value;
                 }
                 else
                 {
@@ -30,65 +29,69 @@ namespace Startup.Settings
             }
         }
 
-        public static int PointDeductor
-        {
-            get { return pointDeductor; }
-            set
-            {
-                if (value > 0)
-                {
-                    pointDeductor = value;
-                }
-                else
-                {
-                    throw new InvalidValueForBoxException();
-                }
-            }
-        }
-
-        public static int PointEventGoodScore
-        {
-            get { return pointEventGoodScore; }
-            set
-            {
-                if (value > 0)
-                {
-                    pointEventGoodScore = value;
-                }
-                else
-                {
-                    throw new InvalidValueForBoxException();
-                }
-            }
-        }
-
-        public static int PointEventBestScore
-        {
-            get { return pointEventBestScore; }
-            set
-            {
-                if (value > 0)
-                {
-                    pointEventBestScore = value;
-                }
-                else
-                {
-                    throw new InvalidValueForBoxException();
-                }
-            }
-        }
-
-        public static int HostileAddingScore
+        public int PointDeductor
         {
             get
             {
-                return hostileAddingScore;
+                return this.pointDeductor; }
+            set
+            {
+                if (value > 0)
+                {
+                    this.pointDeductor = value;
+                }
+                else
+                {
+                    throw new InvalidValueForBoxException();
+                }
+            }
+        }
+
+        public int PointEventGoodScore
+        {
+            get { return this.pointEventGoodScore; }
+            set
+            {
+                if (value > 0)
+                {
+                    this.pointEventGoodScore = value;
+                }
+                else
+                {
+                    throw new InvalidValueForBoxException();
+                }
+            }
+        }
+
+        public int PointEventBestScore
+        {
+            get
+            {
+                return this.pointEventBestScore; }
+            set
+            {
+                if (value > 0)
+                {
+                    this.pointEventBestScore = value;
+                }
+                else
+                {
+                    throw new InvalidValueForBoxException();
+                }
+            }
+        }
+
+        public int HostileAddingScore
+        {
+            get
+            {
+                return this.hostileAddingScore;
             }
             set
             {
                 if (value > 0)
                 {
-                    hostileAddingScore = value;
+                    this.hostileAddingScore = value;
                 }
                 else
                 {
@@ -97,14 +100,14 @@ namespace Startup.Settings
             }
         }
 
-        public static int LoseLifePenalty
+        public int LoseLifePenalty
         {
-            get { return loseLifePenalty; }
+            get { return this.loseLifePenalty; }
             set
             {
                 if (value < 0)
                 {
-                    loseLifePenalty = value;
+                    this.loseLifePenalty = value;
                 }
                 else
                 {
