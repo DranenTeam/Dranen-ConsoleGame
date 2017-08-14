@@ -5,7 +5,7 @@ using Startup.Exceptions;
 
 namespace Startup
 {
-    public class Hostile : IPosition, IMovable
+    public class Hostile : IDynamic
     {
         private int dx;
         private int dy;

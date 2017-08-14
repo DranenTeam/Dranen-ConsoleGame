@@ -4,7 +4,7 @@ using Startup.Interfaces;
 
 namespace Dranen
 {
-    public class Protagonist : IMovable, ILivable, IPosition
+    public class Protagonist : IDynamic, ILivable
     {
         private int gameWidth;
         private int gameHeight;

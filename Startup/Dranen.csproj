@@ -58,6 +58,7 @@
     <Compile Include="Exceptions\InvalidGameWIdthException.cs" />
     <Compile Include="Exceptions\InvalidLivesCountException.cs" />
     <Compile Include="Exceptions\InvalidPointDeductorValueException.cs" />
+    <Compile Include="Interfaces\IDynamic.cs" />
     <Compile Include="Interfaces\IEvent.cs" />
     <Compile Include="Models\Hostile.cs" />
     <Compile Include="Interfaces\ILivable.cs" />

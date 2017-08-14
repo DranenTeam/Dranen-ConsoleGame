@@ -24,11 +24,8 @@ namespace Startup.Core
             this.game = game;
         }
 
-        public void NavigateProtagonist()
+        public void NavigateProtagonist(ConsoleKeyInfo cki, Stopwatch stopwatch)
         {
-            ConsoleKeyInfo cki = new ConsoleKeyInfo();
-            Stopwatch stopwatch = new Stopwatch();
-
             do
             {
                 while (Console.KeyAvailable == false)
@@ -91,7 +88,7 @@ namespace Startup.Core
                 Drawing.DrawHostile(hostile);
                 Drawing.ScoreBoard(game);
 
-                ProcessEvents(events, protagonist, hostile, game);
+                ProcessEvents();
             }
 
             if (currentScore >= Settings.Game.HostileAddingScore)
@@ -101,11 +98,11 @@ namespace Startup.Core
             }
         }
 
-        private void ProcessEvents(List<PointBox> events, Protagonist obj, Hostile hostile, Game game)
+        private void ProcessEvents()
         {
             for (int i = 0; i < events.Count; i++)
             {
-                if (events[i].Y == obj.Y && events[i].X == obj.X)
+                if (events[i].Y == this.protagonist.Y && events[i].X == this.protagonist.X)
                 {
                     game.AddScore(events[i].Points);
                     currentScore += events[i].Points;

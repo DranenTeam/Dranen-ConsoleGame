@@ -13,11 +13,14 @@ namespace Startup
         public static void Initialize()
         {
             Sound.GameStartSound();
-            Console.WindowHeight =
-                20;
-            Console.WindowWidth = 40;
-            Console.BufferHeight = 20;
-            Console.BufferWidth = 40;
+            //Console.WindowHeight =20;
+            //Console.WindowWidth = 40;
+            //Console.BufferHeight = 20;
+            //Console.BufferWidth = 40;
+            Console.WindowHeight = Settings.Environment.Height;
+            Console.WindowWidth = Settings.Environment.Width;
+            Console.BufferHeight = Settings.Environment.Height;
+            Console.BufferWidth = Settings.Environment.Width;
             Console.CursorVisible = false;
             var menuList = new string[]
             {
@@ -277,10 +280,10 @@ namespace Startup
                 List<Hostile> hostiles = new List<Hostile>();
                 hostiles.Add(new Hostile(4, 4));
                 //Navigation navigation = new Navigation(protagonist, events, hostiles, game);
+                Engine engine = new Engine(protagonist, events, hostiles, game);
                 ConsoleKeyInfo cki = new ConsoleKeyInfo();
                 Stopwatch stopwatch = new Stopwatch();
-                var engine = new Engine(protagonist, events, hostiles, game);
-                engine.NavigateProtagonist();
+                engine.NavigateProtagonist(cki, stopwatch);
             }
         }
 

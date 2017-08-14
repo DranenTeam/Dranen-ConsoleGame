@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Dranen;
 using Startup;
+using Startup.Interfaces;
 
 namespace Dranen
 {
     public class Drawing
     {
-        public static void DrawProtagonist(Protagonist obj)
+        public static void DrawProtagonist(IDynamic obj)
         {
             Console.BackgroundColor = Settings.Color.Protagonist;
             Console.SetCursorPosition(obj.X, obj.Y);
@@ -45,7 +46,7 @@ namespace Dranen
             Console.Write("  ");
         }
 
-        public static void ClearBackground(Protagonist obj)
+        public static void ClearBackground(IDynamic obj)
         {
             Console.BackgroundColor = Settings.Color.Background;
             Console.Clear();
@@ -58,7 +59,7 @@ namespace Dranen
             Console.Clear();
         }
 
-        public static void Draw(Hostile hostile, Protagonist obj)
+        public static void Draw(Hostile hostile, IDynamic obj)
         {
             DrawProtagonist(obj);
             DrawHostile(hostile);

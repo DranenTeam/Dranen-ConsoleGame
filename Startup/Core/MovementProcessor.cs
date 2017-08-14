@@ -1,12 +1,13 @@
 ﻿using Dranen;
 using Startup.Enums;
 using System;
+using Startup.Interfaces;
 
 namespace Startup.Core
 {
     public class MovementProcessor
     {
-        public static ConsoleKeyInfo Run(Protagonist obj, ConsoleKeyInfo cki, Game game)
+        public static ConsoleKeyInfo Run(IDynamic obj, ConsoleKeyInfo cki, Game game)
         {
             if (cki.Key == ConsoleKey.UpArrow)
             {
