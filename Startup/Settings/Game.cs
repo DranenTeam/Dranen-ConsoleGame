@@ -24,7 +24,7 @@
                 }
                 else
                 {
-                    throw new ArgumentException("Game speed cannot be lower than 0");
+                    throw new InvalidGameSpeedException();
                 }
             }
         }

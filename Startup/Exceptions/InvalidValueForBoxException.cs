@@ -6,8 +6,8 @@
     {
         private const string message = "Value of box points cannot be lower than 0";
 
-        public InvalidValueForBoxException() :
-            base(message)
+        public InvalidValueForBoxException() 
+            : base(message)
         {
         }
     }
