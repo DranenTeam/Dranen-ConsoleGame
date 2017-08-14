@@ -2,6 +2,8 @@
 
 namespace Startup.Settings
 {
+    using Startup.Exceptions;
+
     public static class Game
     {
         public const int EventsCount = 10; // Count of Point boxes on the map [5 - 50]
@@ -39,7 +41,7 @@ namespace Startup.Settings
                 }
                 else
                 {
-                    throw new ArgumentException("Value of box points cannot be lower than 0");
+                    throw new InvalidValueForBoxException();
                 }
             }
         }
@@ -55,7 +57,7 @@ namespace Startup.Settings
                 }
                 else
                 {
-                    throw new ArgumentException("Value of box points cannot be lower than 0");
+                    throw new InvalidValueForBoxException();
                 }
             }
         }
@@ -71,7 +73,7 @@ namespace Startup.Settings
                 }
                 else
                 {
-                    throw new ArgumentException("Value of box points cannot be lower than 0");
+                    throw new InvalidValueForBoxException();
                 }
             }
         }
