@@ -17,6 +17,7 @@ namespace Startup
             Console.WindowWidth = Settings.Environment.Width;
             Console.BufferHeight = Settings.Environment.Height;
             Console.BufferWidth = Settings.Environment.Width;
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.CursorVisible = false;
             var menuList = new string[]
             {
@@ -26,26 +27,12 @@ namespace Startup
 
             while (true)
             {
-                Console.Clear();
-                Display.Menu.Logo();
-                Position(11, 11);
-                Console.CursorVisible = true;
-                Console.CursorSize = 100;
-                Console.WriteLine("What is your name?");
-                Position(15, 13);
-                StringBuilder playersName = new StringBuilder(Console.ReadLine());
+                Display.Menu.EnterName();
 
                 Sound.MenuEffect();
                 while (true)
                 {
-                    Console.Clear();
-                    Console.CursorVisible = false;
-                    Display.Menu.Logo();
-
-                    Position(16, 7);
-                    Console.WriteLine($"Hello {playersName}!");
-                    Position(10, 8);
-                    Console.WriteLine($"Good luck in your quest!");
+                    Display.Menu.Greeting();
                     var position = 11;
                     foreach (var item in menuList)
                     {
@@ -77,7 +64,7 @@ namespace Startup
                             switch (cursor)
                             {
                                 case 11:
-                                    Display.Menu.StartGame(playersName.ToString());
+                                    Display.Menu.StartGame(Display.Menu.Result.ToString());
                                     break;
 
                                 case 12:
@@ -93,7 +80,7 @@ namespace Startup
                                     break;
 
                                 case 15:
-                                    Exit();
+                                    Display.Menu.Exit();
                                     break;
                             }
                             break;
@@ -114,11 +101,6 @@ namespace Startup
         public static void Position(int x, int y)
         {
             Console.SetCursorPosition(x, y);
-        }
-
-        private static void Exit()
-        {
-            Environment.Exit(0);
         }
     }
 }

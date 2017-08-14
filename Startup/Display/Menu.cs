@@ -4,11 +4,20 @@ using System.Media;
 
 namespace Startup.Display
 {
-    public static class Menu
+    public static class Menu // Sort of factory
     {
-        public static void EndScreen(Stopwatch stopwatch, Game game)
+        private static string result;
+
+        public static string Result
         {
-            new EndScreen(stopwatch, game);
+            get { return result; }
+            private set { result = value; }
+        }
+
+        public static void EnterName()
+        {
+            var instance = new EnterName();
+            Result = instance.PlayersName;
         }
 
         public static void Logo()
@@ -34,6 +43,21 @@ namespace Startup.Display
         public static void StartGame(string playerName)
         {
             new StartGame(playerName);
+        }
+
+        public static void Greeting()
+        {
+            new Greeting();
+        }
+
+        public static void EndScreen(Stopwatch stopwatch, Game game)
+        {
+            new EndScreen(stopwatch, game);
+        }
+
+        public static void Exit()
+        {
+            new Exit();
         }
     }
 }
