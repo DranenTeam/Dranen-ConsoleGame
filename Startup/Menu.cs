@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using Dranen;
@@ -267,22 +268,27 @@ namespace Startup
             while (true)
             {
                 InitializeEnvironment();
-                var game = new Game(3);
+                Game game = new Game(3);
                 game.PlayersName = playerName;
+
                 Protagonist protagonist = new Protagonist();
-                List<EventPoint> events = new List<EventPoint>();
+                List<PointBox> events = new List<PointBox>();
                 List<Hostile> hostiles = new List<Hostile>();
                 hostiles.Add(new Hostile(4, 4));
-                Navigation.NavigateProtagonist(protagonist, events, hostiles, game);
+
+                Navigation navigation = new Navigation(protagonist, events, hostiles, game);
+                ConsoleKeyInfo cki = new ConsoleKeyInfo();
+                Stopwatch stopwatch = new Stopwatch();
+                navigation.NavigateProtagonist(cki, stopwatch);
             }
         }
 
         private static void InitializeEnvironment()
         {
             Console.CursorVisible = false;
-            Console.BufferHeight = Settings.Environment.HeightConst;
-            Console.BufferWidth = Settings.Environment.WidthConst;
-            Console.SetWindowSize(Settings.Environment.WidthConst, Settings.Environment.HeightConst);
+            Console.BufferHeight = Settings.Environment.Height;
+            Console.BufferWidth = Settings.Environment.Width;
+            Console.SetWindowSize(Settings.Environment.Width, Settings.Environment.Height);
             Console.BackgroundColor = Settings.Color.Background;
             Console.Clear();
             Console.BackgroundColor = Settings.Color.Protagonist;

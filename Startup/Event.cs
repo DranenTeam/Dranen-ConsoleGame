@@ -8,17 +8,17 @@ using Startup.Interfaces;
 namespace Dranen
 {
     // describes a block on the map with special properties
-    public abstract class Event : IPosition
+    public abstract class Event : IEvent
     {
         private int x;
         private int y;
         private int gameWidth;
         private int gameHeight;
 
-        public Event(int x, int y, int gameWidth, int gameHeight)
+        public Event(int x, int y)
         {
-            this.GameWidth = gameWidth;
-            this.GameHeight = gameHeight;
+            this.GameWidth = Settings.Environment.Width;
+            this.GameHeight = Settings.Environment.Height;
             this.X = x;
             this.Y = y;
         }

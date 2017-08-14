@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Settings
 {
-    class Environment
+    internal class Environment
     {
-        public const int WidthConst = 90; // This should not be less than the visible area of your console
-        public const int HeightConst = 30;
+        public const int Width = 90; // This should not be less than the visible area of your console
+        public const int Height = 30;
     }
 }

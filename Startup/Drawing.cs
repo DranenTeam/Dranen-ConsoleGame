@@ -27,7 +27,7 @@ namespace Dranen
         public static void ScoreBoard(Game game)
         {
             Console.Title = game.Score.ToString();
-            //Console.SetCursorPosition(Game.WidthConst/2, 0);
+            //Console.SetCursorPosition(Game.Width/2, 0);
             //Console.Background = Game.ScoreBoardColor;
             //Console.Write($"{Game.Score.ToString().PadLeft(6)}");
         }
@@ -64,7 +64,7 @@ namespace Dranen
             DrawHostile(hostile);
         }
 
-        public static void Events(List<EventPoint> events)
+        public static void Events(IList<PointBox> events)
         {
             foreach (var ev in events)
             {

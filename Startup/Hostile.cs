@@ -4,7 +4,7 @@ using System;
 
 namespace Startup
 {
-    public class Hostile : IPosition, IMovable 
+    public class Hostile : IPosition, IMovable
     {
         private int dx;
         private int dy;
@@ -17,8 +17,8 @@ namespace Startup
         {
             this.X = x;
             this.Y = y;
-            this.GameWidth = Settings.Environment.WidthConst;
-            this.GameHeight = Settings.Environment.HeightConst;
+            this.GameWidth = Settings.Environment.Width;
+            this.GameHeight = Settings.Environment.Height;
             var rdm = new Random();
             this.Slowliness = rdm.Next(5, 12);
             this.dx = Slowliness;
@@ -38,8 +38,8 @@ namespace Startup
             private set { this.y = value; }
         }
 
-        public int Slowliness { get; private set; }        
-               
+        public int Slowliness { get; private set; }
+
         public int GameWidth
         {
             get { return this.gameWidth; }
@@ -69,15 +69,15 @@ namespace Startup
         public void RandomReset()
         {
             var rnd = new Random();
-            var x = rnd.Next(2, (Settings.Environment.WidthConst / 2) - 2) * 2;
-            var y = rnd.Next(2, Settings.Environment.HeightConst - 2);
+            var x = rnd.Next(2, (Settings.Environment.Width / 2) - 2) * 2;
+            var y = rnd.Next(2, Settings.Environment.Height - 2);
             this.X = x;
             this.Y = y;
         }
 
         public void Move(int x, int y)
         {
-            if (this.X + x * 2 < Settings.Environment.WidthConst - 2 && this.X + x * 2 >= 1)
+            if (this.X + x * 2 < Settings.Environment.Width - 2 && this.X + x * 2 >= 1)
             {
                 dx -= 1;
                 if (dx == 0)
@@ -87,7 +87,7 @@ namespace Startup
                 }
             }
 
-            if (this.Y + y < Settings.Environment.HeightConst - 1 && this.Y + y >= 1)
+            if (this.Y + y < Settings.Environment.Height - 1 && this.Y + y >= 1)
             {
                 dy -= 1;
                 if (dy == 0)

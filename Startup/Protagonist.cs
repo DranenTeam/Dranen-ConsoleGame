@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Dranen;
 using Startup.Interfaces;
 
 namespace Dranen
@@ -18,8 +12,8 @@ namespace Dranen
 
         public Protagonist()
         {
-            this.GameWidth = Settings.Environment.WidthConst;
-            this.GameHeight = Settings.Environment.HeightConst;
+            this.GameWidth = Settings.Environment.Width;
+            this.GameHeight = Settings.Environment.Height;
             this.X = 0;
             this.Y = 0;
             this.IsAlive = true;

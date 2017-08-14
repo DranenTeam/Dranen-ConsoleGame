@@ -46,11 +46,12 @@
     <Compile Include="Drawing.cs" />
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="Hostile.cs" />
+    <Compile Include="Interfaces\IEvent.cs" />
     <Compile Include="Interfaces\ILivable.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IPosition.cs" />
     <Compile Include="Menu.cs" />
-    <Compile Include="PointEvent.cs" />
+    <Compile Include="PointBox.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Navigation.cs" />

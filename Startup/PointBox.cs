@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Dranen
 {
     // describes a block on the map with special properties
-    public class EventPoint : Event
+    public class PointBox : Event
     {
         private int points;
         private int pointDeductor;
@@ -26,8 +26,8 @@ namespace Dranen
             }
         }
 
-        public EventPoint(int x, int y, int points, int gameWidth, int gameHeight, int deduction = 1) 
-            : base(x, y, gameWidth, gameHeight)
+        public PointBox(int x, int y, int points, int deduction = 1)
+            : base(x, y)
         {
             this.Points = points;
             this.PointDeductor = Settings.Game.PointDeductor;
