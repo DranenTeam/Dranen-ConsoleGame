@@ -65,8 +65,11 @@
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="Exceptions\InvalidCoordinatesException.cs" />
     <Compile Include="Exceptions\InvalidGameHeightException.cs" />
+    <Compile Include="Exceptions\InvalidGameSpeedException.cs" />
     <Compile Include="Exceptions\InvalidGameWIdthException.cs" />
+    <Compile Include="Exceptions\InvalidHostileAddingScoreException.cs" />
     <Compile Include="Exceptions\InvalidLivesCountException.cs" />
+    <Compile Include="Exceptions\InvalidLoseLifePenalty.cs" />
     <Compile Include="Exceptions\InvalidPointDeductorValueException.cs" />
     <Compile Include="Exceptions\InvalidValueForBoxException.cs" />
     <Compile Include="Interfaces\IColor.cs" />

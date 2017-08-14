@@ -95,7 +95,7 @@
                 }
                 else
                 {
-                    throw new ArgumentException("Score must be more then 0 for new hostile to be added.");
+                    throw new InvalidHostileAddingScoreException();
                 }
             }
         }
@@ -111,7 +111,7 @@
                 }
                 else
                 {
-                    throw new ArgumentException("Penalty should be a negative number.");
+                    throw new InvalidLoseLifePenalty();
                 }
             }
         }
