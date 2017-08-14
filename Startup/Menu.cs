@@ -276,16 +276,11 @@ namespace Startup
                 List<PointBox> events = new List<PointBox>();
                 List<Hostile> hostiles = new List<Hostile>();
                 hostiles.Add(new Hostile(4, 4));
-<<<<<<< HEAD
-
-                Navigation navigation = new Navigation(protagonist, events, hostiles, game);
+                //Navigation navigation = new Navigation(protagonist, events, hostiles, game);
                 ConsoleKeyInfo cki = new ConsoleKeyInfo();
                 Stopwatch stopwatch = new Stopwatch();
-                navigation.NavigateProtagonist(cki, stopwatch);
-=======
-                Engine.NavigateProtagonist(protagonist, events, hostiles, game);
-                //Navigation.NavigateProtagonist(protagonist, events, hostiles, game);
->>>>>>> 1cc9b5c3b6e572dd8704a3896b34a6e75fbe967e
+                var engine = new Engine(protagonist, events, hostiles, game);
+                engine.NavigateProtagonist();
             }
         }
 

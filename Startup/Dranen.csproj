@@ -53,23 +53,14 @@
     <Compile Include="Core\ShowEndScreen.cs" />
     <Compile Include="Drawing.cs" />
     <Compile Include="Enums\Direction.cs" />
-<<<<<<< HEAD
-    <Compile Include="Hostile.cs" />
     <Compile Include="Interfaces\IEvent.cs" />
-=======
     <Compile Include="Models\Hostile.cs" />
->>>>>>> 1cc9b5c3b6e572dd8704a3896b34a6e75fbe967e
     <Compile Include="Interfaces\ILivable.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IPosition.cs" />
     <Compile Include="Menu.cs" />
-<<<<<<< HEAD
-    <Compile Include="PointBox.cs" />
-    <Compile Include="Event.cs" />
-=======
-    <Compile Include="Models\PointEvent.cs" />
+    <Compile Include="Models\PointBox.cs" />
     <Compile Include="Models\Event.cs" />
->>>>>>> 1cc9b5c3b6e572dd8704a3896b34a6e75fbe967e
     <Compile Include="Game.cs" />
     <Compile Include="Core\Navigation.cs" />
     <Compile Include="Settings\Color.cs" />

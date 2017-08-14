@@ -9,8 +9,8 @@ namespace Startup.Commands
         public static void Execute(List<Hostile> hostiles)
         {
             var rnd = new Random();
-            var x = rnd.Next(2, (Settings.Environment.WidthConst / 2) - 2) * 2;
-            var y = rnd.Next(2, Settings.Environment.HeightConst - 2);
+            var x = rnd.Next(2, (Settings.Environment.Width / 2) - 2) * 2;
+            var y = rnd.Next(2, Settings.Environment.Height - 2);
             hostiles.Add(new Hostile(x, y));
         }
     }

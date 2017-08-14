@@ -6,7 +6,7 @@ namespace Startup.Core
 {
     public class EventsProcessor
     {
-        public static void Run(List<EventPoint> events)
+        public static void Run(List<PointBox> events)
         {
             if (events.Count <= Settings.Game.EventsCount)
             {

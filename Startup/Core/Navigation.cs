@@ -10,81 +10,93 @@ namespace Dranen
 {
     public class Navigation
     {
-        private static int currentScore = 0;
-                
-        public static void HostilesProcessor(Protagonist obj, List<EventPoint> events, List<Hostile> hostiles, Game game)
-        {
-            foreach (var hostile in hostiles)
-            {
-                if (obj.X < hostile.X)
-                {
-                    ChaseLeft(hostile, obj);
-                }
-                if (obj.X > hostile.X)
-                {
-                    ChaseRight(hostile, obj);
-                }
-                if (obj.Y < hostile.Y)
-                {
-                    ChaseUp(hostile, obj);
-                }
-                if (obj.Y > hostile.Y)
-                {
-                    ChaseDown(hostile, obj);
-                }
-                if (obj.Y == hostile.Y && obj.X == hostile.X)
-                {
-                    if (game.Lives > 0)
-                    {
-                        game.DecreaseLive();
+        //private int currentScore = 0;
+        //private Protagonist protagonist;
+        //private IList<PointBox> events;
+        //private IList<Hostile> hostiles;
+        //private Game game;
 
-                        game.AddScore(Settings.Game.LoseLifePenalty);
-                        currentScore -= Settings.Game.LoseLifePenalty;
-                        ResetHostile.Execute(hostile);
-                    }
-                    else
-                    {
-                        game.End();
-                    }
-                }
+        //public Navigation(Protagonist protagonist, IList<PointBox> events, IList<Hostile> hostiles, Game game)
+        //{
+        //    this.currentScore = 0;
+        //    this.protagonist = protagonist;
+        //    this.events = events;
+        //    this.hostiles = hostiles;
+        //    this.game = game;
+        //}
 
-                Drawing.Events(events);
-                Drawing.DrawHostile(hostile);
-                Drawing.ScoreBoard(game);
+        //public void HostilesProcessor()
+        //{
+        //    foreach (var hostile in hostiles)
+        //    {
+        //        if (protagonist.X < hostile.X)
+        //        {
+        //            ChaseLeft(hostile, protagonist);
+        //        }
+        //        if (protagonist.X > hostile.X)
+        //        {
+        //            ChaseRight(hostile, protagonist);
+        //        }
+        //        if (protagonist.Y < hostile.Y)
+        //        {
+        //            ChaseUp(hostile, protagonist);
+        //        }
+        //        if (protagonist.Y > hostile.Y)
+        //        {
+        //            ChaseDown(hostile, protagonist);
+        //        }
+        //        if (protagonist.Y == hostile.Y && protagonist.X == hostile.X)
+        //        {
+        //            if (game.Lives > 0)
+        //            {
+        //                game.DecreaseLive();
 
-                ProcessEvents(events, obj, hostile, game);
-            }
+        //                game.AddScore(Settings.Game.LoseLifePenalty);
+        //                currentScore -= Settings.Game.LoseLifePenalty;
+        //                ResetHostile.Execute(hostile);
+        //            }
+        //            else
+        //            {
+        //                game.End();
+        //            }
+        //        }
 
-            if (currentScore >= Settings.Game.HostileAddingScore)
-            {
-                currentScore = 0;
-                GenerateHostile.Execute(hostiles);
-            }
-        }
+        //        Drawing.Events(this.events);
+        //        Drawing.DrawHostile(hostile);
+        //        Drawing.ScoreBoard(game);
 
-        private static void ProcessEvents(List<EventPoint> events, Protagonist obj, Hostile hostile, Game game)
-        {
-            for (int i = 0; i < events.Count; i++)
-            {
-                if (events[i].Y == obj.Y && events[i].X == obj.X)
-                {                    
-                    game.AddScore(events[i].Points);
-                    currentScore += events[i].Points;
-                    events[i].Points = 0;
-                    Sound.Event();
-                }
+        //        ProcessEvents(events, protagonist, hostile, game);
+        //    }
 
-                if (events[i].Points <= Settings.Game.PointDeathThreshold)
-                {
-                    events.RemoveAt(i);
-                }
-                else
-                {
-                    events[i].Deduct();
-                }
-            }
-        }
+        //    if (currentScore >= Settings.Game.HostileAddingScore)
+        //    {
+        //        currentScore = 0;
+        //        GenerateHostile.Execute(hostiles);
+        //    }
+        //}
 
+        //private void ProcessEvents(List<PointBox> events, Protagonist obj, Hostile hostile, Game game)
+        //{
+        //    for (int i = 0; i < events.Count; i++)
+        //    {
+        //        if (events[i].Y == obj.Y && events[i].X == obj.X)
+        //        {
+        //            game.AddScore(events[i].Points);
+        //            currentScore += events[i].Points;
+        //            events[i].Points = 0;
+        //            Sound.Event();
+        //        }
+
+        //        if (events[i].Points <= Settings.Game.PointDeathThreshold)
+        //        {
+        //            events.RemoveAt(i);
+        //        }
+        //        else
+        //        {
+        //            events[i].Deduct();
+        //        }
+        //    }
+        //}
 
         public static void Move(Direction direction, Protagonist protagonist, Game game)
         {
@@ -131,28 +143,28 @@ namespace Dranen
             Drawing.ClearBackground(obj);
         }
 
-        private static void ChaseLeft(Hostile hostile, Protagonist obj)
-        {
-            hostile.Move(-1, 0);
-            Drawing.Draw(hostile, obj);
-        }
+        //private static void ChaseLeft(Hostile hostile, Protagonist obj)
+        //{
+        //    hostile.Move(-1, 0);
+        //    Drawing.Draw(hostile, obj);
+        //}
 
-        private static void ChaseRight(Hostile hostile, Protagonist obj)
-        {
-            hostile.Move(1, 0);
-            Drawing.Draw(hostile, obj);
-        }
+        //private static void ChaseRight(Hostile hostile, Protagonist obj)
+        //{
+        //    hostile.Move(1, 0);
+        //    Drawing.Draw(hostile, obj);
+        //}
 
-        private static void ChaseDown(Hostile hostile, Protagonist obj)
-        {
-            hostile.Move(0, 1);
-            Drawing.Draw(hostile, obj);
-        }
+        //private static void ChaseDown(Hostile hostile, Protagonist obj)
+        //{
+        //    hostile.Move(0, 1);
+        //    Drawing.Draw(hostile, obj);
+        //}
 
-        private static void ChaseUp(Hostile hostile, Protagonist obj)
-        {
-            hostile.Move(0, -1);
-            Drawing.Draw(hostile, obj);
-        }
+        //private static void ChaseUp(Hostile hostile, Protagonist obj)
+        //{
+        //    hostile.Move(0, -1);
+        //    Drawing.Draw(hostile, obj);
+        //}
     }
 }
