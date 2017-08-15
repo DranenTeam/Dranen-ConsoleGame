@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Threading;
-using Startup.Core;
-using Startup.Models;
 
 namespace Startup
 {
