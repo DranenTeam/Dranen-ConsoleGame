@@ -5,13 +5,30 @@
 
     public class Game
     {
-        public const int EventsCount = 10; // Count of Point boxes on the map [5 - 50]
+        public const int EventsCount = 25; // Count of Point boxes on the map [5 - 50]
         private static int gameSpeed = 30;
-        private static int pointDeductor = 1; // How much points a point box losses every game tick [ 5-99]
-        private static int pointEventGoodScore = 50; // Above that points a box is colored as good [ 5-99]
-        private static int pointEventBestScore = 70;// Above that points a box is colored as best [ 5-99]
+        private static int pointDeductor = 1; // How much points a point box losses every game tick [ 1-5 ]
+        private static int pointEventGoodScore = 50;
+        private static int pointEventBestScore = 70;
         private static int hostileAddingScore = 500; // after how mutch points generated a new hostile is added
         private static int loseLifePenalty = -100;
+        private static int lives = 3;
+
+        public static int Lives
+        {
+            get { return lives; }
+            set
+            {
+                if (value > 0)
+                {
+                    pointDeductor = value;
+                }
+                else
+                {
+                    throw new InvalidLiveCountException();
+                }
+            }
+        }
 
         public static int GameSpeed
         {
@@ -33,7 +50,8 @@
         {
             get
             {
-                return pointDeductor; }
+                return pointDeductor;
+            }
             set
             {
                 if (value > 0)
@@ -67,7 +85,8 @@
         {
             get
             {
-                return pointEventBestScore; }
+                return pointEventBestScore;
+            }
             set
             {
                 if (value > 0)

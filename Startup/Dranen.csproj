@@ -43,10 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Commands\GenerateHostile.cs" />
-    <Compile Include="Core\Commands\ResetHostile.cs" />
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Core\EventsProcessor.cs" />
+    <Compile Include="Core\HostilesProcessor.cs" />
     <Compile Include="Core\MovementProcessor.cs" />
     <Compile Include="Display\Information.cs" />
     <Compile Include="Display\Board.cs" />
@@ -67,6 +66,7 @@
     <Compile Include="Exceptions\InvalidGameSpeedException.cs" />
     <Compile Include="Exceptions\InvalidGameWIdthException.cs" />
     <Compile Include="Exceptions\InvalidHostileAddingScoreException.cs" />
+    <Compile Include="Exceptions\InvalidLiveCountException.cs" />
     <Compile Include="Exceptions\InvalidLivesCountException.cs" />
     <Compile Include="Exceptions\InvalidLoseLifePenalty.cs" />
     <Compile Include="Exceptions\InvalidPointDeductorValueException.cs" />

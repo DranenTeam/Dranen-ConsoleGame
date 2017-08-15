@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Startup.Core.Commands;
 using Startup.Models;
 
 namespace Startup.Core
@@ -16,12 +15,37 @@ namespace Startup.Core
 
         public void Run(Random rnd)
         {
-            var x = rnd.Next(1, (Settings.Environment.Width / 2) - 3);
-            var y = rnd.Next(1, (Settings.Environment.Height / 2) - 2);
-            var time = rnd.Next(15, 95);
-            PointBox ev = new PointBox(x * 2, y * 2, time);
+            while (this.events.Count < Settings.Game.EventsCount)
+            {
+                var x = rnd.Next(1, (Settings.Environment.Width / 2) - 1);
+                var y = rnd.Next(1, (Settings.Environment.Height / 2));
+                var time = rnd.Next(15, 95);
+                PointBox ev = new PointBox(x * 2, y * 2, time);
 
-            events.Add(ev);
+                this.events.Add(ev);
+            }
+        }
+
+        public int ProcessEventsAndGetScores(Protagonist protagonist, Game game)
+        {
+            int points = 0;
+            for (int i = 0; i < events.Count; i++)
+            {
+                var currentEvent = this.events[i];
+                if (currentEvent.Y == protagonist.Y && currentEvent.X == protagonist.X)
+                {
+                    points += currentEvent.Activate();
+                    game.AddScore(points);
+                    Sound.Event();
+                }
+                currentEvent.TimeTrigger();
+                if (!currentEvent.IsActive)
+                {
+                    this.events.RemoveAt(i);
+                }
+            }
+
+            return points;
         }
     }
 }

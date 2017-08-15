@@ -2,38 +2,36 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-using Startup.Core.Commands;
-using Startup.Display;
-using Startup.Interfaces;
 using Startup.Models;
 
 namespace Startup.Core
 {
     public class Engine
     {
-        private int currentScore = 0;
         private Protagonist protagonist;
         private List<Event> events;
         private List<Hostile> hostiles;
         private Game game;
         private MovementProcessor movementProcessor;
         private EventsProcessor eventsProcessor;
+        private HostilesProcessor hostilesProcessor;
         private Random randomGenerator;
 
-        public Engine(Protagonist protagonist, List<Event> events, List<Hostile> hostiles, Game game, MovementProcessor movementProcessor, EventsProcessor eventsProcessor)
+        public Engine(Protagonist protagonist, List<Event> events, List<Hostile> hostiles, Game game, MovementProcessor movementProcessor, EventsProcessor eventsProcessor, HostilesProcessor hostilesProcessor)
         {
-            this.currentScore = 0;
             this.protagonist = protagonist;
             this.events = events;
             this.hostiles = hostiles;
             this.game = game;
             this.movementProcessor = movementProcessor;
             this.eventsProcessor = eventsProcessor;
+            this.hostilesProcessor = hostilesProcessor;
             this.randomGenerator = new Random();
         }
 
         public void NavigateProtagonist(ConsoleKeyInfo cki, Stopwatch stopwatch)
         {
+            // tests
             do
             {
                 // if no key is pressed (or hold) execute the last key pressed command every [Settings.Game.GameSpeed] seconds
@@ -48,8 +46,9 @@ namespace Startup.Core
                     // creates new events if needed
                     this.eventsProcessor.Run(this.randomGenerator);
 
-                    // execute last movement command
+                    // execute last movement command till key is pressed
                     this.movementProcessor.Run(this.protagonist, cki, this.game);
+
                     if (this.game.IsEnd)
                     {
                         // TODO: Refacotr this via event or somethig
@@ -61,85 +60,18 @@ namespace Startup.Core
                     Display.Board.ClearBackground();
                     Display.Information.LivesBoard(this.game);
 
-                    HostilesProcessor(); // draws
+                    this.hostilesProcessor.Run();
+                    this.eventsProcessor.ProcessEventsAndGetScores(this.protagonist, this.game);
+                    this.hostilesProcessor.ProcessHostilesAndGetScores(this.protagonist, this.game);
+
+                    Display.Board.All(this.hostiles, this.protagonist, this.events);
+                    Display.Information.ScoreBoard(this.game);
                 }
 
                 // Reads another key
                 cki = Console.ReadKey(true);
             }
             while (cki.Key != ConsoleKey.Escape);
-        }
-
-        public void HostilesProcessor()
-        {
-            foreach (var hostile in this.hostiles)
-            {
-                if (this.protagonist.X < hostile.X)
-                {
-                    hostile.Move(-1, 0);
-                }
-                if (this.protagonist.X > hostile.X)
-                {
-                    hostile.Move(1, 0);
-                }
-                if (this.protagonist.Y < hostile.Y)
-                {
-                    hostile.Move(0, -1);
-                }
-                if (this.protagonist.Y > hostile.Y)
-                {
-                    hostile.Move(0, 1);
-                }
-
-                if (this.protagonist.Y == hostile.Y && this.protagonist.X == hostile.X)
-                {
-                    if (this.game.Lives > 0)
-                    {
-                        this.game.DecreaseLive();
-
-                        this.game.AddScore(Settings.Game.LoseLifePenalty);
-                        this.currentScore -= Settings.Game.LoseLifePenalty;
-                        ResetHostile.Execute(hostile);
-                    }
-                    else
-                    {
-                        game.End();
-                    }
-                }
-
-                Display.Board.Agent(hostile, Settings.Color.Hostile);
-                this.ProcessEvents();
-            }
-            Display.Board.Agent(this.protagonist, Settings.Color.Protagonist);
-
-            Display.Board.Events(this.events);
-            Display.Information.ScoreBoard(this.game);
-
-            if (this.currentScore >= Settings.Game.HostileAddingScore)
-            {
-                this.currentScore = 0;
-                GenerateHostile.Execute(this.hostiles);
-            }
-        }
-
-        private void ProcessEvents()
-        {
-            for (int i = 0; i < events.Count; i++)
-            {
-                var currentEvent = this.events[i];
-                if (currentEvent.Y == this.protagonist.Y && currentEvent.X == this.protagonist.X)
-                {
-                    var points = currentEvent.Activate();
-                    this.game.AddScore(points);
-                    this.currentScore += points;
-                    Sound.Event();
-                }
-                currentEvent.TimeTrigger();
-                if (!currentEvent.IsActive)
-                {
-                    this.events.RemoveAt(i);
-                }
-            }
         }
     }
 }

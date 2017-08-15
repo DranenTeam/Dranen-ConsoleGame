@@ -12,12 +12,12 @@ namespace Startup
     {
         public static void Initialize()
         {
+            Console.BackgroundColor = ConsoleColor.Black;
             Sound.GameStartSound();
             Console.WindowHeight = Settings.Environment.Height;
             Console.WindowWidth = Settings.Environment.Width;
             Console.BufferHeight = Settings.Environment.Height;
             Console.BufferWidth = Settings.Environment.Width;
-            Console.BackgroundColor = ConsoleColor.Black;
             Console.CursorVisible = false;
             var menuList = new string[]
             {
