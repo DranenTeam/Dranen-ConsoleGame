@@ -5,9 +5,9 @@ using Startup.Interfaces;
 
 namespace Startup.Core
 {
-    public class MovementProcessor
+    public class MovementHandler
     {
-        public void Run(IDynamic obj, ConsoleKeyInfo cki, Game game)
+        public void Navigate(IDynamic obj, ConsoleKeyInfo cki, Game game)
         {
             switch (cki.Key)
             {

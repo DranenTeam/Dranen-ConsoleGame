@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Startup.Interfaces;
 using Startup.Models;
 
 namespace Startup.Core
 {
-    public class HostilesProcessor
+    public class HostilesProcessor : IProcessor
     {
         private IList<Hostile> hostiles;
         private Game game;

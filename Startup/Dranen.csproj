@@ -46,7 +46,7 @@
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Core\EventsProcessor.cs" />
     <Compile Include="Core\HostilesProcessor.cs" />
-    <Compile Include="Core\MovementProcessor.cs" />
+    <Compile Include="Core\MovementHandler.cs" />
     <Compile Include="Display\Information.cs" />
     <Compile Include="Display\Board.cs" />
     <Compile Include="Display\Menu.cs" />
@@ -74,6 +74,7 @@
     <Compile Include="Interfaces\IColor.cs" />
     <Compile Include="Interfaces\IDynamic.cs" />
     <Compile Include="Interfaces\IEvent.cs" />
+    <Compile Include="Interfaces\IProcessor.cs" />
     <Compile Include="Interfaces\ISymbol.cs" />
     <Compile Include="Models\Hostile.cs" />
     <Compile Include="Interfaces\ILivable.cs" />

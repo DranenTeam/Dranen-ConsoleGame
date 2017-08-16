@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using Startup.Interfaces;
 using Startup.Models;
 
 namespace Startup.Core
 {
-    public class EventsProcessor
+    public class EventsProcessor : IProcessor
     {
         private IList<Event> events;
+        private Random randomGenerator;
 
-        public EventsProcessor(List<Event> events)
+        public EventsProcessor(List<Event> events, Random randomGenerator)
         {
             this.events = events;
+            this.randomGenerator = randomGenerator;
         }
 
-        public void Run(Random rnd)
+        public void Run()
         {
             while (this.events.Count < Settings.Game.EventsCount)
             {
-                var x = rnd.Next(1, (Settings.Environment.Width / 2) - 1);
-                var y = rnd.Next(1, (Settings.Environment.Height / 2));
-                var time = rnd.Next(15, 95);
+                var x = this.randomGenerator.Next(1, (Settings.Environment.Width / 2) - 1);
+                var y = this.randomGenerator.Next(1, (Settings.Environment.Height / 2));
+                var time = this.randomGenerator.Next(15, 95);
                 PointBox ev = new PointBox(x * 2, y * 2, time);
 
                 this.events.Add(ev);

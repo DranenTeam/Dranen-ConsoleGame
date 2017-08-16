@@ -16,16 +16,17 @@ namespace Startup.Display.SubMenues
             while (true)
             {
                 InitializeEnvironment();
+                Random randomGenerator = new Random();
                 Game game = new Game(Settings.Game.Lives);
                 game.PlayersName = playerName;
                 Protagonist protagonist = new Protagonist();
                 List<Event> events = new List<Event>();
                 List<Hostile> hostiles = new List<Hostile>();
-                MovementProcessor movementProcessor = new MovementProcessor();
-                EventsProcessor eventsProcessor = new EventsProcessor(events);
+                MovementHandler movementHandler = new MovementHandler();
+                EventsProcessor eventsProcessor = new EventsProcessor(events, randomGenerator);
                 HostilesProcessor hostilesProcessor = new HostilesProcessor(hostiles, game);
                 hostiles.Add(new Hostile(4, 4));
-                Engine engine = new Engine(protagonist, events, hostiles, game, movementProcessor, eventsProcessor, hostilesProcessor);
+                Engine engine = new Engine(protagonist, events, hostiles, game, movementHandler, eventsProcessor, hostilesProcessor);
                 ConsoleKeyInfo cki = new ConsoleKeyInfo();
                 Stopwatch stopwatch = new Stopwatch();
                 engine.NavigateProtagonist(cki, stopwatch);
