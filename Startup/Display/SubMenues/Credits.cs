@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Startup.Constants;
+using Startup.Interfaces;
 
 namespace Startup.Display.SubMenues
 {
-    public class Credits
+    public class Credits:ISound
     {
         public Credits(int rollSpeed = 250)
         {
             Console.Clear();
-            Sound.CreditsSound();
+            MakeSound(FileSoundPath.CreditsSound);
 
             var cursor = 1;
 
@@ -29,6 +32,12 @@ namespace Startup.Display.SubMenues
                 }
             }
             Console.ReadKey(); //TODO: Break the while and go back in the menu
+        }
+
+        public void MakeSound(string filePath)
+        {
+            SoundPlayer makeSound = new SoundPlayer(filePath);
+            makeSound.Play();
         }
     }
 }

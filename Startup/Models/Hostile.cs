@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Media;
+using Startup.Constants;
 using Startup.Exceptions;
 using Startup.Interfaces;
 
 namespace Startup.Models
 {
-    public class Hostile : IDynamic
+    public class Hostile : IDynamic, ISound
     {
         private int dx;
         private int dy;
@@ -23,7 +25,7 @@ namespace Startup.Models
             this.Slowliness = rdm.Next(5, 12);
             this.dx = this.Slowliness;
             this.dy = this.Slowliness;
-            Sound.Hostile();
+            this.MakeSound(FileSoundPath.Hostile);
         }
 
         public int X
@@ -96,6 +98,12 @@ namespace Startup.Models
                     this.Y += y;
                 }
             }
+        }
+
+        public void MakeSound(string filePath)
+        {
+            SoundPlayer makeSound = new SoundPlayer(filePath);
+            makeSound.Play();
         }
     }
 }

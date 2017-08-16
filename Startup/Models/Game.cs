@@ -1,8 +1,11 @@
-﻿using Startup.Exceptions;
+﻿using System.Media;
+using Startup.Constants;
+using Startup.Exceptions;
+using Startup.Interfaces;
 
 namespace Startup
 {
-    public class Game
+    public class Game : ISound
     {
         private bool isPaused;
         private bool isEnd;
@@ -80,7 +83,13 @@ namespace Startup
         public void DecreaseLive()
         {
             this.lives--;
-            Sound.LostLife();
+            this.MakeSound(FileSoundPath.LostLife);
+        }
+
+        public void MakeSound(string filePath)
+        {
+            SoundPlayer makeSound = new SoundPlayer(filePath);
+            makeSound.Play();
         }
     }
 }

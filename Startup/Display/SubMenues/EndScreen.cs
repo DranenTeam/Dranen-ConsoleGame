@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Startup.Constants;
+using Startup.Interfaces;
 
 namespace Startup.Display.SubMenues
 {
-    public class EndScreen
+    public class EndScreen : ISound
     {
         public EndScreen(Stopwatch stopwatch, Game game)
         {
@@ -23,13 +26,19 @@ namespace Startup.Display.SubMenues
             Console.WriteLine($"Score: {game.Score}");
             Console.SetCursorPosition(9, 15);
             Console.WriteLine($"Prss any key to start over.");
-            Sound.GameOver();
+            MakeSound(FileSoundPath.GameOver);
 
             if (true)
             {
                 Thread.Sleep(2000);
                 Console.ReadKey();
             }
+        }
+
+        public void MakeSound(string filePath)
+        {
+            SoundPlayer makeSound = new SoundPlayer(filePath);
+            makeSound.Play();
         }
     }
 }

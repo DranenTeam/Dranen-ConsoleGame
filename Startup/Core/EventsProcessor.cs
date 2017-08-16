@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Media;
+using Startup.Constants;
 using Startup.Interfaces;
 using Startup.Models;
 
 namespace Startup.Core
 {
-    public class EventsProcessor : IProcessor
+    public class EventsProcessor : IProcessor, ISound
     {
         private IList<Event> events;
         private Random randomGenerator;
@@ -39,7 +41,7 @@ namespace Startup.Core
                 {
                     points += currentEvent.Activate();
                     game.AddScore(points);
-                    Sound.Event();
+                    this.MakeSound(FileSoundPath.Event);
                 }
                 currentEvent.TimeTrigger();
                 if (!currentEvent.IsActive)
@@ -49,6 +51,12 @@ namespace Startup.Core
             }
 
             return points;
+        }
+
+        public void MakeSound(string filePath)
+        {
+            SoundPlayer makeSound = new SoundPlayer(filePath);
+            makeSound.Play();
         }
     }
 }

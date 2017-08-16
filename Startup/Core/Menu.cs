@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Media;
+using System.Runtime.CompilerServices;
+using Startup.Constants;
+using Startup.Interfaces;
 
 namespace Startup
 {
-    public static class Menu
+    public class Menu
     {
-        public static void Initialize()
+        public static void Initialize(ISound mySound)
         {
+
             Console.BackgroundColor = ConsoleColor.Black;
-            Sound.GameStartSound();
+            mySound.MakeSound(FileSoundPath.GameStartSound);
             Console.WindowHeight = Settings.Environment.Height;
             Console.WindowWidth = Settings.Environment.Width;
             Console.BufferHeight = Settings.Environment.Height;
@@ -22,8 +27,7 @@ namespace Startup
             while (true)
             {
                 Display.Menu.EnterName();
-
-                Sound.MenuEffect();
+                mySound.MakeSound(FileSoundPath.MenuEffect);
                 while (true)
                 {
                     Display.Menu.Greeting();
@@ -43,7 +47,7 @@ namespace Startup
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     var key = Console.ReadKey();
-                    Sound.MenuEffect();
+                    mySound.MakeSound(FileSoundPath.MenuEffect);
                     switch (key.Key)
                     {
                         case ConsoleKey.UpArrow:

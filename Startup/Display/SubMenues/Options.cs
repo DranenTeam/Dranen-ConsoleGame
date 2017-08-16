@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using Startup.Constants;
+using Startup.Interfaces;
 
 namespace Startup.Display.SubMenues
 {
-    public class Options
+    public class Options : ISound
     {
         public Options()
         {
@@ -31,7 +34,7 @@ namespace Startup.Display.SubMenues
                     }
                     Startup.Menu.Position(11, position);
                     Console.WriteLine(item);
-                    Sound.MenuEffect();
+                    MakeSound(FileSoundPath.MenuEffect);
                     position++;
 
                     Console.BackgroundColor = ConsoleColor.Black;
@@ -92,6 +95,12 @@ namespace Startup.Display.SubMenues
             }
 
             return optValue;
+        }
+
+        public void MakeSound(string filePath)
+        {
+            SoundPlayer makeSound = new SoundPlayer(filePath);
+            makeSound.Play();
         }
     }
 }
