@@ -80,14 +80,14 @@
     <Compile Include="Interfaces\ILivable.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IPosition.cs" />
-    <Compile Include="Menu.cs" />
+    <Compile Include="Core\Menu.cs" />
     <Compile Include="Models\PointBox.cs" />
     <Compile Include="Models\Event.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Settings\Color.cs" />
     <Compile Include="Settings\Environment.cs" />
     <Compile Include="Settings\Game.cs" />
-    <Compile Include="Sound.cs" />
+    <Compile Include="Sounds\Sound.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Protagonist.cs" />

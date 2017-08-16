@@ -12,11 +12,11 @@
         private static int pointEventBestScore = 70;
         private static int hostileAddingScore = 500; // after how mutch points generated a new hostile is added
         private static int loseLifePenalty = -100;
-        private static int lives = 3;
+        private static int lifes = 3;
 
-        public static int Lives
+        public static int Lifes
         {
-            get { return lives; }
+            get { return lifes; }
             set
             {
                 if (value > 0)

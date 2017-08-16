@@ -27,7 +27,7 @@ namespace Startup.Core
             this.hostilesProcessor = hostilesProcessor;
         }
 
-        public void NavigateProtagonist(ConsoleKeyInfo cki, Stopwatch stopwatch)
+        public void Start(ConsoleKeyInfo cki, Stopwatch stopwatch)
         {
             // tests
             do

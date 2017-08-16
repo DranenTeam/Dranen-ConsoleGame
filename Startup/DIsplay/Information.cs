@@ -14,7 +14,7 @@ namespace Startup.Display
         public static void LivesBoard(Game game)
         {
             Console.SetCursorPosition(15, 0);
-            Console.WriteLine($"Lives: {game.Lives}");
+            Console.WriteLine($"Lifes: {game.Lives}");
         }
     }
 }

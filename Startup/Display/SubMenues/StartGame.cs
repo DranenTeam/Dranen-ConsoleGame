@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Startup.Core;
+using Startup.Interfaces;
 using Startup.Models;
 
 namespace Startup.Display.SubMenues
@@ -17,7 +18,7 @@ namespace Startup.Display.SubMenues
             {
                 InitializeEnvironment();
                 Random randomGenerator = new Random();
-                Game game = new Game(Settings.Game.Lives);
+                Game game = new Game(Settings.Game.Lifes);
                 game.PlayersName = playerName;
                 Protagonist protagonist = new Protagonist();
                 List<Event> events = new List<Event>();
@@ -29,7 +30,7 @@ namespace Startup.Display.SubMenues
                 Engine engine = new Engine(protagonist, events, hostiles, game, movementHandler, eventsProcessor, hostilesProcessor);
                 ConsoleKeyInfo cki = new ConsoleKeyInfo();
                 Stopwatch stopwatch = new Stopwatch();
-                engine.NavigateProtagonist(cki, stopwatch);
+                engine.Start(cki, stopwatch);
             }
         }
 

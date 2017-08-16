@@ -80,6 +80,7 @@ namespace Startup
         public void DecreaseLive()
         {
             this.lives--;
+            Sound.LostLife();
         }
     }
 }
