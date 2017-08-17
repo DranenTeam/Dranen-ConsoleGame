@@ -9,7 +9,7 @@
         private static int pointDeductor = 1; // How much points a point box losses every game tick [ 1-5 ]
         private static int pointEventGoodScore = 50;
         private static int pointEventBestScore = 70;
-        private static int hostileAddingScore = 500; // after how mutch points generated a new hostile is added
+        private static int hostileAddingScore = 50; // after how mutch points generated a new hostile is added
         private static int loseLifePenalty = -100;
         private static int lifes = 3;
 
