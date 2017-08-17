@@ -2,11 +2,11 @@
 {
     using System;
 
-    class InvalidValueForBoxException : Exception
+    internal class InvalidValueForBoxException : Exception
     {
         private const string message = "Value of box points cannot be lower than 0";
 
-        public InvalidValueForBoxException() 
+        public InvalidValueForBoxException()
             : base(message)
         {
         }

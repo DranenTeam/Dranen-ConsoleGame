@@ -4,7 +4,9 @@ namespace Startup.Exceptions
 {
     public class InvalidPointDeductorValueException : Exception
     {
-        public InvalidPointDeductorValueException(string message)
+        private const string message = "PointDeductor must be positive";
+
+        public InvalidPointDeductorValueException()
              : base(message)
         {
         }

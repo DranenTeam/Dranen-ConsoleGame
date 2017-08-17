@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Startup.Display.SubMenues
 {
     public class HowToPlay
     {
-        public HowToPlay()
+        public HowToPlay(string message)
         {
             Console.Clear();
             while (true)
             {
-                Console.WriteLine(StaticMessages.HowToPlayInstructions);
+                Console.WriteLine(message);
                 var key = Console.ReadKey();
                 if (key.Key == ConsoleKey.Escape)
                 {

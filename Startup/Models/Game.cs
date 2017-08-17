@@ -1,11 +1,11 @@
-﻿using System.Media;
-using Startup.Constants;
+﻿using Startup.Constants;
 using Startup.Exceptions;
 using Startup.Interfaces;
+using System.Media;
 
 namespace Startup
 {
-    public class Game : ISound
+    public class Game : ISoundable
     {
         private bool isPaused;
         private bool isEnd;

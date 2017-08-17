@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading.Tasks;
-using Startup.Constants;
+﻿using Startup.Constants;
 using Startup.Interfaces;
+using System;
+using System.Media;
 
 namespace Startup.Display.SubMenues
 {
-    public class Options : ISound
+    public class Options : ISoundable
     {
         public Options()
         {
@@ -32,7 +28,7 @@ namespace Startup.Display.SubMenues
                         Console.BackgroundColor = ConsoleColor.Yellow;
                         Console.ForegroundColor = ConsoleColor.Blue;
                     }
-                    Startup.Menu.Position(11, position);
+                    Console.SetCursorPosition(11, position);
                     Console.WriteLine(item);
                     MakeSound(FileSoundPath.MenuEffect);
                     position++;

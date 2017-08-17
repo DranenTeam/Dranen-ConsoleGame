@@ -1,10 +1,10 @@
-﻿using System;
-using Startup.Exceptions;
+﻿using Startup.Exceptions;
+using System;
 
 namespace Startup.Models
 {
     // describes a block on the map with special properties
-    public class PointBox : Event
+    public class PointBoxGameEvent : GameEvent
     {
         private int points;
         private int pointDeductor;
@@ -17,13 +17,13 @@ namespace Startup.Models
             {
                 if (value < 0)
                 {
-                    throw new InvalidPointDeductorValueException("PointDeductor must be positive");
+                    throw new InvalidPointDeductorValueException();
                 }
                 this.pointDeductor = value;
             }
         }
 
-        public PointBox(int x, int y, int points, int deduction = 1)
+        public PointBoxGameEvent(int x, int y, int points, int deduction = 1)
             : base(x, y)
         {
             this.points = points;

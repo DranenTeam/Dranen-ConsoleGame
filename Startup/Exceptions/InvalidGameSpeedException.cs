@@ -2,11 +2,11 @@
 {
     using System;
 
-    class InvalidGameSpeedException : Exception
+    internal class InvalidGameSpeedException : Exception
     {
         private const string message = "Game speed cannot be lower than 0";
 
-        public InvalidGameSpeedException() 
+        public InvalidGameSpeedException()
             : base(message)
         {
         }

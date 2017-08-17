@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Media;
-using Startup.Constants;
+﻿using Startup.Constants;
 using Startup.Interfaces;
 using Startup.Models;
+using System;
+using System.Collections.Generic;
+using System.Media;
 
 namespace Startup.Core
 {
-    public class EventsProcessor : IProcessor, ISound
+    public class EventsProcessor : IProcessor, ISoundable
     {
-        private IList<Event> events;
+        private IList<GameEvent> events;
         private Random randomGenerator;
 
-        public EventsProcessor(List<Event> events, Random randomGenerator)
+        public EventsProcessor(List<GameEvent> events, Random randomGenerator)
         {
             this.events = events;
             this.randomGenerator = randomGenerator;
@@ -25,7 +25,7 @@ namespace Startup.Core
                 var x = this.randomGenerator.Next(1, (Settings.Environment.Width / 2) - 1);
                 var y = this.randomGenerator.Next(1, (Settings.Environment.Height / 2));
                 var time = this.randomGenerator.Next(15, 95);
-                PointBox ev = new PointBox(x * 2, y * 2, time);
+                PointBoxGameEvent ev = new PointBoxGameEvent(x * 2, y * 2, time);
 
                 this.events.Add(ev);
             }

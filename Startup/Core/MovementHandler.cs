@@ -1,7 +1,7 @@
-﻿using Startup.Enums;
-using System;
-using Startup.Display;
+﻿using Startup.Display;
+using Startup.Enums;
 using Startup.Interfaces;
+using System;
 
 namespace Startup.Core
 {
@@ -59,7 +59,6 @@ namespace Startup.Core
                     break;
             }
             game.UnPause();
-            Board.ClearBackground(agent);
         }
     }
 }

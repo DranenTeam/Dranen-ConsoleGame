@@ -2,7 +2,7 @@
 {
     using System;
 
-    class InvalidLoseLifePenalty : Exception
+    internal class InvalidLoseLifePenalty : Exception
     {
         private const string message = "Penalty should be a negative number.";
 

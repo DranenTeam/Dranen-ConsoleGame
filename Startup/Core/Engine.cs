@@ -1,22 +1,27 @@
-﻿using System;
+﻿using Startup.Display;
+using Startup.Interfaces;
+using Startup.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-using Startup.Models;
 
 namespace Startup.Core
 {
     public class Engine
     {
         private Protagonist protagonist;
-        private List<Event> events;
-        private List<Hostile> hostiles;
+        private List<GameEvent> events;
+        private List<IHostile> hostiles;
         private Game game;
         private MovementHandler movementHandler;
         private EventsProcessor eventsProcessor;
         private HostilesProcessor hostilesProcessor;
+        private Board board;
+        private Information information;
+        private Menu menu;
 
-        public Engine(Protagonist protagonist, List<Event> events, List<Hostile> hostiles, Game game, MovementHandler movementHandler, EventsProcessor eventsProcessor, HostilesProcessor hostilesProcessor)
+        public Engine(Protagonist protagonist, List<GameEvent> events, List<IHostile> hostiles, Game game, MovementHandler movementHandler, EventsProcessor eventsProcessor, HostilesProcessor hostilesProcessor, Board board, Information information, Menu menu)
         {
             this.protagonist = protagonist;
             this.events = events;
@@ -25,6 +30,9 @@ namespace Startup.Core
             this.movementHandler = movementHandler;
             this.eventsProcessor = eventsProcessor;
             this.hostilesProcessor = hostilesProcessor;
+            this.board = board;
+            this.information = information;
+            this.menu = menu;
         }
 
         public void Start(ConsoleKeyInfo cki, Stopwatch stopwatch)
@@ -50,20 +58,20 @@ namespace Startup.Core
                     if (this.game.IsEnd)
                     {
                         // TODO: Refacotr this via event or somethig
-                        Display.Menu.EndScreen(stopwatch, this.game);
+                        menu.EndScreen(stopwatch, this.game);
                         return;
                     }
 
                     // Draws the screen
-                    Display.Board.ClearBackground();
-                    Display.Information.LivesBoard(this.game);
+                    this.board.ClearBackground();
+                    this.information.LivesBoard(this.game);
 
                     this.hostilesProcessor.Run();
                     this.eventsProcessor.ProcessEventsAndGetScores(this.protagonist, this.game);
                     this.hostilesProcessor.ProcessHostilesAndGetScores(this.protagonist, this.game);
 
-                    Display.Board.All(this.hostiles, this.protagonist, this.events);
-                    Display.Information.ScoreBoard(this.game);
+                    this.board.All(this.hostiles, this.protagonist, this.events);
+                    this.information.ScoreBoard(this.game);
                 }
 
                 // Reads another key

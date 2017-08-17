@@ -2,7 +2,7 @@
 {
     using System;
 
-    class InvalidHostileAddingScoreException : Exception
+    internal class InvalidHostileAddingScoreException : Exception
     {
         private const string message = "Score must be more then 0 for new hostile to be added.";
 

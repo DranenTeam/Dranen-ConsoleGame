@@ -2,11 +2,11 @@
 
 namespace Startup.Display
 {
-    public static class StaticMessages
+    public class StaticMessages
     {
         public static string GamePause => "Press UP, DOWN, LEFT or RIGHT to continue.";
 
-        public static string AuthorsList
+        public string AuthorsList
             =>
                 $"Drenen 2017{Environment.NewLine}" +
                 $"Theo Dor{Environment.NewLine}" +
@@ -16,10 +16,10 @@ namespace Startup.Display
                 $"Dimitar Nikolov"
         ;
 
-        public static string EnterNameQuestion => "What is your name?";
-        public static string GoodLuck => "Good luck in your quest!";
+        public string EnterNameQuestion => "What is your name?";
+        public string GoodLuck => "Good luck in your quest!";
 
-        public static string HowToPlayInstructions
+        public string HowToPlayInstructions
             =>
                 $"1. Chase the points{Environment.NewLine}" +
                 $"2. Dodge the red hostiles{Environment.NewLine}" +

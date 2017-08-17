@@ -1,12 +1,13 @@
-﻿using System;
-using System.Media;
-using Startup.Constants;
+﻿using Startup.Constants;
+using Startup.Core.Arguments;
 using Startup.Exceptions;
 using Startup.Interfaces;
+using System;
+using System.Media;
 
 namespace Startup.Models
 {
-    public class Hostile : IDynamic, ISound
+    public class Hostile : IHostile
     {
         private int dx;
         private int dy;
@@ -104,6 +105,12 @@ namespace Startup.Models
         {
             SoundPlayer makeSound = new SoundPlayer(filePath);
             makeSound.Play();
+        }
+
+        public void OnOverlap(object sender, OverlapArgs e)
+        {
+            this.X = (this.x + e.Counter) % ((Settings.Environment.Width / 2) - 2);
+            this.Y = (this.y + e.Counter) % (Settings.Environment.Height - 2);
         }
     }
 }

@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Startup.Constants;
+﻿using Startup.Constants;
 using Startup.Interfaces;
+using System;
+using System.Media;
+using System.Threading;
 
 namespace Startup.Display.SubMenues
 {
-    public class Credits:ISound
+    public class Credits : ISoundable
     {
-        public Credits(int rollSpeed = 250)
+        public Credits(string message, int rollSpeed = 250)
         {
             Console.Clear();
             MakeSound(FileSoundPath.CreditsSound);
@@ -22,8 +18,8 @@ namespace Startup.Display.SubMenues
             for (int i = 0; i < 15; i++)
             {
                 Console.Clear();
-                Startup.Menu.Position(15, cursor);
-                Console.WriteLine(StaticMessages.AuthorsList);
+                Console.SetCursorPosition(15, cursor);
+                Console.WriteLine(message);
                 Thread.Sleep(rollSpeed);
                 cursor++;
                 if (cursor == Console.WindowHeight)

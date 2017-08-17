@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Startup.Interfaces;
+﻿using Startup.Interfaces;
 using Startup.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Startup.Display
 {
     public class Board
     {
         // Draws an agent( protagonist or hostile) on the console
-        public static void Agent(IDynamic agent, ConsoleColor color)
+        public void Agent(IDynamic agent, ConsoleColor color)
         {
             Console.BackgroundColor = color;
             Console.SetCursorPosition(agent.X, agent.Y);
@@ -23,7 +23,7 @@ namespace Startup.Display
         }
 
         // Clears the background and draws the objects
-        public static void ClearBackground(IDynamic obj)
+        public void ClearBackground(IDynamic obj)
         {
             Console.BackgroundColor = Settings.Color.Background;
             Console.Clear();
@@ -31,14 +31,14 @@ namespace Startup.Display
         }
 
         // Draws the clears the background
-        public static void ClearBackground()
+        public void ClearBackground()
         {
             Console.BackgroundColor = Settings.Color.Background;
             Console.Clear();
         }
 
         // Draws all the events
-        public static void Events(IList<Event> events)
+        public void Events(IList<GameEvent> events)
         {
             foreach (var ev in events)
             {
@@ -49,7 +49,7 @@ namespace Startup.Display
         }
 
         // Draws all the events
-        public static void Hostiles(IList<Hostile> hostiles)
+        public void Hostiles(IList<IHostile> hostiles)
         {
             foreach (var hostile in hostiles)
             {
@@ -59,8 +59,8 @@ namespace Startup.Display
             }
         }
 
-        public static void All(IList<Hostile> hostiles, Protagonist protagonist,
-            IList<Event> events)
+        public void All(IList<IHostile> hostiles, Protagonist protagonist,
+            IList<GameEvent> events)
         {
             Hostiles(hostiles);
             Agent(protagonist, Settings.Color.Protagonist);

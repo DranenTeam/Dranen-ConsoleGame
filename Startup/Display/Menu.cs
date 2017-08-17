@@ -1,63 +1,67 @@
 ﻿using Startup.Display.SubMenues;
 using System.Diagnostics;
-using System.Media;
 
 namespace Startup.Display
 {
-    public static class Menu // Sort of factory
+    public class Menu // Sort of factory
     {
-        private static string result;
+        private string result;
+        private string playerName;
+        private StaticMessages staticMessages;
 
-        public static string Result
+        public void EnterName()
         {
-            get { return result; }
-            private set { result = value; }
+            this.staticMessages = new StaticMessages();
+            var menuForm = new EnterName(this.staticMessages.EnterNameQuestion);
+            this.Result = menuForm.PlayersName;
+            this.playerName = menuForm.PlayersName;
         }
 
-        public static void EnterName()
+        public string Result
         {
-            var instance = new EnterName();
-            Result = instance.PlayersName;
+            get { return this.result; }
+            private set { this.result = value; }
         }
 
-        public static void Logo()
+        public void Credits()
         {
-            new Logo();
+            new Credits(this.staticMessages.AuthorsList);
         }
 
-        public static void Credits()
+        public void HowToPlay()
         {
-            new Credits();
+            new HowToPlay(this.staticMessages.HowToPlayInstructions);
         }
 
-        public static void HowToPlay()
-        {
-            new HowToPlay();
-        }
-
-        public static void Options()
+        public void Options()
         {
             new Options();
         }
 
-        public static void StartGame(string playerName)
+        public void StartGame(string playerName)
         {
             new StartGame(playerName);
         }
 
-        public static void Greeting()
+        public void Greeting()
         {
-            new Greeting();
+            new Greeting(this.playerName, this.staticMessages.GoodLuck);
         }
 
-        public static void EndScreen(Stopwatch stopwatch, Game game)
+        public void EndScreen(Stopwatch stopwatch, Game game)
         {
             new EndScreen(stopwatch, game);
         }
 
-        public static void Exit()
+        public void Exit()
         {
             new Exit();
+        }
+
+        // :(
+        public static void Logo()
+        {
+            new Logo();
         }
     }
 }

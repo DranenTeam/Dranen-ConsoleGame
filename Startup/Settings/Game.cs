@@ -1,6 +1,5 @@
 ﻿namespace Startup.Settings
 {
-    using System;
     using Startup.Exceptions;
 
     public class Game

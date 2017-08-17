@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Startup.Interfaces
+﻿namespace Startup.Interfaces
 {
     public interface IEvent : IPosition
     {

@@ -1,18 +1,18 @@
-﻿using System;
-using Startup.Exceptions;
+﻿using Startup.Exceptions;
 using Startup.Interfaces;
+using System;
 
 namespace Startup.Models
 {
     // describes a block on the map with special properties
-    public abstract class Event : IEvent, IColor, ISymbol
+    public abstract class GameEvent : IEvent, IColor, ISymbol
     {
         private int x;
         private int y;
         private int gameWidth;
         private int gameHeight;
 
-        public Event(int x, int y)
+        public GameEvent(int x, int y)
         {
             this.GameWidth = Settings.Environment.Width;
             this.GameHeight = Settings.Environment.Height;

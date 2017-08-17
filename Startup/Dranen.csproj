@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\FileSoundPath.cs" />
+    <Compile Include="Core\Arguments\OverlapArgs.cs" />
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Core\EventsProcessor.cs" />
     <Compile Include="Core\HostilesProcessor.cs" />
@@ -75,21 +76,22 @@
     <Compile Include="Interfaces\IColor.cs" />
     <Compile Include="Interfaces\IDynamic.cs" />
     <Compile Include="Interfaces\IEvent.cs" />
+    <Compile Include="Interfaces\IHostile.cs" />
     <Compile Include="Interfaces\IProcessor.cs" />
-    <Compile Include="Interfaces\ISound.cs" />
+    <Compile Include="Interfaces\ISoundable.cs" />
     <Compile Include="Interfaces\ISymbol.cs" />
     <Compile Include="Models\Hostile.cs" />
     <Compile Include="Interfaces\ILivable.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IPosition.cs" />
-    <Compile Include="Core\Menu.cs" />
-    <Compile Include="Models\PointBox.cs" />
-    <Compile Include="Models\Event.cs" />
+    <Compile Include="Core\MainMenu.cs" />
+    <Compile Include="Models\PointBoxGameEvent.cs" />
+    <Compile Include="Models\GameEvent.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Settings\Color.cs" />
     <Compile Include="Settings\Environment.cs" />
     <Compile Include="Settings\Game.cs" />
-    <Compile Include="Models\Sound.cs" />
+    <Compile Include="Models\Soundable.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Protagonist.cs" />

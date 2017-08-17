@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Media;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Startup.Constants;
+﻿using Startup.Constants;
 using Startup.Interfaces;
+using System;
+using System.Diagnostics;
+using System.Media;
+using System.Threading;
 
 namespace Startup.Display.SubMenues
 {
-    public class EndScreen : ISound
+    public class EndScreen : ISoundable
     {
         public EndScreen(Stopwatch stopwatch, Game game)
         {
+            Console.BackgroundColor = Settings.Color.EndScreenBackground;
             Console.Clear();
             Display.Menu.Logo();
             stopwatch.Stop();

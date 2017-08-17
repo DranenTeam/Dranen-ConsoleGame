@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Startup.Core;
+﻿using Startup.Core;
 using Startup.Interfaces;
 using Startup.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Startup.Display.SubMenues
 {
@@ -20,14 +17,17 @@ namespace Startup.Display.SubMenues
                 Random randomGenerator = new Random();
                 Game game = new Game(Settings.Game.Lifes);
                 game.PlayersName = playerName;
+                Menu menu = new Menu();
                 Protagonist protagonist = new Protagonist();
-                List<Event> events = new List<Event>();
-                List<Hostile> hostiles = new List<Hostile>();
+                List<GameEvent> events = new List<GameEvent>();
+                List<IHostile> hostiles = new List<IHostile>();
+                hostiles.Add(new Hostile(4, 4));
                 MovementHandler movementHandler = new MovementHandler();
                 EventsProcessor eventsProcessor = new EventsProcessor(events, randomGenerator);
                 HostilesProcessor hostilesProcessor = new HostilesProcessor(hostiles, game);
-                hostiles.Add(new Hostile(4, 4));
-                Engine engine = new Engine(protagonist, events, hostiles, game, movementHandler, eventsProcessor, hostilesProcessor);
+                Display.Board board = new Board();
+                Display.Information information = new Information();
+                Engine engine = new Engine(protagonist, events, hostiles, game, movementHandler, eventsProcessor, hostilesProcessor, board, information, menu);
                 ConsoleKeyInfo cki = new ConsoleKeyInfo();
                 Stopwatch stopwatch = new Stopwatch();
                 engine.Start(cki, stopwatch);

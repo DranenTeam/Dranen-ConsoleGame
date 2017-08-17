@@ -1,18 +1,25 @@
-﻿using System;
-using System.Media;
-using System.Runtime.CompilerServices;
-using Startup.Constants;
+﻿using Startup.Constants;
+using Startup.Display;
 using Startup.Interfaces;
+using System;
 
 namespace Startup
 {
-    public class Menu
+    public class MainMenu
     {
-        public static void Initialize(ISound mySound)
-        {
+        private ISoundable sound;
+        private Menu menu;
 
+        public MainMenu()
+        {
+            this.sound = new Soundable();
+            this.menu = new Menu();
+        }
+
+        public void Initialize()
+        {
             Console.BackgroundColor = ConsoleColor.Black;
-            mySound.MakeSound(FileSoundPath.GameStartSound);
+            this.sound.MakeSound(FileSoundPath.GameStartSound);
             Console.WindowHeight = Settings.Environment.Height;
             Console.WindowWidth = Settings.Environment.Width;
             Console.BufferHeight = Settings.Environment.Height;
@@ -26,11 +33,11 @@ namespace Startup
 
             while (true)
             {
-                Display.Menu.EnterName();
-                mySound.MakeSound(FileSoundPath.MenuEffect);
+                menu.EnterName();
+                this.sound.MakeSound(FileSoundPath.MenuEffect);
                 while (true)
                 {
-                    Display.Menu.Greeting();
+                    menu.Greeting();
                     var position = 11;
                     foreach (var item in menuList)
                     {
@@ -39,7 +46,7 @@ namespace Startup
                             Console.BackgroundColor = ConsoleColor.Yellow;
                             Console.ForegroundColor = ConsoleColor.Blue;
                         }
-                        Position(16, position);
+                        Console.SetCursorPosition(16, position);
                         Console.WriteLine(item);
                         position++;
 
@@ -47,7 +54,7 @@ namespace Startup
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     var key = Console.ReadKey();
-                    mySound.MakeSound(FileSoundPath.MenuEffect);
+                    this.sound.MakeSound(FileSoundPath.MenuEffect);
                     switch (key.Key)
                     {
                         case ConsoleKey.UpArrow:
@@ -62,23 +69,23 @@ namespace Startup
                             switch (cursor)
                             {
                                 case 11:
-                                    Display.Menu.StartGame(Display.Menu.Result);
+                                    menu.StartGame(menu.Result);
                                     break;
 
                                 case 12:
-                                    Display.Menu.Options();
+                                    menu.Options();
                                     break;
 
                                 case 13:
-                                    Display.Menu.HowToPlay();
+                                    menu.HowToPlay();
                                     break;
 
                                 case 14:
-                                    Display.Menu.Credits();
+                                    menu.Credits();
                                     break;
 
                                 case 15:
-                                    Display.Menu.Exit();
+                                    menu.Exit();
                                     break;
                             }
                             break;
@@ -94,11 +101,6 @@ namespace Startup
                     }
                 }
             }
-        }
-
-        public static void Position(int x, int y)
-        {
-            Console.SetCursorPosition(x, y);
         }
     }
 }
